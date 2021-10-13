@@ -1,7 +1,8 @@
 .task {
-    height: 100px;
-    width: 100px;
-    border: 1px solid #fff;
-    margin: 10px;
-    text-align: center;
+  height: 100px;
+  width: 100px;
+  border: 1px solid #fff;
+  margin: 10px;
+  text-align: center;
+  line-height: 100px;
 }

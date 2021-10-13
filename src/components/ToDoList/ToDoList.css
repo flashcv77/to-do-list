@@ -1,0 +1,11 @@
+.taskContainer {
+  width: 650px;
+  height: 250px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* h2 {
+  align-self: center;
+} */

@@ -1,28 +1,40 @@
 import React from "react";
 import ToDo from "../ToDo"
+import './ToDoList.css';
 
 class ToDoList extends React.Component {
-    state = { counter: 0 };
 
+    state = {
+        tasks: []
+    };
 
-    handleAddTask = (event) => {
-        this.setState(({ counter }) => ({ counter: counter + 1 }))
-    }
-    handleRemoveTask = (event) => {
-        this.setState(({ counter }) => ({ counter: counter - 1 }))
+    addTask = (task) => {
+        let arr = this.state.tasks;
+        arr.push(task);
+        this.setState({ tasks: arr });
+    };
+
+    removeTask = () => {
+        let arr = this.state.tasks;
+        arr.pop();
+        this.setState({ tasks: arr });
     }
 
     render() {
-        const { counter } = this.state;
+        let tasksCount = this.state.tasks.length;
         return (
             <div className="field">
-                No items
-                <div>Counter: {counter}</div>
-                <ToDo />
-                <div>
-                    <button onClick={this.handleAddTask}>Add</button>
-                    <button style={{ marginLeft: "10px" }} onClick={this.handleRemoveTask}>Remove</button>
+                <div className="taskContainer">
+                    {tasksCount < 1 && <h2>No Items</h2>}
+                    {this.state.tasks.map(() => {
+                        return <div className="task">ToDo</div >
+                    })}
+                    {/* {this.state.tasks.map(() => <ToDo />)} */}
                 </div>
+                <button disabled={tasksCount > 9} onClick={this.addTask}>Add</button>
+                <button disabled={tasksCount < 1} onClick={this.removeTask}>Remove</button>
+
+
             </div >
         )
     }

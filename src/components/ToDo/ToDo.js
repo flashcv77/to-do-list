@@ -11,7 +11,7 @@ class ToDo extends React.Component {
 
     render() {
         return (
-            <div class="task">ToDo</div >
+            <div className="task">ToDo</div >
         )
     }
 
