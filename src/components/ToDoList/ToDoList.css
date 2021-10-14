@@ -10,15 +10,15 @@
   margin: 0 auto;
 }
 
-button {
-  border-radius: 5px;
+.btn{
+  border-radius: 55px;
   width: 80px;
-  height: 30px;
+  height: 60px;
   font-size: 18px;
   margin: 10px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-.wrapper {
+/* .wrapper {
   margin-top: 100px;
-}
+} */
