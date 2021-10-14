@@ -1,11 +1,24 @@
 .taskContainer {
-  width: 650px;
+  width: 610px;
   height: 250px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
 
-/* h2 {
-  align-self: center;
-} */
+.warning {
+  margin: 0 auto;
+}
+
+button {
+  border-radius: 5px;
+  width: 80px;
+  height: 30px;
+  font-size: 18px;
+  margin: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.wrapper {
+  margin-top: 100px;
+}
