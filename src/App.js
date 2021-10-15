@@ -9,8 +9,8 @@ function App() {
       <header className="App-header">
         TO DO LIST
         <ToDoList />
+        <div className="wrapper"><FirstComponent /></div>
 
-        <FirstComponent />
       </header>
 
     </div>
