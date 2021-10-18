@@ -8,7 +8,7 @@ function App() {
 
       <header className="App-header">
         TO DO LIST
-        {/* <ToDoList /> */}
+        <ToDoList />
         <div className="wrapper"><FirstComponent CHECK/></div>
 
       </header>
