@@ -1,0 +1,22 @@
+form {
+  width: 600px;
+  height: 500px;
+}
+
+label {
+  width: 600px;
+  height: 30px;
+  display: block;
+  margin: 5px 0;
+}
+
+input {
+  width: 600px;
+  height: 30px;
+  margin-bottom: 20px;
+}
+
+.error {
+  background-color: red;
+  min-height: 20px;
+}
