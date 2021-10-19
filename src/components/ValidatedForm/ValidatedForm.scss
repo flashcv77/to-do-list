@@ -1,0 +1,59 @@
+form {
+  width: 600px;
+  height: 600px;
+  border: 1px solid black;
+  box-shadow: 1px 2px 8px black;
+}
+
+h1 {
+  margin-bottom: 50px;
+}
+
+.error {
+  /* background-color: red; */
+  min-height: 20px;
+  font-size: 12px;
+  color: red;
+}
+
+input:focus {
+  outline: none;
+}
+
+.invalid:focus {
+  // outline: 1px solid red;
+  border: 1px solid red;
+  box-shadow: 1px 1px 5px red;
+}
+
+.valid:focus {
+  border: 1px solid #64abe6;
+  box-shadow: 1px 1px 5px #64abe6;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 20px;
+
+  label {
+    position: absolute;
+    z-index: 1;
+    background-color: grey;
+    font-size: 12px;
+    left: 111px;
+    color: white;
+    padding: 2px;
+    border-radius: 4px;
+  }
+
+  input {
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 40px;
+    width: 400px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 16px;
+  }
+}
