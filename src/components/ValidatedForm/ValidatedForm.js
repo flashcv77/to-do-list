@@ -38,17 +38,26 @@ class ValidatedForm extends React.Component {
                 label: "Confirm password",
                 value: "",
                 error: "",
-                validator: (value = "") => {
-                    return value === this.state.fields.password.value ? false : "Passwords dose not match";
+                validator: (value = "", allValues = {}) => {
+                    // console.log(this);
+                    console.log(allValues);
+                    // console.log(value, allValues.password);
+                    return value === allValues.password ? false : "Passwords dose not match";
                 },
             },
-        }
+        },
+        isError: null,
     }
 
     handleChange = (event) => {
         const { value, name } = event.target;
+        const { fields } = this.state;
         const currentField = this.state.fields[name];
-        let error = currentField.validator(value);
+        const allValues = Object.entries(fields).reduce((accum, [fieldName, fieldState]) => {
+            return { ...accum, [fieldName]: fieldState.value }
+        });
+
+        let error = currentField.validator(value, allValues);
         this.setState({
             fields: {
                 ...this.state.fields,
@@ -58,33 +67,65 @@ class ValidatedForm extends React.Component {
     }
 
     handleReset = (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         const { fields } = this.state;
-        for (let key in fields) {
-            fields[key].error = '';
-            fields[key].value = '';
-        }
-        this.setState({
-            fields: {
-                ...this.state.fields
-            }
+        const updatedValues = {};
+        Object.entries(fields).forEach(([fieldName]) => {
+            const updatedFields = { ...fields[fieldName] }
+            updatedFields.value = '';
+            updatedFields.error = false;
+            updatedValues[fieldName] = updatedFields
         });
+        this.setState({ fields: updatedValues });
+
+        // for (let key in fields) {
+        //     fields[key].error = '';
+        //     fields[key].value = '';
+        // }
+        // this.setState({
+        //     fields: {
+        //         ...this.state.fields
+        //     }
+        // });
+
     }
 
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const { fields } = this.state;
-        console.log("name: " + fields.inputName.value);
-        console.log("email: " + fields.email.value)
-        console.log("password: " + fields.password.value)
-        console.log("confirmed password: " + fields.confirmPassword.value)
-        this.handleReset();
-    }
 
-    handleValidate = (event) => {
-        event.preventDefault();
-        console.log("Fields didn't pass validation");
+        const { fields } = this.state;
+        // console.log("name: ", fields.inputName.value);
+        // console.log("email: ", fields.email.value)
+        // console.log("password: ", fields.password.value)
+        // console.log("confirmed password: ", fields.confirmPassword.value)
+        const { value, name } = event.target;
+        const currentField = this.state.fields[name];
+        console.log(currentField);
+        const updatedFields = {};
+        Object.entries(fields).forEach(([fieldName, fieldState]) => {
+            const updatedField = { ...fieldState };
+            const error = fieldState.validator(fieldState.value);
+            updatedField.error = error;
+            updatedFields[fieldName] = updatedField;
+        })
+
+        // const allValues = Object.entries(fields).reduce((accum, [fieldName, fieldState]) => {
+        //     return { ...accum, [fieldName]: fieldState.value }
+        // });
+        // // console.log(currentField);
+        // let error = currentField.validator(value, allValues);
+        // console.log(currentField, ' qq', value, ' ww', error)
+        // this.setState({
+        //     fields: {
+        //         updatedFields,
+        //         [name]: { ...currentField, value, error },
+        //     }
+        // });
+        this.setState({ fields: updatedFields });
+        // console.log(allValues.password);
+        // this.handleReset();
+
     }
 
     render() {
@@ -93,10 +134,10 @@ class ValidatedForm extends React.Component {
         for (let key in fields) {
             errors.push(fields[key].error);
         }
-        console.log(errors);
+        // console.log(errors);
         return (
             <>
-                <form onSubmit={errors.some(elem => elem !== false) ? this.handleValidate : this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
                     <h1>Form</h1>
                     <div className="input-container">
                         <label htmlFor={fields.inputName.name}>{fields.inputName.label}</label>
@@ -156,10 +197,10 @@ class ValidatedForm extends React.Component {
                         <div className="error"> {fields.confirmPassword.error && <span>{fields.confirmPassword.error}</span>}</div>
                     </div>
 
-                    <Button buttonName={"Submit"} onClick={errors.some(elem => elem !== false) ? this.handleValidate : this.handleSubmit} />
+                    <Button buttonName={"Submit"} />
 
+                    <button onClick={this.handleReset}>Reset</button>
                 </form>
-                <button onClick={this.handleReset}>Reset</button>
                 {/* <Button buttonName={"Reset"} onClick={this.handleReset} /> */}
 
             </>
