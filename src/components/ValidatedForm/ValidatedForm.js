@@ -160,7 +160,6 @@ class ValidatedForm extends React.Component {
                 Object.entries(this.state.fields).forEach(([fieldName, fieldState]) => {
                     errors.push(fieldState.error);
                 });
-                // isError = (errors.every(error => error === '' || error === false)) ? false : true;
                 let fieldError = !errors.every((err) => err === false);
                 this.setState({ isError: fieldError })
 
@@ -179,7 +178,7 @@ class ValidatedForm extends React.Component {
             <>
                 <form onSubmit={this.handleSubmit}>
                     <h1>Form</h1>
-                    {Object.entries(this.state.fields).map(([fieldName, fieldsState]) => {
+                    {Object.entries(this.state.fields).map(([_, fieldsState]) => {
                         const { name, value, label, error } = fieldsState;
                         // console.log(name, value, label, error);
                         return (
@@ -194,11 +193,8 @@ class ValidatedForm extends React.Component {
                         );
                     })
                     }
-
-
                     <Button buttonName={"Submit"} />
                     <Button buttonName={"Reset"} onClick={this.handleReset} />
-                    {/* <button onClick={this.handleReset}>Reset</button> */}
                 </form>
 
 

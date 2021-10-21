@@ -1,28 +1,30 @@
 import React from "react";
 
-export const Field = (props) => {
+export const Field = ({ name, label, value, error, onChange }) => {
+
     return (
         <div>
             <div className="input-container">
-                <label htmlFor={props.name}>{props.label}</label>
+                <label htmlFor={name}>{label}</label>
                 <input
                     autoComplete="off"
-                    className={props.error ? "invalid" : "valid"}
-                    placeholder={props.label}
+                    className={error ? "invalid" : "valid"}
+                    placeholder={label}
                     type={
-                        props.name === "password" || props.name === "confirmPassword"
+                        name === "password" || name === "confirmPassword"
                             ? "password"
                             : "text"
                     }
-                    value={props.value}
-                    onChange={props.onChange}
-                    name={props.name}
-                    id={props.name}
+                    value={value}
+                    onChange={onChange}
+                    name={name}
+                    id={name}
                 />
+                <div className="error">
+                    <span>{error && <span>{error}</span>}</span>
+                </div>
             </div>
-            <div className="error">
-                <span>{props.error && <span>{props.error}</span>}</span>
-            </div>
+
         </div>
     );
 };
