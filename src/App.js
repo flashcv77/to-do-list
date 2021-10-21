@@ -2,6 +2,7 @@ import './App.css';
 import ToDoList from './components/ToDoList';
 import FirstComponent from './components/FirstComponent';
 import ValidatedForm from './components/ValidatedForm';
+import FinalForm from './components/FinalForm/FinalForm';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
         {/* TO DO LIST */}
         {/* <ToDoList /> */}
         {/* <div className="wrapper"><FirstComponent CHECK/></div> */}
-        <ValidatedForm />
+        {/* <ValidatedForm /> */}
+        <FinalForm/>
       </header>
 
     </div>
