@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../Button";
+import Field from "../Field/Field";
 import "./ValidatedForm.scss"
 
 
@@ -125,7 +126,7 @@ class ValidatedForm extends React.Component {
 
     handleReset = (event) => {
         event.preventDefault();
-        const { fields,isError } = this.state;
+        const { fields, isError } = this.state;
         const updatedValues = {};
         let resetError = null;
         Object.entries(fields).forEach(([fieldName]) => {
@@ -134,7 +135,7 @@ class ValidatedForm extends React.Component {
             updatedFields.error = false;
             updatedValues[fieldName] = updatedFields
         });
-        this.setState({ fields: updatedValues , isError:resetError});
+        this.setState({ fields: updatedValues, isError: resetError });
 
     }
 
@@ -174,74 +175,32 @@ class ValidatedForm extends React.Component {
     }
 
     render() {
-        const { fields } = this.state;
         return (
             <>
                 <form onSubmit={this.handleSubmit}>
                     <h1>Form</h1>
-                    <div className="input-container">
-                        <label htmlFor={fields.inputName.name}>{fields.inputName.label}</label>
-                        <input
-                            autoComplete="off"
-                            className={fields.inputName.error ? "invalid" : "valid"}
-                            placeholder={fields.inputName.label + "..."}
-                            value={fields.inputName.value}
-                            onChange={this.handleChange}
-                            name={fields.inputName.name}
-                            id={fields.inputName.name}
-                        />
-                        <div className="error"> {fields.inputName.error && <span>{fields.inputName.error}</span>}</div>
-                    </div>
+                    {Object.entries(this.state.fields).map(([fieldName, fieldsState]) => {
+                        const { name, value, label, error } = fieldsState;
+                        // console.log(name, value, label, error);
+                        return (
+                            <Field
+                                key={name}
+                                name={name}
+                                label={label}
+                                value={value}
+                                error={error}
+                                onChange={this.handleChange}
+                            />
+                        );
+                    })
+                    }
 
-                    <div className="input-container">
-                        <label htmlFor={fields.email.name}>{fields.email.label}</label>
-                        <input
-                            autoComplete="off"
-                            className={fields.email.error ? "invalid" : "valid"}
-                            placeholder={fields.email.label + "..."}
-                            value={fields.email.value}
-                            onChange={this.handleChange}
-                            name={fields.email.name}
-                            id={fields.email.name}
-                        />
-                        <div className="error"> {fields.email.error && <span>{fields.email.error}</span>}</div>
-                    </div>
-
-                    <div className="input-container">
-                        <label htmlFor={fields.password.name}>{fields.password.label}</label>
-                        <input
-                            autoComplete="off"
-                            className={fields.password.error ? "invalid" : "valid"}
-                            placeholder={fields.password.label + "..."}
-                            type="password"
-                            value={fields.password.value}
-                            onChange={this.handleChange}
-                            name={fields.password.name}
-                            id={fields.password.name}
-                        />
-                        <div className="error"> {fields.password.error && <span>{fields.password.error}</span>}</div>
-                    </div>
-
-                    <div className="input-container">
-                        <label htmlFor={fields.confirmPassword.name}>{fields.confirmPassword.label}</label>
-                        <input
-                            autoComplete="off"
-                            className={fields.confirmPassword.error ? "invalid" : "valid"}
-                            placeholder={fields.confirmPassword.label + "..."}
-                            type="password"
-                            value={fields.confirmPassword.value}
-                            onChange={this.handleChange}
-                            name={fields.confirmPassword.name}
-                            id={fields.confirmPassword.name}
-                        />
-                        <div className="error"> {fields.confirmPassword.error && <span>{fields.confirmPassword.error}</span>}</div>
-                    </div>
 
                     <Button buttonName={"Submit"} />
-
-                    <button onClick={this.handleReset}>Reset</button>
+                    <Button buttonName={"Reset"} onClick={this.handleReset} />
+                    {/* <button onClick={this.handleReset}>Reset</button> */}
                 </form>
-                {/* <Button buttonName={"Reset"} onClick={this.handleReset} /> */}
+
 
             </>
         )
