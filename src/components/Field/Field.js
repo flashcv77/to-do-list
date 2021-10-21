@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Field = ({ name, label, value, error, onChange }) => {
+export const Field = ({ name, label, value, error, onChange, type }) => {
 
     return (
         <div>
@@ -10,11 +10,7 @@ export const Field = ({ name, label, value, error, onChange }) => {
                     autoComplete="off"
                     className={error ? "invalid" : "valid"}
                     placeholder={label}
-                    type={
-                        name === "password" || name === "confirmPassword"
-                            ? "password"
-                            : "text"
-                    }
+                    type={type}
                     value={value}
                     onChange={onChange}
                     name={name}

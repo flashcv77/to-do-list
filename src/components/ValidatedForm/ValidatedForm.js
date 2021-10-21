@@ -9,6 +9,7 @@ class ValidatedForm extends React.Component {
         fields: {
             inputName: {
                 name: "inputName",
+                type: "text",
                 label: "Name",
                 value: "",
                 error: false,
@@ -19,6 +20,7 @@ class ValidatedForm extends React.Component {
             },
             email: {
                 name: "email",
+                type: "email",
                 label: "Email",
                 value: "",
                 error: false,
@@ -29,6 +31,7 @@ class ValidatedForm extends React.Component {
             },
             password: {
                 name: "password",
+                type: "password",
                 label: "Password",
                 value: "",
                 error: false,
@@ -39,6 +42,7 @@ class ValidatedForm extends React.Component {
             },
             confirmPassword: {
                 name: "confirmPassword",
+                type: "password",
                 label: "Confirm password",
                 value: "",
                 error: false,
@@ -179,11 +183,12 @@ class ValidatedForm extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <h1>Form</h1>
                     {Object.entries(this.state.fields).map(([_, fieldsState]) => {
-                        const { name, value, label, error } = fieldsState;
+                        const { name, value, label, error,type } = fieldsState;
                         // console.log(name, value, label, error);
                         return (
                             <Field
                                 key={name}
+                                type={type}
                                 name={name}
                                 label={label}
                                 value={value}
