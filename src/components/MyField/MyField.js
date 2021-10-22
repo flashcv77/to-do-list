@@ -1,19 +1,18 @@
 import React from "react";
 
-export const MyField = ({ name, label, autoComplete, type, input, placeholder, meta }) => {
-    console.log(name, label, autoComplete, type, input, placeholder, meta);
+export const MyField = ({ label, autoComplete, input, placeholder, meta }) => {
+    console.log(input);
     return (
         <div>
             <div className="input-container">
-                <label htmlFor={name}>{label}</label>
+                <label htmlFor={input.name}>{label}</label>
                 <input
-                    {...input}
-                    autoComplete={autoComplete}
+
+                    // autoComplete={autoComplete}
                     className={meta.error ? "invalid" : "valid"}
                     placeholder={placeholder}
-                    type={type}
-                    name={name}
-                    id={name}
+                    id={input.name}
+                    {...input}
                 />
                 <div className="error">
                     <span>{meta.error && meta.touched && <span>{meta.error}</span>}</span>

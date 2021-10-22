@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, Form } from "react-final-form";
-import styles from "./OtherFinalForumRecord.module.scss";
+// import styles from "./OtherFinalForumRecord.module.scss";
 import "../ValidatedForm/ValidatedForm.scss"
 import MyField from "../MyField";
 
@@ -54,7 +54,7 @@ class FinalForm extends React.Component {
                     if (!values.name) {
                         errors.name = "Required";
                     } else if
-                        (values.name < 4) {
+                        (values.name.length < 4) {
                         errors.name = "Name minimum 4 symbols, maximum 16";
                     }
                     if (!values.email) {
@@ -96,7 +96,21 @@ class FinalForm extends React.Component {
                                 />
                             );
                         })
+
                         }
+                        <button
+                            onClick={form.reset}
+                            className="formButton"
+                            disabled={submitting || pristine}>
+                            Reset
+                        </button>
+                        <button
+                            className="formButton"
+                            type="submit"
+                            disabled={submitting}
+                        >
+                            Submit
+                        </button>
                         <pre>{JSON.stringify(values, 0, 2)}</pre>
                     </form>
                 )}
