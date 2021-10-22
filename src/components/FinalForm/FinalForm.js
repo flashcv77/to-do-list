@@ -11,6 +11,23 @@ const onSubmit = async (values) => {
     window.alert(JSON.stringify(values, 0, 2));
 };
 
+const validators = {
+    name : (value) => {
+        let errors={};
+        console.log(value, " WWW");
+        if (value && value.length < 4) {
+            errors.name = "Name minimum 4 symbols, maximum 16";
+            console.log(errors.name);
+            return  errors.name;
+     }
+    },
+    email: (values,errors) => {
+        if (values.email && !values.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
+            errors.email = "Email is not valid";
+        }
+    },
+}
+
 class FinalForm extends React.Component {
 
     state = {
@@ -41,28 +58,40 @@ class FinalForm extends React.Component {
             },
         },
     }
+    required = (value, allValues) => (
+        value ? undefined : "Required");
+    composeValidators = (validators) => (value,allValues) =>{
+        let error = undefined;
+        for (let i = 0; i< validators.length; i++){
+            error = validators[i](value,allValues);
+            if (error) {
+                return error;
+            }
+        }
+        return error;
+    }
+
     render() {
-
         return (
-
             <Form
                 onSubmit={onSubmit}
-                // initialValues={formData}
                 validate={(values) => {
 
                     const errors = {};
                     if (!values.name) {
                         errors.name = "Required";
-                    } else if
-                        (values.name.length < 4) {
-                        errors.name = "Name minimum 4 symbols, maximum 16";
                     }
+                    // else if
+                    //     (values.name.length < 4) {
+                    //     errors.name = "Name minimum 4 symbols, maximum 16";
+                    // }
                     if (!values.email) {
                         errors.email = "Requied";
-                    } else if
-                        (!values.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-                        errors.email = "Email is not valid";
-                    }
+                    } else 
+                    // if
+                    //     (!values.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
+                    //     errors.email = "Email is not valid";
+                    // }
                     if (!values.password) {
                         errors.password = "Required";
                     } else if
@@ -78,7 +107,7 @@ class FinalForm extends React.Component {
                     return errors;
                 }}
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
-
+                    
                     <form onSubmit={handleSubmit}>
                         <h1>Form</h1>
                         {Object.entries(this.state.fields).map(([_, fieldsState]) => {
@@ -86,13 +115,18 @@ class FinalForm extends React.Component {
                             // console.log(name, label, type, placeholder);
                             return (
                                 <Field
+                                    // validate={composeValidators(required, mustBeNumber, minValue(18))}
                                     component={MyField}
+                                    validate={this.composeValidators([
+                                        this.required,
+                                        validators[name]
+                                    ])}
                                     key={name}
                                     name={name}
                                     label={label}
                                     type={type}
                                     placeholder={placeholder}
-                                    autoComplete={autoComplete}
+                                // autoComplete={autoComplete}
                                 />
                             );
                         })
@@ -100,12 +134,10 @@ class FinalForm extends React.Component {
                         }
                         <button
                             onClick={form.reset}
-                            className="formButton"
                             disabled={submitting || pristine}>
                             Reset
                         </button>
                         <button
-                            className="formButton"
                             type="submit"
                             disabled={submitting}
                         >

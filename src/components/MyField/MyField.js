@@ -7,8 +7,8 @@ export const MyField = ({ label, autoComplete, input, placeholder, meta }) => {
             <div className="input-container">
                 <label htmlFor={input.name}>{label}</label>
                 <input
-
                     // autoComplete={autoComplete}
+                    autoComplete="off"
                     className={meta.error ? "invalid" : "valid"}
                     placeholder={placeholder}
                     id={input.name}
