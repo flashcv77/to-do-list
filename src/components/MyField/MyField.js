@@ -1,30 +1,24 @@
 import React from "react";
 
-export const MyField = ({ name, label, value, error, onChange }) => {
-
+export const MyField = ({ name, label, autoComplete, type, input, placeholder, meta }) => {
+    console.log(name, label, autoComplete, type, input, placeholder, meta);
     return (
         <div>
             <div className="input-container">
                 <label htmlFor={name}>{label}</label>
                 <input
-                    autoComplete="off"
-                    className={error ? "invalid" : "valid"}
-                    placeholder={label}
-                    type={
-                        name === "password" || name === "confirmPassword"
-                            ? "password"
-                            : "text"
-                    }
-                    value={value}
-                    onChange={onChange}
+                    {...input}
+                    autoComplete={autoComplete}
+                    className={meta.error ? "invalid" : "valid"}
+                    placeholder={placeholder}
+                    type={type}
                     name={name}
                     id={name}
                 />
                 <div className="error">
-                    <span>{error && <span>{error}</span>}</span>
+                    <span>{meta.error && meta.touched && <span>{meta.error}</span>}</span>
                 </div>
             </div>
-
         </div>
     );
 };
