@@ -1,7 +1,6 @@
 import React from "react";
 
 export const MyField = ({ label, autoComplete, input, placeholder, meta }) => {
-    console.log(input);
     return (
         <div>
             <div className="input-container">
