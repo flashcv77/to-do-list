@@ -1,6 +1,6 @@
 import React from "react";
 import Task from "../Task"
-import './ToDoList.css';
+import './ToDoList.scss';
 
 class ToDoList extends React.Component {
 
@@ -24,6 +24,7 @@ class ToDoList extends React.Component {
         let tasksCount = this.state.tasks.length;
         return (
             <div className="wrapper">
+                <h1>ToDo List</h1>
                 <div className="taskContainer">
                     {tasksCount === 0 && <div className="warning">No Items</div>}
                     {tasksCount > 0 && this.state.tasks.map((item, index) => <Task key={index}></Task>)}
