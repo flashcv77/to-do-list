@@ -15,8 +15,6 @@ aside {
   align-items: center;
   justify-content: center;
   width: 80%;
-
-  
 }
 
 .nav-bar {
@@ -35,20 +33,21 @@ aside {
     padding: 5px 5px;
 
     a {
-      text-decoration: none;      
+      text-decoration: none;
+      display: block;
     }
   }
-  
-  li:hover{
-   cursor: pointer;
-   text-decoration: underline;
-   background-color: #f7f7f7;
+
+  li:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    background-color: #f7f7f7;
   }
 }
-button:hover{
+button:hover {
   cursor: pointer;
 }
-.nav-active{
+.nav-active {
   background-color: #a6dfee;
   text-decoration: underline;
 }
