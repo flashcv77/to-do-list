@@ -22,16 +22,26 @@
   .card p {
     min-height: 80px;
   }
+  h1{
+    margin-bottom: 50px;
+  }
 }
 
 .navbar {
-  justify-content: center !important;
+  justify-content: right !important;
+
 }
 
+
 .welcome {
-  margin-top: 100px;
+  margin: 100px 0px;
 }
 
 .nav-link .active {
   background-color: red;
+}
+
+.card,
+.navbar {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
