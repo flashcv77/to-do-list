@@ -2,8 +2,6 @@
 
 # dependencies
 /node_modules
-/to-do-list-react-app/node_modules
-/books/node_modules
 /.pnp
 .pnp.js
 
