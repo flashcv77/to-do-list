@@ -12,8 +12,9 @@ export class BookDetails extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.id);
-        getDetails(this.props.match.params.id).then((response) => {
+        const { params } = this.props.match;
+        console.log(params.id);
+        getDetails(params.id).then((response) => {
             this.setState({ loading: false, bookList: response.data });
 
         });
@@ -29,10 +30,10 @@ export class BookDetails extends React.Component {
                     <p className="lead">{description}</p>
                     <hr className="my-2" />
                     <p>{excerpt}</p>
-                    <p className="lead">
-                        <Button color="primary">Learn More</Button>
-                    </p>
-                    {this.state.loading && <Spinner color="secondary" children=""/>}
+                    <Link to={"/booklist"}>
+                        <Button>Go back</Button>
+                    </Link>
+                    {this.state.loading && <Spinner color="secondary" children="" />}
                 </Container>
             </Jumbotron >
         )

@@ -10,7 +10,7 @@ const BookItem = ({ id, title, description }) => (
             <CardBody>
                 <CardTitle tag="h5">{title}</CardTitle>
                 <CardText>{description}</CardText>
-                <Link to={`/bookdetails/${id}`}>
+                <Link to={`/books/${id}`}>
                     <Button>Details</Button>
                 </Link>
             </CardBody>

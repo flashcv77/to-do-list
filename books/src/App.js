@@ -1,8 +1,8 @@
 import './App.scss';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, NavbarBrand } from 'reactstrap';
-import { BrowserRouter as Router, Switch, Route , NavLink, NavLink as ReactLink} from 'react-router-dom';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { BrowserRouter as Router, Switch, Route, NavLink as ReactLink } from 'react-router-dom';
 import BookItem from './pages/books/components/BookItem';
 import HomePage from './pages/HomePage/HomePage';
 // import APIComponent from './APIComponent';
@@ -13,16 +13,26 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Navbar color="dark" light expand="md" >
-          {/* <NavLink tag={ReactLink} to="/" activeClassName="active" href="/">Home</NavLink> */}
-          <NavbarBrand className="text-info" href="/">Home</NavbarBrand>
-          <NavbarBrand  className="text-info" href="/booklist">Books</NavbarBrand>
+        <Navbar color="dark" expand="md" >
+          <Nav>
+            <NavItem>
+              <NavLink
+                exact tag={ReactLink} to="/" activeClassName="active" className="link-light">
+                Home
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink exact tag={ReactLink} to="/booklist" ctiveClassName="active" className="link-light">
+                Books
+              </NavLink>
+            </NavItem>
+          </Nav>
         </Navbar>
         <Switch>
-          
+
           <Route exact path="/booklist" component={Books} />
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/bookdetails/:id" component={BookDetails} />
+          <Route exact path="/books/:id" component={BookDetails} />
         </Switch>
       </Router>
       {/* <APIComponent/> */}

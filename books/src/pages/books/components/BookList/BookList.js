@@ -31,9 +31,9 @@ export class BookList extends React.Component {
         return (
             <Container>
                 <h1>Books</h1>
+                {this.state.loading && <Spinner color="secondary"  children=""/> }
                 <Row>
-                    {booksJsx}
-                    {this.state.loading && <Spinner color="secondary"  children=""/> }
+                    {booksJsx} 
                 </Row>
             </Container>
         )
