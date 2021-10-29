@@ -1,9 +1,9 @@
 import React from "react";
-import BookList from "./BookList";
+import BookListHook from "./BookList";
 
 const Books = () => (
     <>
-        <BookList />
+        <BookListHook />
     </>
 )
 

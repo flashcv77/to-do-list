@@ -5,6 +5,7 @@ import Pagination from "../Pagination";
 import { getBooks } from "../../../../api/books";
 import { Spinner } from "reactstrap";
 
+const POSTS_PER_PAGE = 15;
 export class BookList extends React.Component {
     state = {
         bookList: [],
@@ -33,25 +34,21 @@ export class BookList extends React.Component {
 
     render() {
         const { loading, bookList, currentPageNumber } = this.state;
-        const POSTS_PER_PAGE = 9;
         const indexOfLastPost = this.state.currentPageNumber * POSTS_PER_PAGE;
         const indexOfFirstPost = indexOfLastPost - POSTS_PER_PAGE;
         const currentPosts = bookList.slice(indexOfFirstPost, indexOfLastPost);
-        const booksJsx = !loading && currentPosts.map((book) => (
-            <>
-                <BookItem
-                    id={book.id}
-                    title={book.title}
-                    description={book.description.slice(0, 120) + "..."}
-                />
-            </>
-        ))
         return (
             <Container>
                 <h1>Books</h1>
                 {loading && <Spinner color="secondary" children="" />}
                 <Row>
-                    {booksJsx}
+                    {!loading && currentPosts.map((book) => (
+                        <BookItem
+                            id={book.id}
+                            title={book.title}
+                            description={book.description.slice(0, 120) + "..."}
+                        />
+                    ))}
                 </Row>
                 <div className="pagination-container">
                     <Row>

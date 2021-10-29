@@ -7,7 +7,7 @@ import BookItem from './pages/books/components/BookItem';
 import HomePage from './pages/HomePage/HomePage';
 // import APIComponent from './APIComponent';
 import Books from './pages/books/components/Books';
-import BookDetails from './pages/books/components/BookDetails';
+import BookDetailsHook from './pages/books/components/BookDetails';
 
 const App = () => {
   return (
@@ -22,7 +22,7 @@ const App = () => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink exact tag={ReactLink} to="/booklist" ctiveClassName="active" className="link-light">
+              <NavLink exact tag={ReactLink} to="/booklist" activeClassName="active" className="link-light">
                 Books
               </NavLink>
             </NavItem>
@@ -32,10 +32,9 @@ const App = () => {
 
           <Route exact path="/booklist" component={Books} />
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/books/:id" component={BookDetails} />
+          <Route exact path="/books/:id" component={BookDetailsHook} />
         </Switch>
       </Router>
-      {/* <APIComponent/> */}
     </div>
   );
 }
