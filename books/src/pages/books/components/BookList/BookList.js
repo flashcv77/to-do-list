@@ -1,6 +1,7 @@
 import React from "react";
-import { Container, Row } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import BookItem from "../BookItem"
+import Pagination from "../Pagination";
 import { getBooks } from "../../../../api/books";
 import { Spinner } from "reactstrap";
 
@@ -9,32 +10,61 @@ export class BookList extends React.Component {
         bookList: [],
         loading: true,
         error: false,
+        currentPageNumber: 1,
     }
 
     componentDidMount() {
-        getBooks().then((response) => {
-            // console.log(response.data);
-            this.setState({ loading: false, bookList: response.data });
+        getBooks()
+            .then((response) => {
+                // console.log(response.data);
+                this.setState({ loading: false, bookList: response.data });
+            })
+            .catch((rej) => {
+                console.log("Error in parsing module", rej);
+                this.setState({ error: true });
+            });
+    }
+
+    handler = (number) => {
+        this.setState({
+            currentPageNumber: number,
         });
     }
 
     render() {
-        const booksJsx = !this.state.loading && this.state.bookList.map((book) => (
+        const { loading, bookList, currentPageNumber } = this.state;
+        const POSTS_PER_PAGE = 9;
+        const indexOfLastPost = this.state.currentPageNumber * POSTS_PER_PAGE;
+        const indexOfFirstPost = indexOfLastPost - POSTS_PER_PAGE;
+        const currentPosts = bookList.slice(indexOfFirstPost, indexOfLastPost);
+        const booksJsx = !loading && currentPosts.map((book) => (
             <>
                 <BookItem
                     id={book.id}
                     title={book.title}
-                    description={book.description.slice(0,120)+"..."}
+                    description={book.description.slice(0, 120) + "..."}
                 />
             </>
         ))
         return (
             <Container>
                 <h1>Books</h1>
-                {this.state.loading && <Spinner color="secondary"  children=""/> }
+                {loading && <Spinner color="secondary" children="" />}
                 <Row>
-                    {booksJsx} 
+                    {booksJsx}
                 </Row>
+                <div className="pagination-container">
+                    <Row>
+                        <Col sm="12" md={{ size: 6, offset: 3 }}>
+                            {!loading && <Pagination
+                                dataPerPage={POSTS_PER_PAGE}
+                                totalDataCount={bookList.length}
+                                handler={this.handler}
+                                pageNumber={currentPageNumber}
+                            />}
+                        </Col>
+                    </Row>
+                </div>
             </Container>
         )
     }
