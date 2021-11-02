@@ -3,11 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ModalClassBased from './components/ModalClassBased/ModalClassBased';
 import ModalRedux from './components/ModalRedux/ModalRedux';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 function App() {
 
-  const store = useSelector(state => state.show)
+  // const store = useSelector(state => state.show)
 
   return (
     <div className="App">
@@ -17,10 +17,8 @@ function App() {
       </div>
       <div className="half-container">
         <h2>Redux</h2>
-        <h2>{store}</h2>
         <ModalRedux />
       </div>
-
     </div>
   );
 }

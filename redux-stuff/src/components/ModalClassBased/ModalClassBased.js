@@ -22,8 +22,8 @@ class ModalClassBased extends React.Component {
                     Click Me
                 </Button>
                 <Modal
-                    fullscreen="lg"
-                    size="lg"
+                    fullscreen="md"
+                    size="md"
                     isOpen={this.state.show}
                     toggle={() => { this.handleToggle() }}
                 >

@@ -1,27 +1,25 @@
-import { useDispatch } from "react-redux";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { toggleModal } from "../../action";
+import { useSelector, useDispatch } from 'react-redux'
+import { showModal, hideModal } from '../../reducers/modalReducer'
 
 const ModalRedux = () => {
-    const dispatch = useDispatch();
+    const isActive = useSelector((state) => state.modal_status.value)
 
-    const handleToggle = () => {
-        dispatch(toggleModal())     //receives "action from /action"
-    }
+    const dispatch = useDispatch();
 
     return (
         <div>
             <Button
                 color="danger"
-                onClick={handleToggle}
+                onClick={() => dispatch(showModal())}
             >
                 Click Me
             </Button>
             <Modal
-                fullscreen="lg"
-                size="lg"
-                isOpen={handleToggle()}
-                toggle={() => { handleToggle() }}
+                fullscreen="md"
+                size="md"
+                isOpen={isActive}
+                toggle={() => dispatch(hideModal())}
             >
                 <ModalHeader>
                     Modal title
@@ -36,7 +34,7 @@ const ModalRedux = () => {
                         Do Something
                     </Button>
                     {' '}
-                    <Button onClick={handleToggle}>
+                    <Button onClick={() => dispatch(hideModal())}>
                         Close
                     </Button>
                 </ModalFooter>
