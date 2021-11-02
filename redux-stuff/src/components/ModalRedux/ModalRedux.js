@@ -1,27 +1,27 @@
-import { useDispatch } from "react-redux";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { toggleModal } from "../../action";
+import { connect } from "react-redux";
+import { showModalAction, hideModalAction } from "../../store";
 
-const ModalRedux = () => {
-    const dispatch = useDispatch();
-
-    const handleToggle = () => {
-        dispatch(toggleModal())     //receives "action from /action"
-    }
+const ModalRedux = (props) => {
+    console.log(props);
 
     return (
         <div>
+            {/* <div>Reduct</div>
+            {props.isOpen && <div>Hello</div>}
+            <button onClick={props.openModal}>Click me</button> */}
             <Button
                 color="danger"
-                onClick={handleToggle}
+                onClick={props.openModal}
             >
                 Click Me
             </Button>
+
             <Modal
-                fullscreen="lg"
-                size="lg"
-                isOpen={handleToggle()}
-                toggle={() => { handleToggle() }}
+                fullscreen="md"
+                size="md"
+                isOpen={props.isOpen}
+                toggle={props.hideModal}
             >
                 <ModalHeader>
                     Modal title
@@ -36,13 +36,32 @@ const ModalRedux = () => {
                         Do Something
                     </Button>
                     {' '}
-                    <Button onClick={handleToggle}>
+                    <Button
+                        onClick={props.hideModal}>
                         Close
                     </Button>
                 </ModalFooter>
+
             </Modal>
-        </div>
+        </div >
     )
 }
 
-export default ModalRedux;
+const mapStateToProps = (state) => {
+    return {
+        isOpen: state.isModalOpen,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        openModal: () => {
+            dispatch(showModalAction(true));
+        },
+        hideModal: () => {
+            dispatch(hideModalAction(false))
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalRedux);
