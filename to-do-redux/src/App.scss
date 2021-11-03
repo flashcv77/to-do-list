@@ -1,54 +1,59 @@
 .App {
-  // text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
   background: rgb(255, 235, 146);
-}
 
-.todo-container {
-  margin: 20px;
-  width: 520px;
-  min-height: 600px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: center;
-  flex-direction: column;
-  border: 2px solid black;
-  border-radius: 20px 30px;
-  padding: 20px;
-  -webkit-box-shadow: 0px 2px 27px 8px rgba(34, 60, 80, 0.2);
-  -moz-box-shadow: 0px 2px 27px 8px rgba(34, 60, 80, 0.2);
-  box-shadow: 0px 2px 27px 8px rgba(34, 60, 80, 0.2);
-  background-color: rgb(247, 173, 62);
-
-  .todo {
-    height: 35px;
-    width: 70%;
-    border: 1px solid rgb(109, 109, 109);
-    margin: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border-radius: 15px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  form {
+    margin: 10px;
+    text-align: center;
     font-size: 1.4em;
-    background-color: rgba(253, 7, 7, 0.137);
-
-
-
-    .close-icon {
-      position: absolute;
-      top: 3px;
-      right: 3px;
-    }
-    .close-icon:hover {
-      cursor: pointer;
-      background-color: rgba(58, 58, 58, 0.188);
-      border-radius: 15px;
+    button {
+      margin: 10px;
     }
   }
 
+  .todo-container {
+    margin: 20px;
+    width: 520px;
+    min-height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 20px 30px;
+    padding: 20px;
+    -webkit-box-shadow: 0px 2px 27px 8px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 2px 27px 8px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 2px 27px 8px rgba(34, 60, 80, 0.2);
+    background-color: rgb(247, 173, 62);
+
+    .todo {
+      height: 35px;
+      width: 70%;
+      border: 1px solid rgb(109, 109, 109);
+      margin: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-radius: 15px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      font-size: 1.4em;
+      background-color: rgba(253, 7, 7, 0.137);
+
+      .close-icon {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+      .close-icon:hover {
+        cursor: pointer;
+        background-color: rgba(58, 58, 58, 0.188);
+        border-radius: 15px;
+      }
+    }
+  }
 }
