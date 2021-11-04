@@ -2,35 +2,19 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import BookItem from "../BookItem"
 import Pagination from "../Pagination";
-import { getBooks } from "../../../../api/books";
 import { Spinner } from "reactstrap";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
+import { getBooksThunk } from "../../../../store";
 
 const POSTS_PER_PAGE = 15;
 export class BookList extends React.Component {
     state = {
-        bookList: [],
-        loading: true,
-        error: false,
         currentPageNumber: 1,
     }
 
-    // componentDidMount() {
-    //     getBooks()
-    //         .then((response) => {
-    //             // console.log(response.data);
-    //             this.setState({ loading: false, bookList: response.data });
-    //         })
-    //         .catch((rej) => {
-    //             console.log("Error in parsing module", rej);
-    //             this.setState({ error: true });
-    //         });
-    // }
-
-    // const dispatch = useDispatch;
-    // useEffect(()=> {
-    //     dispatch(getBooks())
-    // }, [dispatch])
+    componentDidMount() {
+        this.props.fetchBooks()
+    }
 
     handler = (number) => {
         this.setState({
@@ -39,18 +23,21 @@ export class BookList extends React.Component {
     }
 
     render() {
-        console.log('props', this.props);
-        const { loading, bookList, currentPageNumber } = this.state;
+        const books = this.props.bookList.booksReducer.books;
+        const { loading, error } = this.props.bookList.booksReducer;
+        // console.log('props: ', loading, '123', error);
+        const { currentPageNumber } = this.state;
         const indexOfLastPost = this.state.currentPageNumber * POSTS_PER_PAGE;
         const indexOfFirstPost = indexOfLastPost - POSTS_PER_PAGE;
-        const currentPosts = bookList.slice(indexOfFirstPost, indexOfLastPost);
+        const currentPosts = books.slice(indexOfFirstPost, indexOfLastPost);
         return (
             <Container>
                 <h1>Books</h1>
                 {loading && <Spinner color="secondary" children="" />}
                 <Row>
-                    {!loading && currentPosts.map((book) => (
+                    {currentPosts.map((book) => (
                         <BookItem
+                            key={book.id}
                             id={book.id}
                             title={book.title}
                             description={book.description.slice(0, 120) + "..."}
@@ -60,9 +47,9 @@ export class BookList extends React.Component {
                 <div className="pagination-container">
                     <Row>
                         <Col sm="12" md={{ size: 6, offset: 3 }}>
-                            {!loading && <Pagination
+                            {<Pagination
                                 dataPerPage={POSTS_PER_PAGE}
-                                totalDataCount={bookList.length}
+                                totalDataCount={books.length}
                                 handler={this.handler}
                                 pageNumber={currentPageNumber}
                             />}
@@ -74,14 +61,19 @@ export class BookList extends React.Component {
     }
 }
 
-// const mapStateToProps = (state) => ({
-//     books: state.books
-//   })
+const mapStateToProps = (state) => {
+    // console.log(state);
+    return {
+        bookList: state
+    }
+}
 
-//   const mapDispatchToProps = {
-//     addTodo: addTodoAction,
-//     removeTodo: removeTodoAction,
-//     removeLast: removeLastAction,
-//     addDefault: addDefaultAction
-//   }
-export default BookList;
+const mapDispatchToProps = (dispatch) => {
+    // console.log("check");
+    return {
+        fetchBooks: () => dispatch(getBooksThunk())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);

@@ -1,16 +1,48 @@
-import { getBooks } from '../src/api/books'
+import { getBooks, getDetails } from '../src/api/books'
 import { combineReducers } from 'redux'
 
-export const INIT_BOOKLIST = "INIT_BOOKLIST";
+export const INIT_SUCCESS = "INIT_SUCCESS";
+export const INIT_FAILURE = "INIT_FAILURE";
 export const BOOK_DETAILS = "BOOK_DETAILS";
+
+const initialState = {
+    books: [],
+    loading: true,
+    error: '',
+};
+
+const detailsState = {
+    books: [],
+    loading: true,
+    error: '',
+}
 
 export const getBooksThunk = () => {
     return (dispatch) => {
         getBooks()
-            .then((books) => {
+            .then((response) => {
+                // console.log('response:', response)
+                let books = response.data;
                 dispatch({
-                    type: INIT_BOOKLIST,
+                    type: INIT_SUCCESS,
                     payload: books,
+                })
+                // console.log(books);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+}
+export const getDetailsThunk = (id) => {
+    return (dispatch) => {
+        getDetails(id)
+            .then((response) => {
+                // console.log('response:', response)
+                let bookDetails = response.data;
+                dispatch({
+                    type: BOOK_DETAILS,
+                    payload: bookDetails,
                 })
             })
             .catch((error) => {
@@ -19,16 +51,41 @@ export const getBooksThunk = () => {
     }
 }
 
-export const booksReducer = (state = [], action) => {
+export const booksReducer = (state = initialState, action) => {
     switch (action.type) {
-        case INIT_BOOKLIST: {
-            const items = action.payload
-            return items
+        case INIT_SUCCESS: {
+            return {
+                books: action.payload,
+                loading: false,
+                error: '',
+            }
+        }
+        case INIT_FAILURE: {
+            return {
+                books: [],
+                loading: true,
+                error: action.payload,
+            }
         }
         default:
             return state;
     }
 }
+
+export const bookDetailsReducer = (state = detailsState, action) => {
+    switch (action.type) {
+        case BOOK_DETAILS: {
+            return {
+                books: action.payload,
+                loading: false,
+                error: '',
+            }
+        }
+        default:
+            return state;
+    }
+}
+
 export const rootReducer = combineReducers({
-    books: booksReducer,
+    booksReducer, bookDetailsReducer
 })
