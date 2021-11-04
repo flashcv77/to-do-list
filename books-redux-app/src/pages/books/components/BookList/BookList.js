@@ -16,18 +16,16 @@ export class BookList extends React.Component {
         this.props.fetchBooks()
     }
 
-    handler = (number) => {
+    handleCurrentPage = (number) => {
         this.setState({
             currentPageNumber: number,
         });
     }
 
     render() {
-        const books = this.props.bookList.booksReducer.books;
-        const { loading, error } = this.props.bookList.booksReducer;
-        // console.log('props: ', loading, '123', error);
+        const { books, loading } = this.props.bookList;
         const { currentPageNumber } = this.state;
-        const indexOfLastPost = this.state.currentPageNumber * POSTS_PER_PAGE;
+        const indexOfLastPost = currentPageNumber * POSTS_PER_PAGE;
         const indexOfFirstPost = indexOfLastPost - POSTS_PER_PAGE;
         const currentPosts = books.slice(indexOfFirstPost, indexOfLastPost);
         return (
@@ -50,7 +48,7 @@ export class BookList extends React.Component {
                             {<Pagination
                                 dataPerPage={POSTS_PER_PAGE}
                                 totalDataCount={books.length}
-                                handler={this.handler}
+                                handler={this.handleCurrentPage}
                                 pageNumber={currentPageNumber}
                             />}
                         </Col>
@@ -62,18 +60,15 @@ export class BookList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state);
     return {
-        bookList: state
+        bookList: state.booksReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    // console.log("check");
     return {
         fetchBooks: () => dispatch(getBooksThunk())
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);

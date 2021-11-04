@@ -21,13 +21,11 @@ export const getBooksThunk = () => {
     return (dispatch) => {
         getBooks()
             .then((response) => {
-                // console.log('response:', response)
                 let books = response.data;
                 dispatch({
                     type: INIT_SUCCESS,
                     payload: books,
                 })
-                // console.log(books);
             })
             .catch((error) => {
                 console.error(error)
@@ -38,7 +36,6 @@ export const getDetailsThunk = (id) => {
     return (dispatch) => {
         getDetails(id)
             .then((response) => {
-                // console.log('response:', response)
                 let bookDetails = response.data;
                 dispatch({
                     type: BOOK_DETAILS,
