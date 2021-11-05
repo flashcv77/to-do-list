@@ -48,7 +48,7 @@ export const getDetailsThunk = (id) => {
     }
 }
 
-export const booksReducer = (state = initialState, action) => {
+const booksReducer = (state = initialState, action) => {
     switch (action.type) {
         case INIT_SUCCESS: {
             return {
@@ -69,7 +69,7 @@ export const booksReducer = (state = initialState, action) => {
     }
 }
 
-export const bookDetailsReducer = (state = detailsState, action) => {
+const bookDetailsReducer = (state = detailsState, action) => {
     switch (action.type) {
         case BOOK_DETAILS: {
             return {

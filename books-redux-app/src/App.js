@@ -1,11 +1,9 @@
 import './App.scss';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Navbar, Nav, NavItem, NavLink } from 'reactstrap';
 import { BrowserRouter as Router, Switch, Route, NavLink as ReactLink } from 'react-router-dom';
-import BookItem from './pages/books/components/BookItem';
 import HomePage from './pages/HomePage/HomePage';
-// import APIComponent from './APIComponent';
 import Books from './pages/books/components/Books';
 import BookDetails from './pages/books/components/BookDetails';
 

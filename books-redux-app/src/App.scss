@@ -1,12 +1,19 @@
 .App {
   text-align: center;
+  // position: relative;
   .navbar {
     justify-content: right !important;
     margin-bottom: 30px;
+    // position: fixed;
 
     .active {
       border-bottom: 2px solid #61dafb;
       color: #61dafb;
+    }
+
+    .nav-item:hover {
+      cursor: pointer;
+      color: #0389ad !important;
     }
   }
 
