@@ -2,8 +2,13 @@
   text-align: center;
   // position: relative;
   .navbar {
-    justify-content: right !important;
+    justify-content: right;
     margin-bottom: 30px;
+    // position: fixed;
+    // top:0;
+    // right: 0;
+    // left:0;
+    // z-index: 5;
     // position: fixed;
 
     .active {
@@ -13,7 +18,7 @@
 
     .nav-item:hover {
       cursor: pointer;
-      color: #0389ad !important;
+      color: #0389ad;
     }
   }
 
@@ -24,6 +29,7 @@
 
   .container {
     justify-content: center;
+    margin-top: 0px;
 
     .card p {
       min-height: 80px;

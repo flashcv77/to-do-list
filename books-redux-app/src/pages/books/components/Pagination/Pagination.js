@@ -52,7 +52,7 @@ const Pagination = ({ handler, dataPerPage, totalDataCount, pageNumber }) => {
           disabled={allPagesCount.length === pageNumber}
           onClick={(event) => {
             event.preventDefault();
-            handler(pageNumber - 1);
+            handler(pageNumber + 1);
           }}
         />
       </PaginationItem>

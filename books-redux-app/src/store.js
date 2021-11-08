@@ -12,7 +12,7 @@ const initialState = {
 };
 
 const detailsState = {
-    books: [],
+    books: {},
     loading: true,
     error: '',
 }
