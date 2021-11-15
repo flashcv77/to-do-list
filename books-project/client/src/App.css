@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+}
+
+body {
+  min-height: 100vh;
+}
+
+header {
+  --hex-header-height: 64px;
+}
+
+footer {
+  --hex-footer-height: 69.33px;
+}
+
+main {
+  min-height: 100vh;
+  /* min-height: calc(100vh-(var(--hex-footer-height)+var(--hex-header-height))); */
+}
+
+.flexJustifyEnd {
+  justify-content: flex-end;
+}
+.flexDisplayFlex {
+  display: flex;
+}
+.width100percent {
+  width: 100%;
+}
+.fontSize24px {
+  font-size: 24px;
+}
+.fontSize48px {
+  font-size: 48px;
+}
+.textColorWhite {
+  color: #fff;
+}
+.bgColor {
+  background: red;
+}
+.bgColorDark {
+  background-color: #001529;
+}
+.paggingZero {
+  padding: 0;
+}
+.marginLeftAuto {
+  margin-left: auto;
+}
+.paddingLeft10px {
+  padding-left: 10px;
+}
+.padding30px {
+  padding: 30px;
+}
+.margin30px {
+  margin: 30px;
+}
+
+.flexJustifySpaceBetween {
+  justify-content: space-between;
+}
+
+.boxShadow {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.flexWrapWrap {
+  flex-wrap: wrap;
+}
+
+.flexJustifyCenter {
+  justify-content: center;
+}
+
+.activeNavLink {
+  background-color: #1890ff;
+}
