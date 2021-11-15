@@ -5,18 +5,13 @@ import { getBooksThunk } from "./getBooksThunk"
 export const addBookThunk = (bookObj) => {
 
     return (dispatch) => {
-        dispatch(
-            addBookInProgressAction()
-        )
+        dispatch(addBookInProgressAction());
         addBook(bookObj)
             .then(() => {
-                dispatch(
-                    addBookAction()
-                );
-                dispatch(getBooksThunk())
-            }
-            )
-
-
+                dispatch(addBookAction());
+                setTimeout(() => {
+                    dispatch(getBooksThunk());
+                }, 4000)
+            });
     }
 }

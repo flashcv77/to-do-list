@@ -9,7 +9,9 @@ import {  useDispatch, useSelector } from "react-redux";
 const BookDetails = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
+    console.log(id);
     const { loading, books } = useSelector((state) => {
+        console.log('state ', state)
         return state.bookDetailsReducer
     })
     useEffect(() => {

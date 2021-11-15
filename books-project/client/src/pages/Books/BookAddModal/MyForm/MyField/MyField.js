@@ -4,17 +4,17 @@ import { StyledInput } from './styled'
 
 export const MyField = (props) => {
     console.log(props)
-    const { name } = props.input
+    const { name} = props.input
+    const { allowClear} = props;
     console.log(name);
     return (
         <>
             <StyledInput>
-
                 <label for={name}>{name}</label>
                 <Input
                     id={name}
                     {...props.input}
-                // {...props.meta}
+                    allowClear={allowClear}
                 />
             </StyledInput>
         </>

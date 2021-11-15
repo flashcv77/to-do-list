@@ -6,8 +6,9 @@ import { addBookThunk } from '../../thunks/addBookThunk';
 
 const MyForm = () => {
     const dispatch = useDispatch();
-    const onSubmit = event => {
-        dispatch(addBookThunk(event));
+    const onSubmit = (bookObj, form) => {
+        dispatch(addBookThunk(bookObj));
+        form.reset();
         // this.props.addBook(event)
         // console.log(event);
     };
@@ -16,15 +17,15 @@ const MyForm = () => {
     // console.log(this.props)
     return (
         <>
-        
+
             <Form
                 id="form"
                 onSubmit={onSubmit}
                 render={({ handleSubmit, form, submitting, pristine }) => (
                     <form onSubmit={handleSubmit} id="form">
-                        <Field name="name" placeholder="Name" component={MyField} />
-                        <Field name="author" placeholder="Author" component={MyField} />
-                        <Field name="description" placeholder="description" component={MyField}
+                        <Field name="name" placeholder="Name" component={MyField} allowClear />
+                        <Field name="author" placeholder="Author" component={MyField} allowClear />
+                        <Field name="description" placeholder="description" component={MyField} allowClear
                         />
                     </form>
                 )}

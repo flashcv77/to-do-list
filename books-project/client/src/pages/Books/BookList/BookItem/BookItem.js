@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Card, Avatar, Button } from 'antd';
+import { EditOutlined, EllipsisOutlined} from '@ant-design/icons';
+import { NavLink } from "react-router-dom";
 
 const { Meta } = Card;
 
@@ -12,7 +13,7 @@ export function BookItem({ id, title, description, author }) {
 
       <Card
         className="margin30px boxShadow"
-        style={{ width: 450 }}
+        style={{ width: 350 }}
         // cover={
         //   <img
         //     alt="example"
@@ -22,7 +23,9 @@ export function BookItem({ id, title, description, author }) {
         actions={[
           // <SettingOutlined key="setting" />,
           // <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />,
+          <EllipsisOutlined
+          //  key="ellipsis" 
+           />,
         ]}
       >
         <Meta
@@ -30,6 +33,9 @@ export function BookItem({ id, title, description, author }) {
           title={title}
           description={description}
         />
+        <NavLink to={`/books/${id}`}>
+          <Button>Details</Button>
+        </NavLink>
       </Card>
 
       {/* </div>, */}

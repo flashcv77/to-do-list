@@ -1,40 +1,39 @@
 import React from 'react'
 import { Modal, Button, Spin } from 'antd';
 import MyForm from './MyForm'
-import { connect } from 'react-redux';
-import { hideModalAction, showModalAction } from '../actions/books.actions';
 
 
 export class BookAddModal extends React.Component {
 
-    handleShowModal = () => {
-        this.props.show();
-    }
+    // handleShowModal = () => {
+    //     this.props.showModal();
+    // }
 
-    handleHideModal = () => {
-        this.props.hide();
-    }
+    // handleHideModal = () => {
+    //     this.props.hideModal();
+    // }
 
     render() {
-        const { visible, loading } = this.props;
-        console.log(loading);
+        const { visible, loading, handleHideModal } = this.props;
+        console.log(this.props);
         return (
             <>
-
-                <Button type="primary" onClick={this.handleShowModal}>
+                
+                {/* <Button type="primary" onClick={this.handleShowModal}>
                     Create book
-                </Button>
+                </Button> */}
 
                 <Modal
                     visible={visible}
                     title="Create/Update book"
-                    onCancel={this.handleHideModal}
-
+                    onCancel={() => handleHideModal()}
+                    confirmLoading={!loading}
+                    loading={this.props.loading}
                     footer={[
                         <Button
-                            type="primary"
+                            type="secondary"
                             key="back"
-                            onClick={this.handleHideModal}>
+                            onClick={() => handleHideModal()}>
                             Return
                         </Button>,
                         <button
@@ -47,30 +46,29 @@ export class BookAddModal extends React.Component {
                         </button>,
                     ]}
                 >
-                    {loading && <Spin tip="Loading...">
-
+                    {<Spin spinning={loading} tip="Loading...">
+                        <MyForm />
                     </Spin>}
-                    <MyForm
 
-                    />
                 </Modal>
 
             </>
         )
     }
 }
-const mapStateToProps = (state) => {
-    return {
-        visible: state.modalReducer.visible,
-        loading: state.modalReducer.loading
-    }
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         visible: state.modalReducer.visible,
+//         loading: state.modalReducer.loading
+//     }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        show: () => { dispatch(showModalAction()) },
-        hide: () => { dispatch(hideModalAction()) },
-    }
-};
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         showModal: () => { dispatch(showModalAction()) },
+//         hideModal: () => { dispatch(hideModalAction()) },
+//     }
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookAddModal);
+export default BookAddModal;
+// export default connect(mapStateToProps, mapDispatchToProps)(BookAddModal);
