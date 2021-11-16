@@ -1,11 +1,8 @@
-import React from 'react'
-import { Modal, Button, Spin } from 'antd';
-import MyForm from './MyForm'
+import { Button, Modal, Spin } from "antd";
+import React from "react";
 
-
-export const BookAddModal = (props) => {
-    const { visible, loading, handleHideModal } = props;
-
+export const BookEditModal = (props) => {
+    const { visible, loading, handleHideModal } = props
     return (
         <>
             <Modal
@@ -13,7 +10,7 @@ export const BookAddModal = (props) => {
                 title="Create/Update book"
                 onCancel={() => handleHideModal()}
                 confirmLoading={!loading}
-                loading={loading}
+                loading={this.props.loading}
                 footer={[
                     <Button
                         type="secondary"
@@ -32,14 +29,10 @@ export const BookAddModal = (props) => {
                 ]}
             >
                 {<Spin spinning={loading} tip="Loading...">
-                    <MyForm />
+                    {/* <MyForm /> */}
                 </Spin>}
 
             </Modal>
-
         </>
     )
-
 }
-
-export default BookAddModal;

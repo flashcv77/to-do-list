@@ -37,7 +37,8 @@ export class BookList extends Component {
                             key={book.uuid}
                             id={book.uuid}
                             title={book.name}
-                            description={book.description.slice(0, 120) }
+                            author={book.author}
+                            description={book.description.slice(0, 120)}
                         />
 
                     ))}

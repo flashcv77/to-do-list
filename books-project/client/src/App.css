@@ -78,3 +78,7 @@ main {
 .activeNavLink {
   background-color: #1890ff;
 }
+
+.flexFlex1 {
+  flex: 1;
+}

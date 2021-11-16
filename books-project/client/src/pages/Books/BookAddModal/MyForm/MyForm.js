@@ -17,7 +17,6 @@ const MyForm = () => {
     // console.log(this.props)
     return (
         <>
-
             <Form
                 id="form"
                 onSubmit={onSubmit}

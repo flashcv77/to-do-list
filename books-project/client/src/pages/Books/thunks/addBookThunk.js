@@ -1,5 +1,5 @@
 import { addBook } from "../../../api/books"
-import { addBookAction, addBookInProgressAction } from "../actions/books.actions"
+import { addBookSuccessAction, addBookInProgressAction } from "../actions/books.actions"
 import { getBooksThunk } from "./getBooksThunk"
 
 export const addBookThunk = (bookObj) => {
@@ -8,7 +8,7 @@ export const addBookThunk = (bookObj) => {
         dispatch(addBookInProgressAction());
         addBook(bookObj)
             .then(() => {
-                dispatch(addBookAction());
+                dispatch(addBookSuccessAction());
                 setTimeout(() => {
                     dispatch(getBooksThunk());
                 }, 4000)

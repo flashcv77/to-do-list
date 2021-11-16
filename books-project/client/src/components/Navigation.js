@@ -34,8 +34,9 @@ class Navigation extends React.Component {
                     selectable={false}
                     theme="dark"
                     onClick={this.handleClick}
-                    // selectedKeys={[current]}
-                    style={{ marginLeft: "auto" }}
+                    className="flexJustifyEnd flexFlex1"
+                // selectedKeys={[current]}
+                // style={{ flex: "1", justifyContent: "flex-end" }}
                 >
                     <NavLink exact to="/" activeClassName="activeNavLink">
                         <Menu.Item
