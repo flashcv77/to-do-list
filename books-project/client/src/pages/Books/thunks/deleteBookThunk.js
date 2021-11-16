@@ -12,12 +12,11 @@ export const deleteBookThunk = (id) => {
                 },
                     setTimeout(() => {
                         dispatch(getBooksThunk());
-                    }, 4000));
+                    }, 1000));
             })
             .catch((error) => {
                 console.error(error);
             });
-
     }
 }
 

@@ -1,46 +1,76 @@
 import React from "react";
-import { Card, Avatar, Button } from 'antd';
+import { Card, Avatar, Button, Menu, Dropdown } from 'antd';
 import { EditOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { NavLink } from "react-router-dom";
-import { deleteBookThunk } from "../../thunks/deleteBookThunk"
 import { connect } from "react-redux";
 import cardIcon from '../../../../assets/images/card_icon.png'
 import { updateBookThunk } from "../../thunks/updateBookThunk";
+import { UserOutlined } from '@ant-design/icons';
+import deleteBookThunk from "../../thunks/deleteBookThunk";
+import BookDeleteModal from "../../BookDeleteModal/BookDeleteModal";
+
 const { Meta } = Card;
 
 export class BookItem extends React.Component {
 
-  handleDeleteModal = (id) => {
-    this.props.deleteBook(id);
-  }
 
   handleUpdateBook = (id, bookObj) => {
     this.props.updateBook(id, bookObj);
   }
 
+  handleMenuClick = (event) => {
+  }
+
+  handleButtonClick = (event) => {
+  }
+
+
+  handleDeleteBook = (id) => {
+    this.props.deleteBook(id);
+  }
+
   render() {
-    const { id, title, description, author } = this.props
+    const { id, title, description, author, handleUpdateShowModal, handleDeleteShowModal, updateGetBook } = this.props;
+    console.log(updateGetBook(id), id);
     const newObj = {
       name: "newBook",
       author: "newAuthor",
       description: "newDescription"
     }
-    console.log(this.props);
+
+    const menu = (
+      <Menu onClick={this.handleMenuClick}>
+        <Menu.Item key="1">
+          <NavLink to={`/books/${id}`}>
+            <Button>Open</Button>
+          </NavLink>
+        </Menu.Item>
+        <Menu.Item key="2">
+          <Button
+            type="danger"
+            onClick={() => handleDeleteShowModal()}
+          // onClick={() => this.handleDeleteBook(id)}
+          >Delete</Button>
+        </Menu.Item>
+        <Menu.Item key="3">
+          <Button type="dashed" onClick={() => { handleUpdateShowModal(); updateGetBook(id) }}>Edit</Button>
+          {/* <Button type="dashed" onClick={() => this.handleUpdateBook(id, newObj)}>Edit</Button> */}
+        </Menu.Item>
+      </Menu>
+
+    );
+
+
     return (
       <>
 
         <Card
-
           className="margin30px boxShadow"
           style={{ width: 350 }}
-          actions={[
-            // <SettingOutlined key="setting" />,
-            // <EditOutlined key="edit" />,
-            <EllipsisOutlined
-            //  key="ellipsis" 
-            />,
-          ]}
         >
+          <Dropdown.Button onClick={this.handleButtonClick} overlay={menu} placement={"topLeft"}>
+
+          </Dropdown.Button>
           <Meta
             avatar={<Avatar src={cardIcon} />}
             title={title}
@@ -49,10 +79,13 @@ export class BookItem extends React.Component {
           <NavLink to={`/books/${id}`}>
             <Button>Details</Button>
           </NavLink>
-          <Button type="danger" onClick={() => this.handleDeleteModal(id)}>Delete</Button>
-          <Button type="dashed" onClick={() => this.handleUpdateBook(id, newObj)}>Edit</Button>
-
-
+          <BookDeleteModal
+            visible={this.props.visibleDelete}
+            // visible={this.props.visibleDelete}
+            loading={this.props.loadingDelete}
+            handleDeleteHideModal={this.handleDeleteHideModal}
+            handleDeleteBook={() => this.handleDeleteBook(id)}
+          />
         </Card>
       </>
     )
@@ -60,17 +93,18 @@ export class BookItem extends React.Component {
 
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     bookData: state.deleteBookReducer
-//   }
-// }
-
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    deleteBook: (id) => { dispatch(deleteBookThunk(id)) },
-    updateBook: (id, bookObj) => { dispatch(updateBookThunk(id, bookObj)) }
+    visibleDelete: state.bookDeleteReducer.visible,
+    loadingDelete: state.bookDeleteReducer.loading,
   }
 }
 
-export default connect(null, mapDispatchToProps)(BookItem);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateBook: (id, bookObj) => { dispatch(updateBookThunk(id, bookObj)) },
+    deleteBook: (id) => { dispatch(deleteBookThunk(id)) },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookItem);

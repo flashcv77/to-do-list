@@ -1,5 +1,5 @@
-import { updateBook } from "../../../api/books";
-import { addBookSuccessAction, updateBookInProgressAction } from "../actions/books.actions";
+import { getBookDetails, updateBook } from "../../../api/books";
+import { addBookSuccessAction, updateBookGetDataAction, updateBookInProgressAction } from "../actions/books.actions";
 import { getBooksThunk } from "./getBooksThunk";
 
 export const updateBookThunk = (id, bookObj) => {
@@ -10,7 +10,16 @@ export const updateBookThunk = (id, bookObj) => {
                 dispatch(addBookSuccessAction());
                 setTimeout(() => {
                     dispatch(getBooksThunk());
-                }, 4000)
+                }, 1000)
             })
+    }
+}
+
+export const updateGetBookThunk = (id) => {
+    return (dispatch) => {
+        getBookDetails(id).then((response) => {
+            console.log(response);
+            dispatch(updateBookGetDataAction(response));
+        });
     }
 }

@@ -1,4 +1,4 @@
-    import {
+import {
     ADD_BOOK_SUCCESS,
     ADD_BOOK_ERROR,
     ADD_BOOK_SHOW_MODAL,
@@ -32,8 +32,6 @@ const modalReducer = (state = initialState, action) => {
         default:
             return state;
     }
-
 }
-
 
 export default modalReducer;
