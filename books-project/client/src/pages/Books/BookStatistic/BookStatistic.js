@@ -4,12 +4,7 @@ import { Table } from 'antd';
 
 const BookStatistic = () => {
   const columns = [
-    {
-      title: 'Id',
-      dataIndex: 'id',
-      key: 'id',
-      //   render: text => <a>{text}</a>,
-    },
+
     {
       title: 'Name',
       dataIndex: 'name',

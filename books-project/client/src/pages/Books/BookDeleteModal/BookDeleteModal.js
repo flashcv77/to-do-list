@@ -1,9 +1,8 @@
 import React from "react";
-import MyForm from '../BookAddModal/MyForm/';
 import { Button, Modal, Spin } from "antd";
 
-export const BookDeleteModal = ({ visible, loading, handleDeleteHideModal, handleDeleteBook }) => {
-    console.log(" ?", visible)
+export const BookDeleteModal = ({ visible, loading, handleDeleteHideModal, handleDeleteBook, id }) => {
+    // console.log(" ?", id)
     return (
         <>
             <Modal
@@ -17,14 +16,14 @@ export const BookDeleteModal = ({ visible, loading, handleDeleteHideModal, handl
                         type="secondary"
                         key="back"
                         onClick={() => handleDeleteHideModal()}>
-                        Return
+                        Cancel
                     </Button>,
                     <button
                         form="form"
                         className="ant-btn ant-btn-danger"
                         key="submit"
                         loading={loading}
-                        onClick={(id) => handleDeleteBook(id)}
+                        onClick={() => handleDeleteBook(id)}
                     >
                         Delete
                     </button>,

@@ -4,7 +4,7 @@ import MyForm from "../BookAddModal/MyForm";
 
 export const BookEditModal = (props) => {
     const { visible, loading, handleUpdateHideModal, initialValue } = props;
-    console.log(initialValue);
+    // console.log(initialValue);
     return (
         <>
             <Modal
@@ -32,6 +32,7 @@ export const BookEditModal = (props) => {
             >
                 {<Spin spinning={loading} tip="Loading...">
                     <MyForm
+                        form="formEdit"
                         initialValue={initialValue}
                     />
                 </Spin>}

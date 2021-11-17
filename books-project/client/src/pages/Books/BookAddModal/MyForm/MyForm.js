@@ -3,6 +3,8 @@ import { MyField } from './MyField/MyField';
 import { Form, Field } from 'react-final-form'
 import { useDispatch } from 'react-redux'
 import { addBookThunk } from '../../thunks/addBookThunk';
+import MyTextArea from './MyTextArea';
+import { message } from 'antd';
 
 const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue }) => {
     const dispatch = useDispatch();
@@ -15,6 +17,10 @@ const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue }) => {
         console.log(bookObj, form);
         dispatch(addBookThunk(data));
         form.reset();
+        setTimeout(() => {
+            message.success('Book has been added');
+        }, 2000)
+
     };
     console.log(initialValue);
     return (
@@ -27,7 +33,7 @@ const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue }) => {
                     <form onSubmit={handleSubmit} id="form">
                         <Field name="name" placeholder="Name" component={MyField} allowClear value={nameValue} />
                         <Field name="author" placeholder="Author" component={MyField} allowClear value={authorValue} />
-                        <Field name="description" placeholder="description" component={MyField} allowClear value={descriptionValue}
+                        <Field name="description" placeholder="description" component={MyTextArea} allowClear value={descriptionValue}
                         />
                     </form>
                 )}

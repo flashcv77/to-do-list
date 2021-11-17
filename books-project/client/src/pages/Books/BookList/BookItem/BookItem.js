@@ -1,6 +1,5 @@
 import React from "react";
-import { Card, Avatar, Button, Menu, Dropdown } from 'antd';
-import { EditOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { Card, Avatar, Button, Menu, Dropdown, message } from 'antd';
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import cardIcon from '../../../../assets/images/card_icon.png'
@@ -8,6 +7,7 @@ import { updateBookThunk } from "../../thunks/updateBookThunk";
 import { UserOutlined } from '@ant-design/icons';
 import deleteBookThunk from "../../thunks/deleteBookThunk";
 import BookDeleteModal from "../../BookDeleteModal/BookDeleteModal";
+import { StyledAvatarWrapper, StyledButtonWrapper } from "./styled";
 
 const { Meta } = Card;
 
@@ -26,65 +26,81 @@ export class BookItem extends React.Component {
 
 
   handleDeleteBook = (id) => {
+    console.log('id', id)
     this.props.deleteBook(id);
+    setTimeout(() => {
+      message.success('Item has been removed')
+    }, 2000)
   }
 
   render() {
-    const { id, title, description, author, handleUpdateShowModal, handleDeleteShowModal, updateGetBook } = this.props;
-    console.log(updateGetBook(id), id);
-    const newObj = {
-      name: "newBook",
-      author: "newAuthor",
-      description: "newDescription"
-    }
+    const { id, title, description, author, handleUpdateShowModal, handleDeleteShowModal, handleDeleteHideModal, updateGetBook } = this.props;
+    // console.log(updateGetBook(id), id);
 
     const menu = (
       <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key="1">
+        <Menu.Item key="1" >
           <NavLink to={`/books/${id}`}>
-            <Button>Open</Button>
+            Open
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="2">
-          <Button
-            type="danger"
-            onClick={() => handleDeleteShowModal()}
-          // onClick={() => this.handleDeleteBook(id)}
-          >Delete</Button>
+        <Menu.Item key="2" onClick={() => {
+          handleUpdateShowModal();
+          updateGetBook(id)
+        }}>
+          Edit
         </Menu.Item>
-        <Menu.Item key="3">
-          <Button type="dashed" onClick={() => { handleUpdateShowModal(); updateGetBook(id) }}>Edit</Button>
-          {/* <Button type="dashed" onClick={() => this.handleUpdateBook(id, newObj)}>Edit</Button> */}
+        <Menu.Item key="3" onClick={() => handleDeleteShowModal()}>
+          Delete
         </Menu.Item>
       </Menu>
 
     );
 
-
     return (
       <>
-
         <Card
           className="margin30px boxShadow"
-          style={{ width: 350 }}
+          style={{
+            width: 350,
+            minHeight: 200
+          }}
         >
-          <Dropdown.Button onClick={this.handleButtonClick} overlay={menu} placement={"topLeft"}>
-
-          </Dropdown.Button>
+          <StyledButtonWrapper>
+            <Dropdown.Button
+              style={{
+                position: "absolute",
+                top: "16px",
+                right: "-15px",
+                fontWeight: "bold",
+                transform: "rotate(270deg)",
+              }}
+              onClick={this.handleButtonClick} overlay={menu} placement={"topLeft"}>
+            </Dropdown.Button>
+          </StyledButtonWrapper>
           <Meta
-            avatar={<Avatar src={cardIcon} />}
+            avatar={
+              <StyledAvatarWrapper>
+                <Avatar src={cardIcon} />
+              </StyledAvatarWrapper>
+            }
             title={title}
             description={description}
+            style={{
+              // border: "1px solid black",
+              minHeight: 140,
+            }}
           />
+          <div>{author}</div>
           <NavLink to={`/books/${id}`}>
-            <Button>Details</Button>
+            <Button type="default">Details</Button>
           </NavLink>
           <BookDeleteModal
             visible={this.props.visibleDelete}
-            // visible={this.props.visibleDelete}
             loading={this.props.loadingDelete}
-            handleDeleteHideModal={this.handleDeleteHideModal}
+            handleDeleteHideModal={handleDeleteHideModal}
             handleDeleteBook={() => this.handleDeleteBook(id)}
+          // id={id}
           />
         </Card>
       </>
