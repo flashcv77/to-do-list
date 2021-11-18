@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Table } from 'antd';
 import { connect } from 'react-redux';
-import { getBooksThunk } from '../Books/thunks/getBooksThunk';
+import { getBooksThunk } from '../Books/thunks/booksThunk';
 
 class BookStatistic extends React.Component {
   componentDidMount() {

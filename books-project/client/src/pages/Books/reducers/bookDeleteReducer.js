@@ -26,7 +26,7 @@ const bookDeleteReducer = (state = deleteState, action) => {
             return { ...state, loading: false, visible: true }
         }
         case DELETE_BOOK_HIDE_MODAL: {
-            return { ...state, loading: false, visible: false }
+            return { ...state, loading: true, visible: false }
         }
         case DELETE_BOOK_IN_PROGRESS: {
             return { ...state, loading: true }

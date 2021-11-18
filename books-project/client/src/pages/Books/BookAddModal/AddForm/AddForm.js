@@ -2,7 +2,7 @@ import React from 'react'
 import { MyField } from './MyField/MyField';
 import { Form, Field } from 'react-final-form'
 import { useDispatch } from 'react-redux'
-import { addBookThunk } from '../../thunks/addBookThunk';
+import { addBookThunk } from '../../thunks/booksThunk';
 import MyTextArea from './MyTextArea';
 
 const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue }) => {

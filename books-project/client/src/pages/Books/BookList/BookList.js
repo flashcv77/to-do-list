@@ -5,9 +5,7 @@ import BookItem from "./BookItem"
 import BookAddModal from "../BookAddModal";
 import BookEditModal from "../BookEditModal/BookEditModal";
 import BookDeleteModal from "../BookDeleteModal/BookDeleteModal";
-import { getBooksThunk } from "../thunks/getBooksThunk";
-import { updateBookThunk, updateGetBookThunk } from "../thunks/updateBookThunk";
-import { deleteBookThunk } from "../thunks/deleteBookThunk";
+import { getBooksThunk, updateBookThunk, updateGetBookThunk,deleteBookThunk } from "../thunks/booksThunk"
 import { deleteBookGetDataAction, deleteHideModalAction, deleteShowModalAction, hideModalAction, showModalAction, updateHideModalAction, updateShowModalAction } from '../actions/books.actions';
 
 export class BookList extends Component {
@@ -48,7 +46,7 @@ export class BookList extends Component {
                     Create book
                 </Button>
                 <Row className="flexWrapWrap flexJustifyCenter">
-                    {loadingAdd && <Spin size="large" />}
+                    {/* {loadingAdd && <Spin size="large" />} */}
                     {bookList.map((book) => (
                         <BookItem
                             handleUpdateShowModal={this.handleUpdateShowModal}

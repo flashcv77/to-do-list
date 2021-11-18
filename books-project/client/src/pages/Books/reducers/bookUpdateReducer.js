@@ -17,16 +17,16 @@ const updateState = {
 const bookUpdateReducer = (state = updateState, action) => {
     switch (action.type) {
         case UPDATE_BOOK_SUCCESS: {
-            return { ...state, loading: false, visible: false, error: '', book: action.payload }
+            return updateState;
         }
         case UPDATE_BOOK_ERROR: {
-            return {...state,  loading: false }
+            return { ...state, loading: false }
         }
         case UPDATE_BOOK_SHOW_MODAL: {
-            return {...state,  loading: false, visible: true }
+            return { ...state, visible: true, }
         }
         case UPDATE_BOOK_HIDE_MODAL: {
-            return { ...state,  visible: false }
+            return { ...state, visible: false, book: {}, loading: true }
         }
         case UPDATE_BOOK_IN_PROGRESS: {
             return { ...state, loading: true }
@@ -35,6 +35,7 @@ const bookUpdateReducer = (state = updateState, action) => {
             return {
                 ...state,
                 book: action.payload,
+                loading: false,
             }
         }
         default:

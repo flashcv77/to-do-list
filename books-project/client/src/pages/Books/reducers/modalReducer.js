@@ -7,7 +7,7 @@ import {
 } from "../action-types/books.action-types";
 
 const initialState = {
-    loading: false,
+    loading: true,
     error: '',
     visible: false
 };
@@ -24,7 +24,7 @@ const modalReducer = (state = initialState, action) => {
             return { ...state, loading: false, visible: true }
         }
         case ADD_BOOK_HIDE_MODAL: {
-            return { ...state, loading: false, visible: false }
+            return { ...state, loading: true, visible: false }
         }
         case ADD_BOOK_IN_PROGRESS: {
             return { ...state, loading: true }

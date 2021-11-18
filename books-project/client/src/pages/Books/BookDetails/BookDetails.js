@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { getBookDetailsThunk } from "../thunks/getBookDetailsThunk";
+import { getBookDetailsThunk } from "../thunks/bookThunk";
 import { Button } from "antd";
 
 class BookDetails extends React.Component {
