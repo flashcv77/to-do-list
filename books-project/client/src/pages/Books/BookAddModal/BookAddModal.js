@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, Button, Spin } from 'antd';
-import MyForm from './MyForm'
+import AddForm from './AddForm'
 
 export const BookAddModal = (props) => {
     const { visible, loading, handleAddHideModal } = props;
@@ -9,7 +9,7 @@ export const BookAddModal = (props) => {
         <>
             <Modal
                 visible={visible}
-                title="Create/Update book"
+                title="Create book"
                 onCancel={() => handleAddHideModal()}
                 confirmLoading={!loading}
                 loading={loading}
@@ -31,7 +31,7 @@ export const BookAddModal = (props) => {
                 ]}
             >
                 {<Spin spinning={loading} tip="Loading...">
-                    <MyForm />
+                    <AddForm />
                 </Spin>}
 
             </Modal>

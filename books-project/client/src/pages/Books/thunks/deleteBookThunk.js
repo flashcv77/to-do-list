@@ -1,17 +1,22 @@
-import { deleteBook } from "../../../api/books";
+import { message } from "antd";
+import { deleteBook, getBookDetails } from "../../../api/books";
 import { DELETE_BOOK_SUCCESS } from "../action-types/books.action-types";
+import { deleteBookGetDataAction } from "../actions/books.actions";
 import { getBooksThunk } from "./getBooksThunk";
 
 export const deleteBookThunk = (id) => {
     return (dispatch) => {
+        console.log('here', id);
         deleteBook(id)
             .then(() => {
                 console.log('Item has been removed');
                 dispatch({
                     type: DELETE_BOOK_SUCCESS
                 },
+               
                     setTimeout(() => {
                         dispatch(getBooksThunk());
+                        message.success("Item has been removed")
                     }, 1000));
             })
             .catch((error) => {
@@ -20,4 +25,12 @@ export const deleteBookThunk = (id) => {
     }
 }
 
-export default deleteBookThunk;
+// export default deleteBookThunk;
+export const deleteGetBookThunk = (id) => { 
+    return (dispatch) => {
+        getBookDetails(id)
+        .then((response) => {
+            dispatch(deleteBookGetDataAction(response));
+        });
+    }
+}

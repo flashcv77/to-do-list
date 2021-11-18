@@ -4,23 +4,18 @@ import { Form, Field } from 'react-final-form'
 import { useDispatch } from 'react-redux'
 import { addBookThunk } from '../../thunks/addBookThunk';
 import MyTextArea from './MyTextArea';
-import { message } from 'antd';
 
 const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue }) => {
     const dispatch = useDispatch();
     const onSubmit = (bookObj, form) => {
-        const data = {
+        const book = {
             name: bookObj.name,
             author: bookObj.author,
             description: bookObj.description
         }
         console.log(bookObj, form);
-        dispatch(addBookThunk(data));
+        dispatch(addBookThunk(book));
         form.reset();
-        setTimeout(() => {
-            message.success('Book has been added');
-        }, 2000)
-
     };
     console.log(initialValue);
     return (

@@ -18,13 +18,14 @@ class BookDetails extends React.Component {
         console.log(this.props);
         return (
             <>
+                <Link to={"/books"}>
+                    <Button className="margin30px" type="primary">Go back</Button>
+                </Link>
                 <h1>{book.name}</h1>
                 <p>{book.description}</p>
                 <hr />
                 <p>{book.author}</p>
-                <Link to={"/books"}>
-                    <Button type="primary">Go back</Button>
-                </Link>
+
             </>
         )
     }

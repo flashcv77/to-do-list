@@ -1,15 +1,15 @@
 import { Button, Modal, Spin } from "antd";
 import React from "react";
-import MyForm from "../BookAddModal/MyForm";
+import EditForm from "./EditForm";
 
 export const BookEditModal = (props) => {
-    const { visible, loading, handleUpdateHideModal, initialValue } = props;
-    // console.log(initialValue);
+    const { visible, loading, handleUpdateHideModal, initialValue, updateBook } = props;
+    console.log(loading, "is loading", visible, "is visible");
     return (
         <>
             <Modal
                 visible={visible}
-                title="Create/Update book"
+                title="Update book"
                 onCancel={() => handleUpdateHideModal()}
                 confirmLoading={!loading}
                 loading={loading}
@@ -21,7 +21,7 @@ export const BookEditModal = (props) => {
                         Return
                     </Button>,
                     <button
-                        form="form"
+                        form="editForm"
                         className="ant-btn ant-btn-primary"
                         key="submit"
                         type="primary"
@@ -31,9 +31,10 @@ export const BookEditModal = (props) => {
                 ]}
             >
                 {<Spin spinning={loading} tip="Loading...">
-                    <MyForm
+                    <EditForm
                         form="formEdit"
                         initialValue={initialValue}
+                        updateBook={updateBook}
                     />
                 </Spin>}
             </Modal>

@@ -15,19 +15,19 @@ const initialState = {
 const modalReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_BOOK_SUCCESS: {
-            return { loading: false, visible: false }
+            return { ...state, loading: false, visible: false }
         }
         case ADD_BOOK_ERROR: {
-            return { loading: false }
+            return { ...state, loading: false }
         }
         case ADD_BOOK_SHOW_MODAL: {
-            return { loading: false, visible: true }
+            return { ...state, loading: false, visible: true }
         }
         case ADD_BOOK_HIDE_MODAL: {
-            return { loading: false, visible: false }
+            return { ...state, loading: false, visible: false }
         }
         case ADD_BOOK_IN_PROGRESS: {
-            return { loading: true }
+            return { ...state, loading: true }
         }
         default:
             return state;

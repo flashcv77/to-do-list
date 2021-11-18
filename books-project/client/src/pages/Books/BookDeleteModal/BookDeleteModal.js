@@ -1,13 +1,12 @@
 import React from "react";
 import { Button, Modal, Spin } from "antd";
 
-export const BookDeleteModal = ({ visible, loading, handleDeleteHideModal, handleDeleteBook, id }) => {
-    // console.log(" ?", id)
+export const BookDeleteModal = ({ visible, loading, handleDeleteHideModal, deleteBook, deleteBookId }) => {
     return (
         <>
             <Modal
                 visible={visible}
-                title="Are you sure you wanna delete this book?"
+                title={`Delete book`}
                 onCancel={() => handleDeleteHideModal()}
                 confirmLoading={!loading}
                 loading={loading}
@@ -19,20 +18,19 @@ export const BookDeleteModal = ({ visible, loading, handleDeleteHideModal, handl
                         Cancel
                     </Button>,
                     <button
-                        form="form"
                         className="ant-btn ant-btn-danger"
-                        key="submit"
                         loading={loading}
-                        onClick={() => handleDeleteBook(id)}
+                        onClick={() => deleteBook(deleteBookId)}
                     >
                         Delete
                     </button>,
                 ]}
             >
-                {/* {<Spin spinning={loading} tip="Loading...">
-                 
-                </Spin>} */}
+                {<Spin spinning={loading} tip="Loading...">
 
+
+                    <div className="textAlignCenter">Are you sure you want to delete this book? There is no undo</div>
+                </Spin>}
             </Modal>
 
         </>

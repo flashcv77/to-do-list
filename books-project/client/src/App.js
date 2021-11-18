@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Books from './pages/Books/Books';
 import BookDetails from './pages/Books/BookDetails';
-import BookStatistic from './pages/Books/BookStatistic';
+import BookStatistic from './pages/BookStatistic';
 import { Layout } from 'antd';
 const { Header, Footer, Content } = Layout;
 

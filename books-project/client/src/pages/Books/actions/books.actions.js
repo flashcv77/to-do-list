@@ -5,6 +5,7 @@ import {
     ADD_BOOK_SHOW_MODAL,
     DELETE_BOOK_SUCCESS,
     DELETE_BOOK_IN_PROGRESS,
+    DELETE_BOOK_GET_DATA_ACTION,
     UPDATE_BOOK_IN_PROGRESS,
     UPDATE_BOOK_SUCCESS,
     UPDATE_BOOK_SHOW_MODAL,
@@ -48,6 +49,10 @@ export const updateBookSuccessAction = () => ({
 
 export const updateBookGetDataAction = (book) => ({
     type: UPDATE_BOOK_GET_DATA_ACTION,
+    payload: book
+});
+export const deleteBookGetDataAction = (book) => ({
+    type: DELETE_BOOK_GET_DATA_ACTION,
     payload: book
 });
 
