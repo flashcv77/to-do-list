@@ -3,31 +3,31 @@ import React from "react";
 import MyForm from "../MyForm";
 
 export const BookEditModal = (props) => {
-    const { visible, loading, hideModal, initialValue, updateBook } = props;
-    const onEditSubmit = (event,form) => {
-        const id = event.uuid;
-        const book = {
-            name: event.name,
-            author: event.author,
-            description: event.description
-        }
-        updateBook(id, book);
-        form.reset();
-    }
-    const editName="editForm";
+    const { visible, loading, closeModal, initialValue, bookEdit, handleSubmit } = props;
+    // const onEditSubmit = (event,form) => {
+    //     const id = event.uuid;
+    //     const book = {
+    //         name: event.name,
+    //         author: event.author,
+    //         description: event.description
+    //     }
+    //     updateBook(id, book);
+    //     form.reset();
+    // }
+    const editName = "editForm";
     return (
         <>
             <Modal
                 visible={visible}
                 title="Update book"
-                onCancel={() => hideModal()}
+                onCancel={() => closeModal()}
                 confirmLoading={!loading}
                 loading={loading}
                 footer={[
                     <Button
                         type="secondary"
                         key="back"
-                        onClick={() => hideModal()}>
+                        onClick={() => closeModal()}>
                         Return
                     </Button>,
                     <button
@@ -44,8 +44,8 @@ export const BookEditModal = (props) => {
                     <MyForm
                         form="form"
                         initialValue={initialValue}
-                        updateBook={updateBook}
-                        onSubmit={onEditSubmit}
+                        updateBook={bookEdit}
+                        onSubmit={handleSubmit}
                         formName={editName}
                     />
                 </Spin>}

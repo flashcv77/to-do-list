@@ -1,5 +1,5 @@
 import { getBookDetails } from "../../../api/books";
-import { BOOK_DETAILS_FETCH_SUCCESS } from "../action-types/books.action-types";
+import { BOOK_DETAIL_SUCCESS } from "../action-types/books.action-types";
 
 export const getBookDetailsThunk = (id) => {
     return (dispatch) => {
@@ -8,7 +8,7 @@ export const getBookDetailsThunk = (id) => {
                 console.log('response', response)
                 let bookDetails = response;
                 dispatch({
-                    type: BOOK_DETAILS_FETCH_SUCCESS,
+                    type: BOOK_DETAIL_SUCCESS,
                     payload: bookDetails,
                 })
             })

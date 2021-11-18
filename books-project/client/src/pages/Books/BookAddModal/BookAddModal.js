@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Button, Spin } from 'antd';
 import MyForm from '../MyForm'
 import { useDispatch } from 'react-redux';
-import { addBookThunk } from '../thunks/booksThunk';
+import { createBookThunk } from '../thunks/booksThunk';
 
 export const BookAddModal = (props) => {
     const { visible, loading, hideModal } = props;
@@ -14,7 +14,7 @@ export const BookAddModal = (props) => {
             description: bookObj.description
         }
         console.log(bookObj, form);
-        dispatch(addBookThunk(book));
+        dispatch(createBookThunk(book));
         form.reset();
     };
     const addName = "addForm";

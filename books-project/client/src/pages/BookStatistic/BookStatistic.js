@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Table } from 'antd';
 import { connect } from 'react-redux';
-import { getBooksThunk } from '../Books/thunks/booksThunk';
+import { getBookListThunk, getBooksThunk } from '../Books/thunks/booksThunk';
 
 class BookStatistic extends React.Component {
   componentDidMount() {
@@ -68,7 +68,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
 
-  fetchBooks: getBooksThunk,
+  fetchBooks: getBookListThunk,
 
 }
 
