@@ -34,8 +34,7 @@ export const BookDeleteModal = ({ visible, loading, handleDeleteHideModal, delet
             </Modal>
 
         </>
-    )
-
+    );
 }
 
 export default BookDeleteModal;

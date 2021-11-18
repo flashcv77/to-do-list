@@ -54,7 +54,7 @@ class BookStatistic extends React.Component {
 
     return (
       <Table columns={columns} dataSource={books} />
-    )
+    );
 
   }
 

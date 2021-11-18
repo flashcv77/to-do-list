@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { Link, useParams } from 'react-router-dom';
-import { connect, useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 import { getBookDetailsThunk } from "../thunks/getBookDetailsThunk";
 import { Button } from "antd";
 
@@ -11,11 +11,8 @@ class BookDetails extends React.Component {
         this.props.getBookDetails(id);
     }
 
-
     render() {
-
         const { book } = this.props.bookData;
-        console.log(this.props);
         return (
             <>
                 <Link to={"/books"}>
@@ -27,7 +24,7 @@ class BookDetails extends React.Component {
                 <p>{book.author}</p>
 
             </>
-        )
+        );
     }
 }
 

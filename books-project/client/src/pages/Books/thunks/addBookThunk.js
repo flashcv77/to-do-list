@@ -10,7 +10,7 @@ export const addBookThunk = (bookObj) => {
         addBook(bookObj)
             .then(() => {
                 dispatch(addBookSuccessAction());
-                message.success('Book has been created', 5);
+                message.success('The book has been created', 3);
                 setTimeout(() => {
                     dispatch(getBooksThunk());
                 }, 1000)

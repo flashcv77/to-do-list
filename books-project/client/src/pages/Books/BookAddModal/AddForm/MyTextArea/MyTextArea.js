@@ -3,7 +3,6 @@ import { Input } from 'antd'
 import { StyledTextArea } from './styled'
 
 export const MyTextArea = (props) => {
-    console.log(props)
     const { name } = props.input
     const { allowClear } = props;
     return (
@@ -18,7 +17,7 @@ export const MyTextArea = (props) => {
                 />
             </StyledTextArea>
         </>
-    )
+    );
 }
 
 export default MyTextArea;

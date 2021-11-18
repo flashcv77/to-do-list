@@ -1,36 +1,18 @@
 import React from 'react'
 import { Form, Field } from 'react-final-form'
-import { useDispatch } from 'react-redux'
-import { addBookThunk } from '../../thunks/addBookThunk';
-import { message } from 'antd';
 import EditField from './EditField';
 import EditTextArea from './EditTextArea';
 
 const EditForm = ({ nameValue, authorValue, descriptionValue, initialValue, updateBook }) => {
-    console.log(updateBook, 'mark');
-    const dispatch = useDispatch();
     const onSubmit = (event) => {
-        // const data = {
-        //     name: bookObj.name,
-        //     author: bookObj.author,
-        //     description: bookObj.description
-        // }
-        // const id = bookObj.uuids
-        // console.log(bookObj, form);
-
-        // form.reset();
-        console.log(" submit event", event)
-        const  id = event.uuid;
+        const id = event.uuid;
         const book = {
             name: event.name,
             author: event.author,
             description: event.description
         }
-        console.log(id, book, 'vse')
-        // dispatch(addBookThunk(data));
-      updateBook(id, book);
+        updateBook(id, book);
     }
-    console.log(initialValue);
     return (
         <>
             <Form

@@ -16,7 +16,7 @@ export const EditField = (props) => {
                 />
             </StyledInput>
         </>
-    )
+    );
 }
 
 export default EditField;

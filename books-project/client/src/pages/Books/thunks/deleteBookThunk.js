@@ -9,11 +9,9 @@ export const deleteBookThunk = (id) => {
         console.log('here', id);
         deleteBook(id)
             .then(() => {
-                console.log('Item has been removed');
                 dispatch({
                     type: DELETE_BOOK_SUCCESS
                 },
-               
                     setTimeout(() => {
                         dispatch(getBooksThunk());
                         message.success("Item has been removed")
@@ -26,11 +24,11 @@ export const deleteBookThunk = (id) => {
 }
 
 // export default deleteBookThunk;
-export const deleteGetBookThunk = (id) => { 
+export const deleteGetBookThunk = (id) => {
     return (dispatch) => {
         getBookDetails(id)
-        .then((response) => {
-            dispatch(deleteBookGetDataAction(response));
-        });
+            .then((response) => {
+                dispatch(deleteBookGetDataAction(response));
+            });
     }
 }

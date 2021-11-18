@@ -34,8 +34,7 @@ const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue }) => {
                 )}
             />
         </>
-    )
-
+    );
 }
 
 export default MyForm;

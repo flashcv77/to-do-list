@@ -12,7 +12,7 @@ import {
     UPDATE_BOOK_HIDE_MODAL,
     DELETE_BOOK_SHOW_MODAL,
     DELETE_BOOK_HIDE_MODAL,
-    UPDATE_BOOK_GET_DATA_ACTION
+    UPDATE_BOOK_GET_DATA_ACTION,
 } from "../action-types/books.action-types"
 
 export const addBookSuccessAction = () => ({

@@ -17,7 +17,7 @@ export const MyField = (props) => {
                 />
             </StyledInput>
         </>
-    )
+    );
 }
 
 export default MyField;

@@ -33,12 +33,10 @@ export const BookAddModal = (props) => {
                 {<Spin spinning={loading} tip="Loading...">
                     <AddForm />
                 </Spin>}
-
             </Modal>
 
         </>
-    )
-
+    );
 }
 
 export default BookAddModal;

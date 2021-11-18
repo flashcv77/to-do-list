@@ -17,7 +17,7 @@ export const MyTextArea = (props) => {
                 />
             </StyledTextArea>
         </>
-    )
+    );
 }
 
 export default MyTextArea;

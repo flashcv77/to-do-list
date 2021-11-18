@@ -6,22 +6,12 @@ import booksLogo from '../assets/images/logo11.png'
 import { StyledLogoBlock } from "./styled"
 
 class Navigation extends React.Component {
-    // state = {
-    //     current: 'home',
-    // };
 
-    // handleClick = event => {
-
-    //     // console.log('click ', event);
-    //     this.setState({ current: event.key });
-    // };
 
     render() {
-        // const { current } = this.state;
         return (
             <div className="flexDisplayFlex" >
                 <NavLink
-                    // key="home"
                     exact to="/" >
                     <StyledLogoBlock>
                         <img src={booksLogo} alt={'Books'} height={52} />
@@ -35,12 +25,9 @@ class Navigation extends React.Component {
                     theme="dark"
                     onClick={this.handleClick}
                     className="flexJustifyEnd flexFlex1"
-                // selectedKeys={[current]}
-                // style={{ flex: "1", justifyContent: "flex-end" }}
                 >
                     <NavLink exact to="/" activeClassName="activeNavLink">
                         <Menu.Item
-                            // key="home"
                             icon={<HomeOutlined />}>
                             Home
                         </Menu.Item>
@@ -48,7 +35,6 @@ class Navigation extends React.Component {
 
                     <NavLink to="/books" activeClassName="activeNavLink">
                         <Menu.Item
-                            // key="books"
                             icon={<ReadOutlined />}>
                             Books
                         </Menu.Item>
@@ -56,14 +42,13 @@ class Navigation extends React.Component {
 
                     <NavLink to="/statistic" activeClassName="activeNavLink">
                         <Menu.Item
-                            // key="statistic"
                             icon={<BarChartOutlined />}>
                             Statistic
                         </Menu.Item>
                     </NavLink>
                 </Menu>
             </div>
-        )
+        );
     }
 }
 
