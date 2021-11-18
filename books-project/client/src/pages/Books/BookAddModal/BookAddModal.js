@@ -1,28 +1,41 @@
 import React from 'react'
 import { Modal, Button, Spin } from 'antd';
-import AddForm from './AddForm'
+import MyForm from '../MyForm'
+import { useDispatch } from 'react-redux';
+import { addBookThunk } from '../thunks/booksThunk';
 
 export const BookAddModal = (props) => {
-    const { visible, loading, handleAddHideModal } = props;
-
+    const { visible, loading, hideModal } = props;
+    const dispatch = useDispatch();
+    const onAddSubmit = (bookObj, form) => {
+        const book = {
+            name: bookObj.name,
+            author: bookObj.author,
+            description: bookObj.description
+        }
+        console.log(bookObj, form);
+        dispatch(addBookThunk(book));
+        form.reset();
+    };
+    const addName = "addForm";
     return (
         <>
-        
+
             <Modal
                 visible={visible}
                 title="Create book"
-                onCancel={() => handleAddHideModal()}
+                onCancel={() => hideModal()}
                 confirmLoading={!loading}
                 loading={loading}
                 footer={[
                     <Button
                         type="secondary"
                         key="back"
-                        onClick={() => handleAddHideModal()}>
+                        onClick={() => hideModal()}>
                         Return
                     </Button>,
                     <button
-                        form="form"
+                        form="addForm"
                         className="ant-btn ant-btn-primary"
                         key="submit"
                         type="primary"
@@ -32,7 +45,10 @@ export const BookAddModal = (props) => {
                 ]}
             >
                 {<Spin spinning={loading} tip="Loading...">
-                    <AddForm />
+                    <MyForm
+                        formName={addName}
+                        onSubmit={onAddSubmit}
+                    />
                 </Spin>}
             </Modal>
 

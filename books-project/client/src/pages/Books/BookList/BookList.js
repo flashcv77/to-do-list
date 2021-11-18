@@ -5,8 +5,8 @@ import BookItem from "./BookItem"
 import BookAddModal from "../BookAddModal";
 import BookEditModal from "../BookEditModal/BookEditModal";
 import BookDeleteModal from "../BookDeleteModal/BookDeleteModal";
-import { getBooksThunk, updateBookThunk, updateGetBookThunk,deleteBookThunk } from "../thunks/booksThunk"
-import { deleteBookGetDataAction, deleteHideModalAction, deleteShowModalAction, hideModalAction, showModalAction, updateHideModalAction, updateShowModalAction } from '../actions/books.actions';
+import { getBooksThunk, updateBookThunk, updateGetBookThunk, deleteBookThunk } from "../thunks/booksThunk"
+import { deleteBookGetDataAction, deleteHideModalAction, hideModalAction, addShowModalAction, updateShowModalAction, deleteShowModalAction } from '../actions/books.actions';
 
 export class BookList extends Component {
     componentDidMount() {
@@ -17,25 +17,25 @@ export class BookList extends Component {
         this.props.addShowModal();
     }
 
-    handleAddHideModal = () => {
-        this.props.addHideModal();
+    handleHideModal = () => {
+        this.props.hideModal();
     }
 
     handleUpdateShowModal = () => {
         this.props.updateShowModal();
     }
 
-    handleUpdateHideModal = () => {
-        this.props.updateHideModal();
-    }
+    // handleUpdateHideModal = () => {
+    //     this.props.updateHideModal();
+    // }
 
     handleDeleteShowModal = () => {
         this.props.deleteShowModal();
     }
 
-    handleDeleteHideModal = () => {
-        this.props.deleteHideModal();
-    }
+    // handleDeleteHideModal = () => {
+    //     this.props.deleteHideModal();
+    // }
 
     render() {
         const { bookList, loadingAdd, visibleAdd, loadingUpdate, visibleUpdate, updateGetBook, book, updateBook, visibleDelete, loadingDelete, deleteBookId, deleteGetBook, deleteBook } = this.props;
@@ -66,19 +66,19 @@ export class BookList extends Component {
                 <BookAddModal
                     loading={loadingAdd}
                     visible={visibleAdd}
-                    handleAddHideModal={this.handleAddHideModal}
+                    hideModal={this.hideModal}
                 />
                 <BookEditModal
                     loading={loadingUpdate}
                     visible={visibleUpdate}
-                    handleUpdateHideModal={this.handleUpdateHideModal}
+                    hideModal={this.hideModal}
                     initialValue={book}
                     updateBook={updateBook}
                 />
                 <BookDeleteModal
                     visible={visibleDelete}
                     loading={loadingDelete}
-                    handleDeleteHideModal={this.handleDeleteHideModal}
+                    hideModal={this.hideModal}
                     deleteBook={deleteBook}
                     deleteBookId={deleteBookId}
                 />
@@ -101,12 +101,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     fetchBooks: getBooksThunk,
-    addShowModal: showModalAction,
+    addShowModal: addShowModalAction,
     addHideModal: hideModalAction,
     updateShowModal: updateShowModalAction,
-    updateHideModal: updateHideModalAction,
     deleteShowModal: deleteShowModalAction,
-    deleteHideModal: deleteHideModalAction,
+    hideModal: hideModalAction,
     updateGetBook: updateGetBookThunk,
     updateBook: updateBookThunk,
     deleteGetBook: deleteBookGetDataAction,

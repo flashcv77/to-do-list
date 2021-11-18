@@ -1,33 +1,57 @@
 import {
-    ADD_BOOK_SUCCESS,
-    ADD_BOOK_ERROR,
     ADD_BOOK_SHOW_MODAL,
-    ADD_BOOK_HIDE_MODAL,
-    ADD_BOOK_IN_PROGRESS
+    UPDATE_BOOK_SHOW_MODAL,
+    DELETE_BOOK_SHOW_MODAL,
+    HIDE_MODAL,
+    UPDATE_BOOK_GET_DATA_ACTION,
 } from "../action-types/books.action-types";
 
 const initialState = {
+    visible: false,
     loading: true,
     error: '',
-    visible: false
+    type: '',
+    book: {}
 };
 
 const modalReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_BOOK_SUCCESS: {
-            return { ...state, loading: false, visible: false }
-        }
-        case ADD_BOOK_ERROR: {
-            return { ...state, loading: false }
-        }
         case ADD_BOOK_SHOW_MODAL: {
-            return { ...state, loading: false, visible: true }
+            return {
+                ...state,
+                loading: false,
+                visible: true,
+                type: "edit"
+            }
         }
-        case ADD_BOOK_HIDE_MODAL: {
-            return { ...state, loading: true, visible: false }
+        case UPDATE_BOOK_SHOW_MODAL: {
+            return {
+                ...state,
+                visible: true,
+                type: "update"
+            }
         }
-        case ADD_BOOK_IN_PROGRESS: {
-            return { ...state, loading: true }
+        case DELETE_BOOK_SHOW_MODAL: {
+            return {
+                ...state,
+                loading: true,
+                visible: false,
+                type: "delete"
+            }
+        }
+        case HIDE_MODAL: {
+            return {
+                ...state,
+                loading: true,
+                visible: false
+            }
+        }
+        case UPDATE_BOOK_GET_DATA_ACTION: {
+            return {
+                ...state,
+                book: action.payload,
+                loading: false,
+            }
         }
         default:
             return state;
