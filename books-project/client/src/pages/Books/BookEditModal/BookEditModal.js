@@ -12,14 +12,14 @@ export const BookEditModal = (props) => {
             <Modal
                 visible={visible}
                 title="Update book"
-                onCancel={closeModal()}
+                onCancel={() => closeModal()}
                 confirmLoading={!loading}
                 loading={loading}
                 footer={[
                     <Button
                         type="secondary"
                         key="back"
-                        onClick={closeModal()}>
+                        onClick={() => closeModal()}>
                         Return
                     </Button>,
                     <button

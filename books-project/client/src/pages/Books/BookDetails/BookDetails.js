@@ -29,8 +29,9 @@ class BookDetails extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
-        bookData: state.bookDetailsReducer
+        bookData: state.bookReducer
     }
 }
 

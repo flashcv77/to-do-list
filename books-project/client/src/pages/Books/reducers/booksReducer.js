@@ -16,7 +16,6 @@ import {
     DELETE_BOOK_GET_DATA_ACTION
 } from "../action-types/books.action-types";
 
-
 const initialState = {
     books: [],
     loading: true,

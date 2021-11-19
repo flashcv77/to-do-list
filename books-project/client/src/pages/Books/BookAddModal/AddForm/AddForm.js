@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { addBookThunk } from '../../thunks/booksThunk';
 import MyTextArea from './MyTextArea';
 
-const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue }) => {
+const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue, closeModal }) => {
     const dispatch = useDispatch();
     const onSubmit = (bookObj, form) => {
         const book = {
@@ -14,8 +14,10 @@ const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue }) => {
             description: bookObj.description
         }
         console.log(bookObj, form);
+        console.log(closeModal);
         dispatch(addBookThunk(book));
         form.reset();
+        closeModal();
     };
     console.log(initialValue);
     return (

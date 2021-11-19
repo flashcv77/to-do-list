@@ -8,20 +8,20 @@ export const BookDeleteModal = ({ id, visible, loading, handleDelete, closeModal
             <Modal
                 visible={visible}
                 title={`Delete book`}
-                onCancel={closeModal()}
+                onCancel={() => closeModal()}
                 confirmLoading={!loading}
                 loading={loading}
                 footer={[
                     <Button
                         type="secondary"
                         key="back"
-                        onClick={closeModal()}>
+                        onClick={() => closeModal()}>
                         Cancel
                     </Button>,
                     <button
                         className="ant-btn ant-btn-danger"
                         loading={loading}
-                        onClick={() => deleteBook(deleteBookId)}
+                        onClick={() => deleteBook(id)}
                     >
                         Delete
                     </button>,

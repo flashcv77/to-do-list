@@ -21,8 +21,10 @@ export class BookItem extends React.Component {
 
 
   render() {
-    const { id, title, description, author, showModalDelete, handleUpdateShowModal, handleDeleteShowModal, updateGetBook, deleteGetBook } = this.props;
+    const { getBook, book, id, title, description, author, showModalDelete, handleUpdateShowModal, updateGetBook, deleteGetBook } = this.props;
     // console.log(updateGetBook(id), id);
+    // console.log(showModalDelete);
+    console.log(id)
 
     return (
       <>
@@ -35,51 +37,6 @@ export class BookItem extends React.Component {
           }}
         >
           <StyledButtonWrapper>
-
-            {/* <Dropdown.Button
-              arrow
-              placement="topLeft"
-              overlay={
-                <Menu onClick={this.handleMenuClick}>
-                  <Menu.Item key="1"
-                    icon={<FolderOpenOutlined />} >
-                    <NavLink to={`/books/${id}`}>
-                      Open
-                    </NavLink>
-                  </Menu.Item>
-                  <Menu.Item key="2" onClick={() => {
-                    handleUpdateShowModal();
-                    updateGetBook(id)
-                  }} icon={<EditOutlined />}>
-                    <EditOutlined />
-                    Edit
-                  </Menu.Item>
-                  <Menu.Item key="3" onClick={() => {
-                    console.log("ID for delete ", id)
-                    handleDeleteShowModal();
-                    deleteGetBook(id)
-                  }}
-                    icon={<DeleteOutlined />}
-                  >
-                    Delete
-                  </Menu.Item>
-
-                </Menu>
-              }
-              trigger={['click']}
-              style={{
-                position: "absolute",
-                top: "22px",
-                right: "-15px",
-                fontWeight: "bold",
-                transform: "rotate(270deg)",
-              }}
-            >
-              <DownOutlined />
-              <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-              
-              </a> 
-            </Dropdown.Button> */}
             <Dropdown.Button
               style={{
                 position: "absolute",
@@ -99,19 +56,16 @@ export class BookItem extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item key="2" onClick={() => {
-                    handleUpdateShowModal();
-                    updateGetBook(id)
+                    // handleUpdateShowModal();
+                    // updateGetBook(id)
+                    getBook(book.uuid)
+
                   }} icon={<EditOutlined />}>
                     {/* <EditOutlined /> */}
                     Edit
                   </Menu.Item>
-                  <Menu.Item key="3" onClick={() => {
-                    console.log("ID for delete ", id)
-                    // handleDeleteShowModal();
-                    // deleteGetBook(id)
-                    showModalDelete()
-
-                  }}
+                  <Menu.Item key="3"
+                    onClick={() => showModalDelete("delete", book.uuid)}
                     icon={<DeleteOutlined />}
                   >
                     Delete

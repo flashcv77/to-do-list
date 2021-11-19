@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Row, Spin, Button } from "antd";
+import { Row, Spin, Button, Empty } from "antd";
 import BookItem from "./BookItem"
 import BookAddModal from "../BookAddModal";
 import BookEditModal from "../BookEditModal/BookEditModal";
 import BookDeleteModal from "../BookDeleteModal/BookDeleteModal";
-import { getBooksThunk, updateBookThunk, updateGetBookThunk, deleteBookThunk, getBookForEdit } from "../thunks/booksThunk"
+import { getBooksThunk, updateBookThunk, updateGetBookThunk, deleteBookThunk, getBookForEdit, addBookThunk, deleteBookByIdThunk } from "../thunks/booksThunk"
 import { deleteBookGetDataAction, deleteHideModalAction, deleteShowModalAction, hideModalAction, modalBookCloseAction, modalBookShowAction, showModalAction, updateHideModalAction, updateShowModalAction } from '../actions/books.actions';
 
 export class BookList extends Component {
@@ -24,8 +24,9 @@ export class BookList extends Component {
 
 
     render() {
-        const { type, loading, bookEdit, id, loadingModal, bookList, updateGetBook, book, updateBook, visibleDelete, loadingDelete, deleteBookId, deleteGetBook, deleteBook } = this.props;
-        console.log(type);
+        const { type, loading, bookEdit, id, loadingModal, bookList, updateGetBook,
+            book, updateBook, deleteBookId,
+            deleteGetBook, deleteBook } = this.props;
         return (
             <div className="site-card-wrapper">
                 <h1>Books</h1>
@@ -33,9 +34,10 @@ export class BookList extends Component {
                     Create book
                 </Button>
                 <Row className="flexWrapWrap flexJustifyCenter">
-                    {/* {loadingAdd && <Spin size="large" />} */}
-                    {bookList.map((book) => (
+                    {(!bookList.length && !loading) && <Empty />}
+                    {!loading && bookList.map((book) => (
                         <BookItem
+                            book={book}
                             key={book.uuid}
                             id={book.uuid}
                             title={book.name}
@@ -46,13 +48,14 @@ export class BookList extends Component {
                             deleteGetBook={deleteGetBook}
                             deleteBook={deleteBook}
                             showModalDelete={this.props.showModal}
-
+                            getBook={this.props.getBook}
                         />
                     ))}
                 </Row>
                 {type === "create" && (
                     <BookAddModal
                         visible={true}
+                        addBook={this.props.addBook}
                         closeModal={this.props.closeModal}
                         handleSubmitCreate={this.props.handleSubmitCreate}
                         loading={loadingModal}
@@ -85,18 +88,15 @@ export class BookList extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    console.log(state);
-    return {
-        type: state.modalReducer.type,
-        bookList: state.booksReducer.books,
-        deleteBookId: state.booksReducer.book,
-        book: state.booksReducer.book,
-        id: state.modalReducer.data.id,
-        loadingModal: state.modalReducer.loading,
-        bookEdit: state.modalReducer.data,
-    }
-};
+const mapStateToProps = (state) => ({
+    type: state.modalReducer.type,
+    bookList: state.booksReducer.books,
+    deleteBookId: state.booksReducer.book,
+    book: state.booksReducer.book,
+    id: state.modalReducer.data.id,
+    loadingModal: state.modalReducer.loading,
+    bookEdit: state.modalReducer.data,
+});
 
 const mapDispatchToProps = {
     fetchBooks: getBooksThunk,
@@ -105,7 +105,7 @@ const mapDispatchToProps = {
     updateGetBook: updateGetBookThunk,
     updateBook: updateBookThunk,
     deleteGetBook: deleteBookGetDataAction,
-    deleteBook: deleteBookThunk,
+    deleteBook: deleteBookByIdThunk,
     getBook: getBookForEdit,
 }
 

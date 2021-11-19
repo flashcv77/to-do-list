@@ -3,7 +3,7 @@ import { Modal, Button, Spin } from 'antd';
 import AddForm from './AddForm'
 
 export const BookAddModal = (props) => {
-    const { visible, loading, closeModal, handleSubmitCreate } = props;
+    const { visible, loading, addBook, closeModal, handleSubmitCreate } = props;
 
     return (
         <>
@@ -18,7 +18,8 @@ export const BookAddModal = (props) => {
                     <Button
                         type="secondary"
                         key="back"
-                        onClick={() => closeModal()}>
+                        onClick={() => closeModal()}
+                    >
                         Return
                     </Button>,
                     <button
@@ -26,14 +27,17 @@ export const BookAddModal = (props) => {
                         className="ant-btn ant-btn-primary"
                         key="submit"
                         type="primary"
-                        loading={loading} >
+                        loading={loading}
 
+                    >
                         Submit
                     </button>,
                 ]}
             >
                 {<Spin spinning={loading} tip="Loading...">
-                    <AddForm />
+                    <AddForm
+                        closeModal={closeModal}
+                    />
                 </Spin>}
             </Modal>
 
