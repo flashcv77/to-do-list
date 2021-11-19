@@ -58,7 +58,7 @@ export class BookItem extends React.Component {
                   <Menu.Item key="2" onClick={() => {
                     // handleUpdateShowModal();
                     // updateGetBook(id)
-                    getBook(book.uuid)
+                    getBook('edit',book.uuid)
 
                   }} icon={<EditOutlined />}>
                     {/* <EditOutlined /> */}

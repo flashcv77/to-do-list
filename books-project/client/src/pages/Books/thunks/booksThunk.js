@@ -1,7 +1,7 @@
 import { message } from "antd"
 import { addBook, deleteBook, getBookDetails, getBooks, updateBook } from "../../../api/books"
 import { BOOKS_FETCH_SUCCESS, DELETE_BOOK_SUCCESS } from "../action-types/books.action-types"
-import { addBookSuccessAction, addBookInProgressAction, deleteBookGetDataAction, updateBookInProgressAction, updateBookSuccessAction, updateBookGetDataAction, modalBookShowAction, modalBookProgressAction, modalBookSuccessAction } from "../actions/books.actions"
+import { addBookSuccessAction, addBookInProgressAction, deleteBookGetDataAction, updateBookInProgressAction, updateBookSuccessAction, updateBookGetDataAction, modalBookShowAction, modalBookProgressAction, modalBookSuccessAction, getBookForEditAction } from "../actions/books.actions"
 // import { getBooksThunk } from "./getBooksThunk"
 
 export const getBooksThunk = () => {
@@ -24,10 +24,10 @@ export const getBooksThunk = () => {
 export const addBookThunk = (bookObj) => {
 
     return (dispatch) => {
-        dispatch(addBookInProgressAction());
+        dispatch(modalBookProgressAction());
         addBook(bookObj)
             .then(() => {
-                dispatch(addBookSuccessAction());
+                dispatch(modalBookSuccessAction());
                 message.success('The book has been created', 3);
                 setTimeout(() => {
                     dispatch(getBooksThunk());
@@ -36,51 +36,23 @@ export const addBookThunk = (bookObj) => {
     }
 }
 
-// export const deleteBookThunk = (id) => {
-//     return (dispatch) => {
-//         console.log('here', id);
-//         deleteBook(id)
-//             .then(() => {
-//                 dispatch({
-//                     type: DELETE_BOOK_SUCCESS
-//                 },
-//                     setTimeout(() => {
-//                         dispatch(getBooksThunk());
-//                         message.success("The book has been removed")
-//                     }, 2000));
-//             })
-//             .catch((error) => {
-//                 console.error(error);
-//             });
-//     }
-// }
-
 export const deleteBookByIdThunk = (id) => {
     return (dispatch) => {
         dispatch(modalBookProgressAction());
         deleteBook(id).then(() => {
             dispatch(modalBookSuccessAction());
-            message.success("Note was deleted");
+            message.success("The book has been deleted");
             dispatch(getBooksThunk());
         });
     };
 };
 
-export const deleteGetBookThunk = (id) => {
-    return (dispatch) => {
-        getBookDetails(id)
-            .then((response) => {
-                dispatch(deleteBookGetDataAction(response));
-            });
-    }
-}
-
 export const updateBookThunk = (id, bookObj) => {
     return (dispatch) => {
-        dispatch(updateBookInProgressAction());
+        dispatch(modalBookProgressAction());
         updateBook(id, bookObj)
             .then(() => {
-                dispatch(updateBookSuccessAction());
+                dispatch(modalBookSuccessAction());
                 message.success('The book has been edited', 3);
                 setTimeout(() => {
                     dispatch(getBooksThunk());
@@ -89,22 +61,20 @@ export const updateBookThunk = (id, bookObj) => {
     }
 }
 
-export const updateGetBookThunk = (id) => {
+export const getBookModalDataThunk = (id) => {
     return (dispatch) => {
-        getBookDetails(id).then((response) => {
-            console.log(response);
-            dispatch(updateBookGetDataAction(response));
-        });
+        dispatch(modalBookProgressAction());
+        getBookDetails(id)
+            .then((bookData) => {
+                dispatch(getBookForEditAction(bookData));
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
+
 }
 
-export const getBookForEdit = (id) => {
-    return (dispatch) => {
-        dispatch(modalBookShowAction("edit"));
-        dispatch(modalBookProgressAction());
-        getBookDetails(id).then((response) => {
-            console.log(response);
-            dispatch(updateBookSuccessAction(response));
-        });
-    };
-}
+
+  
+      

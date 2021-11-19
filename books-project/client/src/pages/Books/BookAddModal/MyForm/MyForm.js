@@ -5,27 +5,15 @@ import { useDispatch } from 'react-redux'
 import { addBookThunk } from '../../thunks/booksThunk';
 import MyTextArea from './MyTextArea';
 
-const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue, closeModal }) => {
-    const dispatch = useDispatch();
-    const onSubmit = (bookObj, form) => {
-        const book = {
-            name: bookObj.name,
-            author: bookObj.author,
-            description: bookObj.description
-        }
-        console.log(bookObj, form);
-        console.log(closeModal);
-        dispatch(addBookThunk(book));
-        form.reset();
-        closeModal();
-    };
+const MyForm = ({ nameValue, authorValue, descriptionValue, initialValue, closeModal, handleOnSubmit, updateBook, onSubmit }) => {
+
     console.log(initialValue);
     return (
         <>
             <Form
-                initialValues={initialValue}
+                initialValues={initialValue || {}}
                 id="form"
-                onSubmit={onSubmit}
+                onSubmit={handleOnSubmit}
                 render={({ handleSubmit, form, submitting, pristine }) => (
                     <form onSubmit={handleSubmit} id="form">
                         <Field name="name" placeholder="Name" component={MyField} allowClear value={nameValue} />

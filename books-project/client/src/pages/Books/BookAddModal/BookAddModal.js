@@ -1,9 +1,18 @@
 import React from 'react'
 import { Modal, Button, Spin } from 'antd';
-import AddForm from './AddForm'
+import MyForm from './MyForm'
 
 export const BookAddModal = (props) => {
     const { visible, loading, addBook, closeModal, handleSubmitCreate } = props;
+
+    const onSubmit = (bookObj, form) => {
+        const book = {
+            name: bookObj.name,
+            author: bookObj.author,
+            description: bookObj.description
+        }
+        addBook(book);
+    };
 
     return (
         <>
@@ -17,13 +26,15 @@ export const BookAddModal = (props) => {
                 footer={[
                     <Button
                         type="secondary"
+                        loading={loading}
                         key="back"
                         onClick={() => closeModal()}
                     >
                         Return
                     </Button>,
-                    <button
+                    <Button
                         form="form"
+                        htmlType="form"
                         className="ant-btn ant-btn-primary"
                         key="submit"
                         type="primary"
@@ -31,12 +42,13 @@ export const BookAddModal = (props) => {
 
                     >
                         Submit
-                    </button>,
+                    </Button>,
                 ]}
             >
                 {<Spin spinning={loading} tip="Loading...">
-                    <AddForm
+                    <MyForm
                         closeModal={closeModal}
+                        handleOnSubmit={onSubmit}
                     />
                 </Spin>}
             </Modal>

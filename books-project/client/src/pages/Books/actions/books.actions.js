@@ -36,13 +36,15 @@ export const modalBookSuccessAction = () => ({
     type: MODAL_BOOK_SUCCESS,
 });
 
-export const addBookSuccessAction = () => ({
-    type: ADD_BOOK_SUCCESS,
-});
-
+// CREATE /////////////////////////////////////////
 export const addBookInProgressAction = () => ({
     type: ADD_BOOK_IN_PROGRESS,
 });
+
+export const addBookSuccessAction = () => ({
+    type: ADD_BOOK_SUCCESS,
+});
+////////////////////////////////////////////////////
 
 export const deleteBookSuccessAction = () => ({
     type: DELETE_BOOK_SUCCESS,
