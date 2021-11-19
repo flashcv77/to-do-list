@@ -62,7 +62,7 @@ export class BookList extends Component {
                 </Button>
                 <Row className="flexWrapWrap flexJustifyCenter">
                     {/* {loadingAdd && <Spin size="large" />} */}
-                    {(!books.length && !loading) && <Empty />}
+                    {/* {(!books.length && !loading) && <Empty />} */}
                     {books.map((book) => (
                         <BookItem
                             key={book.uuid}
