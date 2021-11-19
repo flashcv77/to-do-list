@@ -3,6 +3,7 @@ import React from 'react'
 import { Table } from 'antd';
 import { connect } from 'react-redux';
 import { getBooksThunk } from '../Books/thunks/booksThunk';
+import moment from 'moment';
 
 class BookStatistic extends React.Component {
   componentDidMount() {
@@ -48,6 +49,7 @@ class BookStatistic extends React.Component {
           compare: (a, b) => a.createDate - b.createDate,
           multiple: 4,
         },
+        render: (text)=>(moment(text).format('ll')),
       }
 
     ];

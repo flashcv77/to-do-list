@@ -2,8 +2,9 @@ import React from "react";
 import { Card, Avatar, Button, Menu, Dropdown } from 'antd';
 import { NavLink } from "react-router-dom";
 import cardIcon from '../../../../assets/images/card_icon.png'
-import { StyledAvatarWrapper, StyledButtonWrapper } from "./styled";
+import { StyledAvatarWrapper, StyledButtonWrapper, StyledDropDownWrapper } from "./styled";
 import { DeleteOutlined, FolderOpenOutlined, EditOutlined, DownOutlined } from '@ant-design/icons';
+import dropDownImg from '../../../../assets/images/dropdownImg.png'
 
 const { Meta } = Card;
 
@@ -36,19 +37,16 @@ export class BookItem extends React.Component {
             minHeight: 200
           }}
         >
-          <StyledButtonWrapper>
-            <Dropdown.Button
-              style={{
-                position: "absolute",
-                top: "16px",
-                right: "-15px",
-                fontWeight: "bold",
-                transform: "rotate(270deg)",
-              }}
-              onClick={this.handleButtonClick}
-              overlay={(
-
-                <Menu onClick={this.handleMenuClick}>
+          <StyledDropDownWrapper
+            style={{
+              position: "absolute",
+              right: 5,
+              top: 5
+            }}>
+            <Dropdown
+              overlay={
+                <Menu
+                  onClick={this.handleMenuClick}           >
                   <Menu.Item key="1"
                     icon={<FolderOpenOutlined />} >
                     <NavLink to={`/books/${id}`}>
@@ -56,12 +54,9 @@ export class BookItem extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item key="2" onClick={() => {
-                    // handleUpdateShowModal();
-                    // updateGetBook(id)
-                    getBook('edit',book.uuid)
+                    getBook('edit', book.uuid)
 
                   }} icon={<EditOutlined />}>
-                    {/* <EditOutlined /> */}
                     Edit
                   </Menu.Item>
                   <Menu.Item key="3"
@@ -70,13 +65,14 @@ export class BookItem extends React.Component {
                   >
                     Delete
                   </Menu.Item>
-
                 </Menu>
-
-              )}
-              placement={"topLeft"}>
-            </Dropdown.Button>
-          </StyledButtonWrapper>
+              }
+              trigger={['click']}>
+              <div className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                <img src={dropDownImg} width="15" alt="dropdown" /> <DownOutlined />
+              </div>
+            </Dropdown>
+          </StyledDropDownWrapper>
           <Meta
             avatar={
               <StyledAvatarWrapper>

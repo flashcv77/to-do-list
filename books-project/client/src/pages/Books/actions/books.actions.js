@@ -12,7 +12,17 @@ import {
     MODAL_BOOK_CLOSE,
     MODAL_BOOK_IN_PROGRESS,
     MODAL_BOOK_SUCCESS,
+    BOOKS_FETCH_IN_PROGRESS,
+    BOOKS_FETCH_SUCCESS,
 } from "../action-types/books.action-types"
+
+export const booksFetchInProgressAction = () => ({
+    type: BOOKS_FETCH_IN_PROGRESS,
+})
+
+export const booksFetchSuccessAction = () => ({
+    type: BOOKS_FETCH_SUCCESS,
+})
 
 export const getBookForEditAction = (payload) => ({
     type: GET_BOOK_FOR_EDIT,

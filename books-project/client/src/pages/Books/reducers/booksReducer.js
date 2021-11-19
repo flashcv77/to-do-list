@@ -13,7 +13,8 @@ import {
     DELETE_BOOK_SHOW_MODAL,
     DELETE_BOOK_SUCCESS,
     DELETE_BOOK_ERROR,
-    DELETE_BOOK_GET_DATA_ACTION
+    DELETE_BOOK_GET_DATA_ACTION,
+    BOOKS_FETCH_IN_PROGRESS
 } from "../action-types/books.action-types";
 
 const initialState = {
@@ -32,6 +33,12 @@ const booksReducer = (state = initialState, action) => {
                 error: '',
             }
         }
+        case BOOKS_FETCH_IN_PROGRESS: {
+            return {
+                ...state, loading: true
+            }
+        }
+
         case BOOKS_FETCH_ERROR: {
             return {
                 books: [],

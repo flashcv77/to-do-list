@@ -23,80 +23,84 @@ export class BookList extends Component {
     };
 
 
-    
-        
-    
 
 
-render() {
-    const { type, loading, bookEdit, id, loadingModal, bookList,
-        book, updateBook, deleteBookId,
-        deleteGetBook, deleteBook } = this.props;
-    return (
-        <div className="site-card-wrapper">
-            <h1>Books</h1>
-            {/*TODO move create => MODAL_TYPES.CREATE
+
+
+
+    render() {
+        const { type, loading, bookEdit, id, loadingModal, bookList,
+            book, updateBook, deleteBookId,
+            deleteGetBook, deleteBook } = this.props;
+        return (
+            <div className="site-card-wrapper">
+                <h1>Books</h1>
+                {/*TODO move create => MODAL_TYPES.CREATE
                 const MODAL_TYPES = { 
                     CREATE: 'CREATE'
                  }
                 */}
-            <Button type="primary" onClick={() => this.props.showModal("create")} >
-                Create book
-            </Button>
-            <Row className="flexWrapWrap flexJustifyCenter">
-                {(!bookList.length && !loading) && <Empty />}
-                {!loading && bookList.map((book) => (
-                    <BookItem
-                        book={book}
-                        key={book.uuid}
-                        id={book.uuid}
-                        title={book.name}
-                        author={book.author}
-                        description={book.description.slice(0, 120)}
-                        deleteBookId={deleteBookId}
-                        deleteGetBook={deleteGetBook}
-                        deleteBook={deleteBook}
-                        showModalDelete={this.props.showModal}
-                        getBook={this.props.getBook}
-                    />
-                ))}
-            </Row>
-            {type === "create" && (
-                <BookAddModal
-                    visible={true}
-                    addBook={this.props.addBook}
-                    closeModal={this.props.closeModal}
-                    handleSubmitCreate={this.props.handleSubmitCreate}
-                    loading={loadingModal}
-                />
-            )}
-            {type === "edit" && (
-                <BookEditModal
-                    visible={true}
-                    closeModal={this.props.closeModal}
-                    bookEdit={bookEdit}  // <------
-                    handleSubmitEdit={this.handleSubmit}
-                    loading={loadingModal}
-                    initialValue={book}
-                    id={id}
-                    updateBook={updateBook}
-                    getBookData={this.props.getBookData}
-                />
-            )}
-            {type === "delete" && (
-                <BookDeleteModal
-                    id={id}
-                    visible={true}
-                    loading={loadingModal}
-                    handleDelete={this.props.handleDelete}
-                    closeModal={this.props.closeModal}
-                    deleteBook={deleteBook}
-                    deleteBookId={deleteBookId}
-                />
-            )}
-        </div>
-    );
-}
+                <Button type="primary" onClick={() => this.props.showModal("create")} >
+                    Create book
+                </Button>
+                {<Spin spinning={this.props.loadingList} tip="Loading...">
+                    <Row className="flexWrapWrap flexJustifyCenter">
+                        {(!bookList.length && !loading) && <Empty />}
+
+                        {!loading && bookList.map((book) => (
+                            <BookItem
+                                book={book}
+                                key={book.uuid}
+                                id={book.uuid}
+                                title={book.name}
+                                author={book.author}
+                                description={book.description.slice(0, 120)}
+                                deleteBookId={deleteBookId}
+                                deleteGetBook={deleteGetBook}
+                                deleteBook={deleteBook}
+                                showModalDelete={this.props.showModal}
+                                getBook={this.props.getBook}
+                            />
+                        ))}
+
+                    </Row>
+                    {type === "create" && (
+                        <BookAddModal
+                            visible={true}
+                            addBook={this.props.addBook}
+                            closeModal={this.props.closeModal}
+                            handleSubmitCreate={this.props.handleSubmitCreate}
+                            loading={loadingModal}
+                        />
+                    )}
+                    {type === "edit" && (
+                        <BookEditModal
+                            visible={true}
+                            closeModal={this.props.closeModal}
+                            bookEdit={bookEdit}  // <------
+                            handleSubmitEdit={this.handleSubmit}
+                            loading={loadingModal}
+                            initialValue={book}
+                            id={id}
+                            updateBook={updateBook}
+                            getBookData={this.props.getBookData}
+                        />
+                    )}
+                    {type === "delete" && (
+                        <BookDeleteModal
+                            id={id}
+                            visible={true}
+                            loading={loadingModal}
+                            handleDelete={this.props.handleDelete}
+                            closeModal={this.props.closeModal}
+                            deleteBook={deleteBook}
+                            deleteBookId={deleteBookId}
+                        />
+                    )}
+                </Spin>}
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state) => ({
@@ -107,7 +111,7 @@ const mapStateToProps = (state) => ({
     id: state.modalReducer.data.id,
     loadingModal: state.modalReducer.loading,
     bookEdit: state.modalReducer.data,
-
+    loadingList: state.booksReducer.loading
 });
 
 const mapDispatchToProps = {

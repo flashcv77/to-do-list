@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { getBookDetailsThunk } from "../thunks/bookThunk";
 import { Button } from "antd";
+import moment from "moment";
 
 class BookDetails extends React.Component {
 
@@ -22,6 +23,8 @@ class BookDetails extends React.Component {
                 <p>{book.description}</p>
                 <hr />
                 <p>{book.author}</p>
+                <hr/>
+                <p>{moment(book.createDate).format('ll')}</p>
 
             </>
         );
