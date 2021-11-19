@@ -1,7 +1,7 @@
 import { message } from "antd"
 import { addBook, deleteBook, getBookDetails, getBooks, updateBook } from "../../../api/books"
 import { BOOKS_FETCH_SUCCESS, DELETE_BOOK_SUCCESS } from "../action-types/books.action-types"
-import { addBookSuccessAction, addBookInProgressAction, deleteBookGetDataAction, updateBookInProgressAction, updateBookSuccessAction, updateBookGetDataAction } from "../actions/books.actions"
+import { addBookSuccessAction, addBookInProgressAction, deleteBookGetDataAction, updateBookInProgressAction, updateBookSuccessAction, updateBookGetDataAction, modalBookShowAction, modalBookProgressAction } from "../actions/books.actions"
 // import { getBooksThunk } from "./getBooksThunk"
 
 export const getBooksThunk = () => {
@@ -85,4 +85,14 @@ export const updateGetBookThunk = (id) => {
             dispatch(updateBookGetDataAction(response));
         });
     }
+}
+
+export const getBookForEdit = (id) => {
+    return (dispatch) => {
+        dispatch(modalBookShowAction("edit"));
+        dispatch(modalBookProgressAction());
+        getBookDetails(id).then((response) => {
+            dispatch(updateBookSuccessAction(response));
+        });
+    };
 }

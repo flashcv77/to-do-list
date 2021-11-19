@@ -1,19 +1,40 @@
 import {
     ADD_BOOK_IN_PROGRESS,
     ADD_BOOK_SUCCESS,
-    ADD_BOOK_HIDE_MODAL,
-    ADD_BOOK_SHOW_MODAL,
     DELETE_BOOK_SUCCESS,
     DELETE_BOOK_IN_PROGRESS,
     DELETE_BOOK_GET_DATA_ACTION,
     UPDATE_BOOK_IN_PROGRESS,
     UPDATE_BOOK_SUCCESS,
-    UPDATE_BOOK_SHOW_MODAL,
-    UPDATE_BOOK_HIDE_MODAL,
-    DELETE_BOOK_SHOW_MODAL,
-    DELETE_BOOK_HIDE_MODAL,
     UPDATE_BOOK_GET_DATA_ACTION,
+    GET_BOOK_FOR_EDIT,
+    MODAL_BOOK_SHOW,
+    MODAL_BOOK_CLOSE,
+    MODAL_BOOK_IN_PROGRESS,
+    MODAL_BOOK_SUCCESS,
 } from "../action-types/books.action-types"
+
+export const getBookForEditAction = (payload) => ({
+    type: GET_BOOK_FOR_EDIT,
+    payload,
+});
+
+export const modalBookShowAction = (type, id) => ({
+    type: MODAL_BOOK_SHOW,
+    payload: { type, id },
+});
+
+export const modalBookCloseAction = () => ({
+    type: MODAL_BOOK_CLOSE,
+});
+
+export const modalBookProgressAction = () => ({
+    type: MODAL_BOOK_IN_PROGRESS,
+});
+
+export const modalBookSuccessAction = () => ({
+    type: MODAL_BOOK_SUCCESS,
+});
 
 export const addBookSuccessAction = () => ({
     type: ADD_BOOK_SUCCESS,
@@ -21,14 +42,6 @@ export const addBookSuccessAction = () => ({
 
 export const addBookInProgressAction = () => ({
     type: ADD_BOOK_IN_PROGRESS,
-});
-
-export const hideModalAction = () => ({
-    type: ADD_BOOK_HIDE_MODAL,
-});
-
-export const showModalAction = () => ({
-    type: ADD_BOOK_SHOW_MODAL,
 });
 
 export const deleteBookSuccessAction = () => ({
@@ -56,19 +69,4 @@ export const deleteBookGetDataAction = (book) => ({
     payload: book
 });
 
-export const updateShowModalAction = () => ({
-    type: UPDATE_BOOK_SHOW_MODAL,
-});
-
-export const updateHideModalAction = () => ({
-    type: UPDATE_BOOK_HIDE_MODAL,
-});
-
-export const deleteShowModalAction = () => ({
-    type: DELETE_BOOK_SHOW_MODAL,
-});
-
-export const deleteHideModalAction = () => ({
-    type: DELETE_BOOK_HIDE_MODAL,
-})
 

@@ -5,52 +5,37 @@ import BookItem from "./BookItem"
 import BookAddModal from "../BookAddModal";
 import BookEditModal from "../BookEditModal/BookEditModal";
 import BookDeleteModal from "../BookDeleteModal/BookDeleteModal";
-import { getBooksThunk, updateBookThunk, updateGetBookThunk,deleteBookThunk } from "../thunks/booksThunk"
-import { deleteBookGetDataAction, deleteHideModalAction, deleteShowModalAction, hideModalAction, showModalAction, updateHideModalAction, updateShowModalAction } from '../actions/books.actions';
+import { getBooksThunk, updateBookThunk, updateGetBookThunk, deleteBookThunk, getBookForEdit } from "../thunks/booksThunk"
+import { deleteBookGetDataAction, deleteHideModalAction, deleteShowModalAction, hideModalAction, modalBookCloseAction, modalBookShowAction, showModalAction, updateHideModalAction, updateShowModalAction } from '../actions/books.actions';
 
 export class BookList extends Component {
     componentDidMount() {
         this.props.fetchBooks();
     }
 
-    handleAddShowModal = () => {
-        this.props.addShowModal();
-    }
+    handleSubmit = (editValues) => {
+        const book = {
+            name: editValues.name,
+            author: editValues.author,
+            description: editValues.description,
+        };
+        this.props.handleSubmitEdit(book, editValues.uuid);
+    };
 
-    handleAddHideModal = () => {
-        this.props.addHideModal();
-    }
-
-    handleUpdateShowModal = () => {
-        this.props.updateShowModal();
-    }
-
-    handleUpdateHideModal = () => {
-        this.props.updateHideModal();
-    }
-
-    handleDeleteShowModal = () => {
-        this.props.deleteShowModal();
-    }
-
-    handleDeleteHideModal = () => {
-        this.props.deleteHideModal();
-    }
 
     render() {
-        const { bookList, loadingAdd, visibleAdd, loadingUpdate, visibleUpdate, updateGetBook, book, updateBook, visibleDelete, loadingDelete, deleteBookId, deleteGetBook, deleteBook } = this.props;
+        const { type, loading, bookEdit, id, loadingModal, bookList, updateGetBook, book, updateBook, visibleDelete, loadingDelete, deleteBookId, deleteGetBook, deleteBook } = this.props;
+        console.log(type);
         return (
             <div className="site-card-wrapper">
                 <h1>Books</h1>
-                <Button type="primary" onClick={this.handleAddShowModal} >
+                <Button type="primary" onClick={() => this.props.showModal("create")} >
                     Create book
                 </Button>
                 <Row className="flexWrapWrap flexJustifyCenter">
                     {/* {loadingAdd && <Spin size="large" />} */}
                     {bookList.map((book) => (
                         <BookItem
-                            handleUpdateShowModal={this.handleUpdateShowModal}
-                            handleDeleteShowModal={this.handleDeleteShowModal}
                             key={book.uuid}
                             id={book.uuid}
                             title={book.name}
@@ -60,57 +45,68 @@ export class BookList extends Component {
                             deleteBookId={deleteBookId}
                             deleteGetBook={deleteGetBook}
                             deleteBook={deleteBook}
+                            showModalDelete={this.props.showModal}
+
                         />
                     ))}
                 </Row>
-                <BookAddModal
-                    loading={loadingAdd}
-                    visible={visibleAdd}
-                    handleAddHideModal={this.handleAddHideModal}
-                />
-                <BookEditModal
-                    loading={loadingUpdate}
-                    visible={visibleUpdate}
-                    handleUpdateHideModal={this.handleUpdateHideModal}
-                    initialValue={book}
-                    updateBook={updateBook}
-                />
-                <BookDeleteModal
-                    visible={visibleDelete}
-                    loading={loadingDelete}
-                    handleDeleteHideModal={this.handleDeleteHideModal}
-                    deleteBook={deleteBook}
-                    deleteBookId={deleteBookId}
-                />
+                {type === "create" && (
+                    <BookAddModal
+                        visible={true}
+                        closeModal={this.props.closeModal}
+                        handleSubmitCreate={this.props.handleSubmitCreate}
+                        loading={loadingModal}
+                    />
+                )}
+                {type === "edit" && (
+                    <BookEditModal
+                        visible={true}
+                        closeModal={this.props.closeModal}
+                        bookEdit={bookEdit}  // <------
+                        handleSubmitEdit={this.handleSubmit}
+                        loading={loadingModal}
+                        initialValue={book}
+                        updateBook={updateBook}
+                    />
+                )}
+                {type === "delete" && (
+                    <BookDeleteModal
+                        id={id}
+                        visible={true}
+                        loading={loadingModal}
+                        handleDelete={this.props.handleDelete}
+                        closeModal={this.props.closeModal}
+                        deleteBook={deleteBook}
+                        deleteBookId={deleteBookId}
+                    />
+                )}
             </div>
         );
     }
 }
 
-const mapStateToProps = (state) => ({
-    bookList: state.booksReducer.books,
-    visibleAdd: state.modalReducer.visible,
-    loadingAdd: state.modalReducer.loading,
-    visibleUpdate: state.bookUpdateReducer.visible,
-    loadingUpdate: state.bookUpdateReducer.loading,
-    visibleDelete: state.bookDeleteReducer.visible,
-    loadingDelete: state.bookDeleteReducer.loading,
-    deleteBookId: state.bookDeleteReducer.book,
-    book: state.bookUpdateReducer.book
-});
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        type: state.modalReducer.type,
+        bookList: state.booksReducer.books,
+        deleteBookId: state.booksReducer.book,
+        book: state.booksReducer.book,
+        id: state.modalReducer.data.id,
+        loadingModal: state.modalReducer.loading,
+        bookEdit: state.modalReducer.data,
+    }
+};
 
 const mapDispatchToProps = {
     fetchBooks: getBooksThunk,
-    addShowModal: showModalAction,
-    addHideModal: hideModalAction,
-    updateShowModal: updateShowModalAction,
-    updateHideModal: updateHideModalAction,
-    deleteShowModal: deleteShowModalAction,
-    deleteHideModal: deleteHideModalAction,
+    showModal: modalBookShowAction,
+    closeModal: modalBookCloseAction,
     updateGetBook: updateGetBookThunk,
     updateBook: updateBookThunk,
     deleteGetBook: deleteBookGetDataAction,
     deleteBook: deleteBookThunk,
+    getBook: getBookForEdit,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);

@@ -21,7 +21,7 @@ export class BookItem extends React.Component {
 
 
   render() {
-    const { id, title, description, author, handleUpdateShowModal, handleDeleteShowModal, updateGetBook, deleteGetBook } = this.props;
+    const { id, title, description, author, showModalDelete, handleUpdateShowModal, handleDeleteShowModal, updateGetBook, deleteGetBook } = this.props;
     // console.log(updateGetBook(id), id);
 
     return (
@@ -107,8 +107,10 @@ export class BookItem extends React.Component {
                   </Menu.Item>
                   <Menu.Item key="3" onClick={() => {
                     console.log("ID for delete ", id)
-                    handleDeleteShowModal();
-                    deleteGetBook(id)
+                    // handleDeleteShowModal();
+                    // deleteGetBook(id)
+                    showModalDelete()
+
                   }}
                     icon={<DeleteOutlined />}
                   >

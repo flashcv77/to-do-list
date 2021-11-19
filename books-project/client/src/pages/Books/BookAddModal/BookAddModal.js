@@ -3,22 +3,22 @@ import { Modal, Button, Spin } from 'antd';
 import AddForm from './AddForm'
 
 export const BookAddModal = (props) => {
-    const { visible, loading, handleAddHideModal } = props;
+    const { visible, loading, closeModal, handleSubmitCreate } = props;
 
     return (
         <>
-        
+
             <Modal
                 visible={visible}
                 title="Create book"
-                onCancel={() => handleAddHideModal()}
+                onCancel={() => closeModal()}
                 confirmLoading={!loading}
                 loading={loading}
                 footer={[
                     <Button
                         type="secondary"
                         key="back"
-                        onClick={() => handleAddHideModal()}>
+                        onClick={() => closeModal()}>
                         Return
                     </Button>,
                     <button
@@ -27,6 +27,7 @@ export const BookAddModal = (props) => {
                         key="submit"
                         type="primary"
                         loading={loading} >
+
                         Submit
                     </button>,
                 ]}
