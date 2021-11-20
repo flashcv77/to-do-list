@@ -1,7 +1,7 @@
 import { message } from "antd"
 import { addBook, deleteBook, getBookDetails, getBooks, updateBook } from "../../../api/books"
-import { BOOKS_FETCH_SUCCESS, DELETE_BOOK_SUCCESS } from "../action-types/books.action-types"
-import { addBookSuccessAction, addBookInProgressAction, deleteBookGetDataAction, updateBookInProgressAction, updateBookSuccessAction, updateBookGetDataAction, modalBookShowAction, modalBookProgressAction, modalBookSuccessAction, getBookForEditAction, booksFetchInProgressAction, booksFetchSuccessAction } from "../actions/books.actions"
+import { BOOKS_FETCH_SUCCESS } from "../action-types/books.action-types"
+import { modalBookProgressAction, modalBookSuccessAction, getBookForEditAction, booksFetchInProgressAction } from "../actions/books.actions"
 // import { getBooksThunk } from "./getBooksThunk"
 
 export const getBooksThunk = () => {
@@ -14,12 +14,12 @@ export const getBooksThunk = () => {
                     type: BOOKS_FETCH_SUCCESS,
                     payload: books,
                 })
-                
+
             })
             .catch((error) => {
                 console.error(error)
             });
-            // dispatch(booksFetchSuccessAction());
+        // dispatch(booksFetchSuccessAction());
     }
 }
 
@@ -32,7 +32,7 @@ export const addBookThunk = (bookObj) => {
             .then(() => {
                 dispatch(modalBookSuccessAction());
                 message.success('The book has been created', 3);
-                    dispatch(getBooksThunk());
+                dispatch(getBooksThunk());
             });
     }
 }
@@ -77,5 +77,5 @@ export const getBookModalDataThunk = (id) => {
 }
 
 
-  
-      
+
+

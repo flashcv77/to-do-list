@@ -7,6 +7,7 @@ export const BookDeleteModal = ({ id, visible, loading, handleDelete, closeModal
             {/* {<Spin spinning={loading} tip="Loading..."> */}
             <Modal
                 visible={visible}
+                destroyOnClose={true}
                 title={`Delete book`}
                 onCancel={() => closeModal()}
                 confirmLoading={!loading}

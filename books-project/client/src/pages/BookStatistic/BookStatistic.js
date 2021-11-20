@@ -49,13 +49,13 @@ class BookStatistic extends React.Component {
           compare: (a, b) => a.createDate - b.createDate,
           multiple: 4,
         },
-        render: (text)=>(moment(text).format('ll')),
+        render: (text) => (moment(text).format('ll')),
       }
 
     ];
 
     return (
-      <Table columns={columns} dataSource={books} />
+      <Table columns={columns} dataSource={books} loading={this.props.loadingList} />
     );
 
   }
@@ -63,15 +63,12 @@ class BookStatistic extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-
   bookList: state.booksReducer.books,
-
+  loadingList: state.booksReducer.loading
 });
 
 const mapDispatchToProps = {
-
   fetchBooks: getBooksThunk,
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookStatistic);

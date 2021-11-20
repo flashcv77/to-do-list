@@ -3,8 +3,8 @@ import { Form, Field } from 'react-final-form'
 import EditField from './EditField';
 import EditTextArea from './EditTextArea';
 
-const EditForm = ({ nameValue, authorValue, descriptionValue, initialValue, updateBook, closeModal,handleSubmit}) => {
-   
+const EditForm = ({ nameValue, authorValue, descriptionValue, initialValue, updateBook, closeModal, handleSubmit }) => {
+
     return (
         <>
             <Form

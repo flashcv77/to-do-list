@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Avatar, Button, Menu, Dropdown } from 'antd';
 import { NavLink } from "react-router-dom";
 import cardIcon from '../../../../assets/images/card_icon.png'
-import { StyledAvatarWrapper, StyledButtonWrapper, StyledDropDownWrapper } from "./styled";
+import { StyledAvatarWrapper, StyledDropDownWrapper } from "./styled";
 import { DeleteOutlined, FolderOpenOutlined, EditOutlined, DownOutlined } from '@ant-design/icons';
 import dropDownImg from '../../../../assets/images/dropdownImg.png'
 
@@ -17,15 +17,8 @@ export class BookItem extends React.Component {
   handleMenuClick = (event) => {
   }
 
-  // handleButtonClick = (event) => {
-  // }
-
-
   render() {
-    const { getBook, book, id, title, description, author, showModalDelete, handleUpdateShowModal, updateGetBook, deleteGetBook } = this.props;
-    // console.log(updateGetBook(id), id);
-    // console.log(showModalDelete);
-    console.log(id)
+    const { getBook, book, id, title, description, author, showModalDelete } = this.props;
 
     return (
       <>

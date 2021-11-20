@@ -5,7 +5,7 @@ import BookItem from "./BookItem"
 import BookAddModal from "../BookAddModal";
 import BookEditModal from "../BookEditModal/BookEditModal";
 import BookDeleteModal from "../BookDeleteModal/BookDeleteModal";
-import { getBooksThunk, updateBookThunk, getBookForEdit, addBookThunk, deleteBookByIdThunk, getBookModalDataThunk } from "../thunks/booksThunk"
+import { getBooksThunk, updateBookThunk, addBookThunk, deleteBookByIdThunk, getBookModalDataThunk } from "../thunks/booksThunk"
 import { deleteBookGetDataAction, modalBookCloseAction, modalBookShowAction, } from '../actions/books.actions';
 
 export class BookList extends Component {
@@ -29,9 +29,7 @@ export class BookList extends Component {
 
 
     render() {
-        const { type, loading, bookEdit, id, loadingModal, bookList,
-            book, updateBook, deleteBookId,
-            deleteGetBook, deleteBook } = this.props;
+        const { type, loading, bookEdit, id, loadingModal, bookList, book, updateBook, deleteBookId, deleteGetBook, deleteBook } = this.props;
         return (
             <div className="site-card-wrapper">
                 <h1>Books</h1>
