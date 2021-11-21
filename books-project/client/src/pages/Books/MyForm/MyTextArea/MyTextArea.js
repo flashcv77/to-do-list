@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input } from 'antd'
 import { StyledTextArea } from './styled'
+import PropTypes from 'prop-types';
 
 export const MyTextArea = (props) => {
     const { name } = props.input
@@ -18,6 +19,12 @@ export const MyTextArea = (props) => {
             </StyledTextArea>
         </>
     );
+}
+
+MyTextArea.propTypes = {
+    allowClear: PropTypes.bool,
+    name: PropTypes.string,
+    input: PropTypes.object,
 }
 
 export default MyTextArea;

@@ -4,6 +4,7 @@ import { Table } from 'antd';
 import { connect } from 'react-redux';
 import { getBooksThunk } from '../Books/thunks/booksThunk';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 class BookStatistic extends React.Component {
   componentDidMount() {
@@ -12,6 +13,7 @@ class BookStatistic extends React.Component {
 
   render() {
     const books = this.props.bookList;
+    const loading = this.props.loadingList;
     const columns = [
 
       {
@@ -55,7 +57,7 @@ class BookStatistic extends React.Component {
     ];
 
     return (
-      <Table columns={columns} dataSource={books} loading={this.props.loadingList} />
+      <Table columns={columns} dataSource={books} loading={loading} />
     );
 
   }
@@ -69,6 +71,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchBooks: getBooksThunk,
+}
+
+BookStatistic.propTypes = {
+  bookList: PropTypes.object,
+  loadingList: PropTypes.bool,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookStatistic);

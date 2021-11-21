@@ -1,10 +1,10 @@
 import { Button, Modal, Spin } from "antd";
 import React, { useEffect } from "react";
 import MyForm from "../MyForm";
+import PropTypes from 'prop-types';
 
 export const BookEditModal = (props) => {
     const { visible, loading, id, updateBook, getBookData, bookEditData, closeModal } = props;
-
     useEffect(() => {
         getBookData(id)
     }, [])
@@ -55,6 +55,17 @@ export const BookEditModal = (props) => {
             </Modal>
         </>
     )
+}
+
+BookEditModal.propTypes = {
+    visible: PropTypes.bool,
+    loading: PropTypes.bool,
+    id: PropTypes.string,
+    updateBook: PropTypes.func,
+    getBookData: PropTypes.func,
+    bookEditData: PropTypes.object,
+    closeModal: PropTypes.func,
+    onSubmit: PropTypes.func,
 }
 
 export default BookEditModal;

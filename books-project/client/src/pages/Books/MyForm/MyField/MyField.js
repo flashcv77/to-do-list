@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input } from 'antd'
 import { StyledInput } from './styled'
+import PropTypes from 'prop-types';
 
 export const MyField = (props) => {
     const { name } = props.input
@@ -17,6 +18,12 @@ export const MyField = (props) => {
             </StyledInput>
         </>
     );
+}
+
+MyField.propTypes = {
+    allowClear: PropTypes.bool,
+    name: PropTypes.string,
+    input: PropTypes.object,
 }
 
 export default MyField;

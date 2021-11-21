@@ -6,6 +6,7 @@ import { StyledAvatarWrapper, StyledDropDownWrapper } from "./styled";
 import { DeleteOutlined, FolderOpenOutlined, EditOutlined, DownOutlined } from '@ant-design/icons';
 import dropDownImg from '../../../../assets/images/dropdownImg.png'
 import moment from "moment";
+import PropTypes from 'prop-types';
 
 const { Meta } = Card;
 
@@ -13,7 +14,6 @@ export class BookItem extends React.Component {
 
   render() {
     const { id, title, description, author, date, showModal } = this.props;
-
     return (
       <>
         <Card
@@ -86,6 +86,15 @@ export class BookItem extends React.Component {
       </>
     )
   }
+}
+
+BookItem.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  author: PropTypes.string,
+  date: PropTypes.string,
+  showModal: PropTypes.func,
 }
 
 export default BookItem;

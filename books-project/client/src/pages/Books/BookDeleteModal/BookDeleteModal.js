@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal, Spin } from "antd";
+import PropTypes from 'prop-types';
 
 export const BookDeleteModal = ({ id, visible, loading, closeModal, deleteBook }) => {
     return (
@@ -35,5 +36,14 @@ export const BookDeleteModal = ({ id, visible, loading, closeModal, deleteBook }
         </>
     );
 }
+
+BookDeleteModal.propTypes = {
+    id: PropTypes.string,
+    visible: PropTypes.bool,
+    loading: PropTypes.bool,
+    closeModal: PropTypes.func,
+    deleteBook: PropTypes.func,
+}
+
 
 export default BookDeleteModal;

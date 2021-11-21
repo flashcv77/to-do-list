@@ -7,6 +7,7 @@ import BookEditModal from "../BookEditModal/BookEditModal";
 import BookDeleteModal from "../BookDeleteModal/BookDeleteModal";
 import { getBooksThunk, updateBookThunk, addBookThunk, deleteBookByIdThunk, getBookModalDataThunk } from "../thunks/booksThunk"
 import { modalBookCloseAction, modalBookShowAction } from '../actions/books.actions';
+import PropTypes from 'prop-types';
 
 export class BookList extends Component {
     componentDidMount() {
@@ -31,6 +32,7 @@ export class BookList extends Component {
                     <Row className="flexWrapWrap flexJustifyCenter">
                         {!bookList.length && <Empty />}
                         {bookList.map((book) => (
+
                             <BookItem
                                 loading={this.props.loadingDetails}
                                 key={book.uuid}
@@ -38,7 +40,7 @@ export class BookList extends Component {
                                 title={book.name}
                                 author={book.author}
                                 date={book.createDate}
-                                description={book.description.slice(0, 120)}
+                                description={book.description !== undefined && book.description.slice(0, 120)}
                                 showModal={showModal}
                             />
                         ))}
@@ -98,4 +100,20 @@ const mapDispatchToProps = {
     closeModal: modalBookCloseAction,
 }
 
+BookList.propTypes = {
+    bookList: PropTypes.array,
+    loadingList: PropTypes.bool,
+    type: PropTypes.string,
+    loadingModal: PropTypes.bool,
+    id: PropTypes.string,
+    bookEditData: PropTypes.object,
+    addBook: PropTypes.func,
+    deleteBook: PropTypes.func,
+    updateBook: PropTypes.func,
+    getBookData: PropTypes.func,
+    showModal: PropTypes.func,
+    closeModal: PropTypes.func
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);
+

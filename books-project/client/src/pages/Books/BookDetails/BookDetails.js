@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getBookDetailsThunk } from "../thunks/bookThunk";
 import { Button, Spin } from "antd";
 import moment from "moment";
+import PropTypes from 'prop-types';
 
 class BookDetails extends React.Component {
 
@@ -39,6 +40,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     getBookDetails: getBookDetailsThunk
+}
+
+BookDetails.propTypes = {
+    book: PropTypes.object,
+    loading: PropTypes.bool,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookDetails);

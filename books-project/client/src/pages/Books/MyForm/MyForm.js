@@ -2,6 +2,7 @@ import React from 'react'
 import { MyField } from './MyField/MyField';
 import { Form, Field } from 'react-final-form'
 import MyTextArea from './MyTextArea';
+import PropTypes from 'prop-types';
 
 const MyForm = ({ initialValues, handleOnSubmit }) => {
     return (
@@ -23,6 +24,11 @@ const MyForm = ({ initialValues, handleOnSubmit }) => {
             />
         </>
     );
+}
+
+MyForm.propTypes = {
+    initialValues: PropTypes.object,
+    handleOnSubmit: PropTypes.func,
 }
 
 export default MyForm;

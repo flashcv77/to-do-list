@@ -1,10 +1,10 @@
 import React from 'react'
 import { Modal, Button, Spin } from 'antd';
 import MyForm from '../MyForm'
+import PropTypes from 'prop-types';
 
 export const BookAddModal = (props) => {
     const { visible, loading, addBook, closeModal } = props;
-
     const onSubmit = (bookObj, form) => {
         const book = {
             name: bookObj.name,
@@ -51,6 +51,13 @@ export const BookAddModal = (props) => {
             </Modal>
         </>
     );
+}
+
+BookAddModal.propTypes = {
+    visible: PropTypes.bool,
+    loading: PropTypes.bool,
+    addBook: PropTypes.func,
+    closeModal: PropTypes.func,
 }
 
 export default BookAddModal;
