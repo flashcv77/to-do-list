@@ -6,30 +6,16 @@ import BookAddModal from "../BookAddModal";
 import BookEditModal from "../BookEditModal/BookEditModal";
 import BookDeleteModal from "../BookDeleteModal/BookDeleteModal";
 import { getBooksThunk, updateBookThunk, addBookThunk, deleteBookByIdThunk, getBookModalDataThunk } from "../thunks/booksThunk"
-import { deleteBookGetDataAction, modalBookCloseAction, modalBookShowAction, } from '../actions/books.actions';
+import { modalBookCloseAction, modalBookShowAction } from '../actions/books.actions';
 
 export class BookList extends Component {
     componentDidMount() {
         this.props.fetchBooks();
     }
 
-    handleSubmit = (editValues) => {
-        const book = {
-            name: editValues.name,
-            author: editValues.author,
-            description: editValues.description,
-        };
-        this.props.handleSubmitEdit(book, editValues.uuid);
-    };
-
-
-
-
-
-
-
     render() {
-        const { type, loading, bookEdit, id, loadingModal, bookList, book, updateBook, deleteBookId, deleteGetBook, deleteBook } = this.props;
+        const { bookList, loadingList, type, loadingModal, id, bookEditData, addBook, deleteBook, updateBook, getBookData, showModal, closeModal,
+        } = this.props;
         return (
             <div className="site-card-wrapper">
                 <h1>Books</h1>
@@ -38,26 +24,22 @@ export class BookList extends Component {
                     CREATE: 'CREATE'
                  }
                 */}
-                <Button type="primary" onClick={() => this.props.showModal("create")} >
+                <Button type="primary" onClick={() => showModal("create")} >
                     Create book
                 </Button>
-                {<Spin spinning={this.props.loadingList} tip="Loading...">
+                {<Spin spinning={loadingList} tip="Loading...">
                     <Row className="flexWrapWrap flexJustifyCenter">
-                        {(!bookList.length && !loading) && <Empty />}
-
-                        {!loading && bookList.map((book) => (
+                        {!bookList.length && <Empty />}
+                        {bookList.map((book) => (
                             <BookItem
-                                book={book}
+                                loading={this.props.loadingDetails}
                                 key={book.uuid}
                                 id={book.uuid}
                                 title={book.name}
                                 author={book.author}
+                                date={book.createDate}
                                 description={book.description.slice(0, 120)}
-                                deleteBookId={deleteBookId}
-                                deleteGetBook={deleteGetBook}
-                                deleteBook={deleteBook}
-                                showModalDelete={this.props.showModal}
-                                getBook={this.props.getBook}
+                                showModal={showModal}
                             />
                         ))}
 
@@ -65,23 +47,20 @@ export class BookList extends Component {
                     {type === "create" && (
                         <BookAddModal
                             visible={true}
-                            addBook={this.props.addBook}
-                            closeModal={this.props.closeModal}
-                            handleSubmitCreate={this.props.handleSubmitCreate}
                             loading={loadingModal}
+                            addBook={addBook}
+                            closeModal={closeModal}
                         />
                     )}
                     {type === "edit" && (
                         <BookEditModal
                             visible={true}
-                            closeModal={this.props.closeModal}
-                            bookEdit={bookEdit}  // <------
-                            handleSubmitEdit={this.handleSubmit}
                             loading={loadingModal}
-                            initialValue={book}
                             id={id}
                             updateBook={updateBook}
-                            getBookData={this.props.getBookData}
+                            getBookData={getBookData}
+                            bookEditData={bookEditData}
+                            closeModal={closeModal}
                         />
                     )}
                     {type === "delete" && (
@@ -89,10 +68,8 @@ export class BookList extends Component {
                             id={id}
                             visible={true}
                             loading={loadingModal}
-                            handleDelete={this.props.handleDelete}
                             closeModal={this.props.closeModal}
                             deleteBook={deleteBook}
-                            deleteBookId={deleteBookId}
                         />
                     )}
                 </Spin>}
@@ -102,29 +79,23 @@ export class BookList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    type: state.modalReducer.type,
     bookList: state.booksReducer.books,
-    deleteBookId: state.booksReducer.book,
-    book: state.booksReducer.book,
-    id: state.modalReducer.data.id,
+    loadingList: state.booksReducer.loading,
+    type: state.modalReducer.type,
     loadingModal: state.modalReducer.loading,
-    bookEdit: state.modalReducer.data,
-    loadingList: state.booksReducer.loading
+    id: state.modalReducer.data.id,
+    bookEditData: state.modalReducer.data,
+    loadingDetails: state.bookReducer.loading
 });
 
 const mapDispatchToProps = {
     fetchBooks: getBooksThunk,
+    addBook: addBookThunk,
+    deleteBook: deleteBookByIdThunk,
+    updateBook: updateBookThunk,
+    getBookData: getBookModalDataThunk,
     showModal: modalBookShowAction,
     closeModal: modalBookCloseAction,
-    updateBook: updateBookThunk,
-    deleteGetBook: deleteBookGetDataAction,
-    deleteBook: deleteBookByIdThunk,
-    getBook: modalBookShowAction,
-    addBook: addBookThunk,
-    getBookData: getBookModalDataThunk,
-
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);

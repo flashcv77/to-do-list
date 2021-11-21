@@ -1,23 +1,22 @@
 import React from 'react'
 import { Input } from 'antd'
-import { StyledTextArea } from './styled'
+import { StyledInput } from './styled'
 
-export const MyTextArea = (props) => {
-    const { name } = props.input;
+export const MyField = (props) => {
+    const { name } = props.input
     const { allowClear } = props;
     return (
         <>
-            <StyledTextArea>
+            <StyledInput>
                 <label for={name}>{name}</label>
-                <Input.TextArea
-                    rows={4}
+                <Input
                     id={name}
                     {...props.input}
                     allowClear={allowClear}
                 />
-            </StyledTextArea>
+            </StyledInput>
         </>
     );
 }
 
-export default MyTextArea;
+export default MyField;

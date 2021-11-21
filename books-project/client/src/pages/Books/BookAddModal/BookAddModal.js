@@ -1,9 +1,9 @@
 import React from 'react'
 import { Modal, Button, Spin } from 'antd';
-import MyForm from './MyForm'
+import MyForm from '../MyForm'
 
 export const BookAddModal = (props) => {
-    const { visible, loading, addBook, closeModal, handleSubmitCreate } = props;
+    const { visible, loading, addBook, closeModal } = props;
 
     const onSubmit = (bookObj, form) => {
         const book = {
@@ -16,7 +16,6 @@ export const BookAddModal = (props) => {
 
     return (
         <>
-
             <Modal
                 visible={visible}
                 title="Create book"
@@ -39,7 +38,6 @@ export const BookAddModal = (props) => {
                         key="submit"
                         type="primary"
                         loading={loading}
-
                     >
                         Submit
                     </Button>,
@@ -47,12 +45,10 @@ export const BookAddModal = (props) => {
             >
                 {<Spin spinning={loading} tip="Loading...">
                     <MyForm
-                        closeModal={closeModal}
                         handleOnSubmit={onSubmit}
                     />
                 </Spin>}
             </Modal>
-
         </>
     );
 }

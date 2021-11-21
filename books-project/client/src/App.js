@@ -22,12 +22,6 @@ function App() {
               padding: '0 50px',
               minHeight: 'calc(100vh - 134px)',
               backgroundColor: '#feffb8',
-              // backgroundImage: `url(${homepageImg})`,
-              // backgroundImage: `url(${homepageImg2})`,
-              // backgroundRepeat: 'repeat',
-              // filter: 'grayscale(100%)',
-              // // opacity: '0.1'
-              // boxShadow: 'inset 0px 0px 277px 3px #4c3f37',
             }}>
 
             <Switch>

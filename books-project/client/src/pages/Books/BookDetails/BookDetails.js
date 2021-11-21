@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { getBookDetailsThunk } from "../thunks/bookThunk";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import moment from "moment";
 
 class BookDetails extends React.Component {
@@ -13,35 +13,32 @@ class BookDetails extends React.Component {
     }
 
     render() {
-        const { book } = this.props.bookData;
+        const { book, loading } = this.props.bookData;
         return (
             <>
-                <Link to={"/books"}>
-                    <Button className="margin30px" type="primary">Go back</Button>
-                </Link>
-                <h1>{book.name}</h1>
-                <p>{book.description}</p>
-                <hr />
-                <p>{book.author}</p>
-                <hr/>
-                <p>{moment(book.createDate).format('ll')}</p>
-
+                {<Spin spinning={loading} tip="Loading...">
+                    <Link to={"/books"}>
+                        <Button className="margin30px" type="primary">Go back</Button>
+                    </Link>
+                    <h1>{book.name}</h1>
+                    <p>{book.description}</p>
+                    <hr />
+                    <p>{book.author}</p>
+                    <hr />
+                    <p>{moment(book.createDate).format('ll')}</p>
+                </Spin>}
             </>
         );
     }
 }
 
-const mapStateToProps = (state) => {
-    console.log(state);
-    return {
-        bookData: state.bookReducer
-    }
-}
+const mapStateToProps = (state) => ({
+    bookData: state.bookReducer,
+    loading: state.bookReducer.loading
+})
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getBookDetails: (id) => { dispatch(getBookDetailsThunk(id)) }
-    }
+const mapDispatchToProps = {
+    getBookDetails: getBookDetailsThunk
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookDetails);

@@ -28,7 +28,11 @@ const modalReducer = (state = initialState, action) => {
         case MODAL_BOOK_CLOSE:
             return initialState;
         case GET_BOOK_FOR_EDIT:
-            return { ...state, data: action.payload, loading: false };
+            return {
+                ...state,
+                data: action.payload,
+                loading: false
+            };
         default:
             return state;
     }

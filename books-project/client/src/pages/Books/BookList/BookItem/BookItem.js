@@ -5,24 +5,17 @@ import cardIcon from '../../../../assets/images/card_icon.png'
 import { StyledAvatarWrapper, StyledDropDownWrapper } from "./styled";
 import { DeleteOutlined, FolderOpenOutlined, EditOutlined, DownOutlined } from '@ant-design/icons';
 import dropDownImg from '../../../../assets/images/dropdownImg.png'
+import moment from "moment";
 
 const { Meta } = Card;
 
 export class BookItem extends React.Component {
 
-  handleUpdateBook = (id, bookObj) => {
-    this.props.updateBook(id, bookObj);
-  }
-
-  handleMenuClick = (event) => {
-  }
-
   render() {
-    const { getBook, book, id, title, description, author, showModalDelete } = this.props;
+    const { id, title, description, author, date, showModal } = this.props;
 
     return (
       <>
-
         <Card
           className="margin30px boxShadow"
           style={{
@@ -38,22 +31,25 @@ export class BookItem extends React.Component {
             }}>
             <Dropdown
               overlay={
-                <Menu
-                  onClick={this.handleMenuClick}           >
-                  <Menu.Item key="1"
-                    icon={<FolderOpenOutlined />} >
+                <Menu>
+                  <Menu.Item
+                    key="1"
+                    icon={<FolderOpenOutlined />}
+                  >
                     <NavLink to={`/books/${id}`}>
                       Open
                     </NavLink>
                   </Menu.Item>
-                  <Menu.Item key="2" onClick={() => {
-                    getBook('edit', book.uuid)
-
-                  }} icon={<EditOutlined />}>
+                  <Menu.Item
+                    key="2"
+                    onClick={() => { showModal('edit', id) }}
+                    icon={<EditOutlined />}
+                  >
                     Edit
                   </Menu.Item>
-                  <Menu.Item key="3"
-                    onClick={() => showModalDelete("delete", book.uuid)}
+                  <Menu.Item
+                    key="3"
+                    onClick={() => showModal('delete', id)}
                     icon={<DeleteOutlined />}
                   >
                     Delete
@@ -61,8 +57,11 @@ export class BookItem extends React.Component {
                 </Menu>
               }
               trigger={['click']}>
-              <div className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                <img src={dropDownImg} width="15" alt="dropdown" /> <DownOutlined />
+              <div
+                className="ant-dropdown-link"
+                onClick={e => e.preventDefault()}>
+                <img src={dropDownImg} width="15" alt="dropdown" />
+                <DownOutlined />
               </div>
             </Dropdown>
           </StyledDropDownWrapper>
@@ -79,16 +78,14 @@ export class BookItem extends React.Component {
             }}
           />
           <div>{author}</div>
+          <div>{moment(date).format('ll')}</div>
           <NavLink to={`/books/${id}`}>
             <Button type="default">Details</Button>
           </NavLink>
-
         </Card>
-
       </>
     )
   }
-
 }
 
 export default BookItem;

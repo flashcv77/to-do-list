@@ -21,4 +21,3 @@ export const StyledAvatarWrapper = styled.div
     position: absolute;
     `
 
-  

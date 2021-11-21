@@ -1,15 +1,14 @@
 import { Button, Modal, Spin } from "antd";
 import React, { useEffect } from "react";
-// import EditForm from "./EditForm";
-import MyForm from "../BookAddModal/MyForm/MyForm";
+import MyForm from "../MyForm";
 
 export const BookEditModal = (props) => {
-    const { visible, loading, closeModal, bookEdit, handleSubmitEdit, initialValue, updateBook, getBookData, id } = props;
-    // console.log(loading, "is loading", visible, "is visible");
-    useEffect(() => {
+    const { visible, loading, id, updateBook, getBookData, bookEditData, closeModal } = props;
 
+    useEffect(() => {
         getBookData(id)
     }, [])
+
     const onSubmit = (event) => {
         const id = event.uuid;
         const book = {
@@ -21,7 +20,6 @@ export const BookEditModal = (props) => {
     }
     return (
         <>
-            {/* {<Spin spinning={loading} tip="Loading..."> */}
             <Modal
                 visible={visible}
                 title="Update book"
@@ -37,7 +35,6 @@ export const BookEditModal = (props) => {
                         Return
                     </Button>,
                     <Button
-                        // for="form"
                         form="form"
                         htmlType="form"
                         className="ant-btn ant-btn-primary"
@@ -51,14 +48,11 @@ export const BookEditModal = (props) => {
                 {<Spin spinning={loading} tip="Loading...">
                     <MyForm
                         form="form"
-                        initialValue={bookEdit}
-                        updateBook={updateBook}
-                        closeModal={closeModal}
+                        initialValues={bookEditData}
                         handleOnSubmit={onSubmit}
                     />
                 </Spin>}
             </Modal>
-            {/* </Spin>} */}
         </>
     )
 }
