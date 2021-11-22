@@ -1,1 +1,2 @@
-export {default} from './BookAddModal'
+/* eslint-disable no-restricted-exports */
+export { default } from './BookAddModal';

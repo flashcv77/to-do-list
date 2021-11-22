@@ -1,1 +1,1 @@
-export { default } from './BookEditModal'
+export { default } from './BookEditModal';

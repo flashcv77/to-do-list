@@ -1,29 +1,30 @@
-import React from 'react'
-import { Input } from 'antd'
-import { StyledInput } from './styled'
+import React from 'react';
+import { Input } from 'antd';
 import PropTypes from 'prop-types';
+import { StyledInput } from './styled';
 
 export const MyField = (props) => {
-    const { name } = props.input
-    const { allowClear } = props;
-    return (
-        <>
-            <StyledInput>
-                <label for={name}>{name}</label>
-                <Input
-                    id={name}
-                    {...props.input}
-                    allowClear={allowClear}
-                />
-            </StyledInput>
-        </>
-    );
-}
+  const { input } = props;
+  const { name } = input;
+  const { allowClear } = props;
+  return (
+    <StyledInput>
+      <label htmlFor={name}>{name}</label>
+      <Input
+        id={name}
+        {...input}
+        allowClear={allowClear}
+      />
+    </StyledInput>
+  );
+};
 
 MyField.propTypes = {
-    allowClear: PropTypes.bool,
+  allowClear: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  input: PropTypes.shape({
     name: PropTypes.string,
-    input: PropTypes.object,
-}
+  }).isRequired,
+};
 
 export default MyField;

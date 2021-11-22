@@ -1,34 +1,34 @@
-import React from 'react'
-import { MyField } from './MyField/MyField';
-import { Form, Field } from 'react-final-form'
-import MyTextArea from './MyTextArea';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Form, Field } from 'react-final-form';
+import { MyField } from './MyField/MyField';
+import MyTextArea from './MyTextArea';
 
-const MyForm = ({ initialValues, handleOnSubmit }) => {
-    return (
-        <>
-            <Form
-                initialValues={initialValues || {}}
-                id="form"
-                onSubmit={handleOnSubmit}
-                render={({ handleSubmit, form, submitting, pristine }) => (
-                    <form onSubmit={handleSubmit} id="form">
-                        <Field name="name" placeholder="Name" component={MyField} allowClear
-                        />
-                        <Field name="author" placeholder="Author" component={MyField} allowClear
-                        />
-                        <Field name="description" placeholder="description" component={MyTextArea} allowClear
-                        />
-                    </form>
-                )}
-            />
-        </>
-    );
-}
+const MyForm = (props) => {
+  const { initialValues, handleOnSubmit } = props;
+  return (
+    <Form
+      initialValues={initialValues || {}}
+      id="form"
+      onSubmit={handleOnSubmit}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit} id="form">
+          <Field name="name" placeholder="Name" component={MyField} allowClear />
+          <Field name="author" placeholder="Author" component={MyField} allowClear />
+          <Field name="description" placeholder="description" component={MyTextArea} allowClear />
+        </form>
+      )}
+    />
+  );
+};
 
 MyForm.propTypes = {
-    initialValues: PropTypes.object,
-    handleOnSubmit: PropTypes.func,
-}
+  initialValues: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    author: PropTypes.string,
+  }).isRequired,
+  handleOnSubmit: PropTypes.func.isRequired,
+};
 
 export default MyForm;

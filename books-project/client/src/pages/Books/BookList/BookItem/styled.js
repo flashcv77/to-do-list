@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const StyledDropDownWrapper = styled.div
-    `
+export const StyledDropDownWrapper = styled.div`
     // display:flex;
     // justify-content: flex-end;
     font-weight: 5em;
@@ -16,8 +15,7 @@ export const StyledDropDownWrapper = styled.div
     }
     `
 
-export const StyledAvatarWrapper = styled.div
-    `
+export const StyledAvatarWrapper = styled.div`
     position: absolute;
     `
 

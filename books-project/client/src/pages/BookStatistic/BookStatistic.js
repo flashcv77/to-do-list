@@ -1,19 +1,21 @@
-import React from 'react'
+import React from 'react';
 
 import { Table } from 'antd';
 import { connect } from 'react-redux';
-import { getBooksThunk } from '../Books/thunks/booksThunk';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import { getBooksThunk } from '../Books/thunks/booksThunk';
 
 class BookStatistic extends React.Component {
   componentDidMount() {
-    this.props.fetchBooks()
+    const { fetchBooks } = this.props;
+    fetchBooks();
   }
 
   render() {
-    const books = this.props.bookList;
-    const loading = this.props.loadingList;
+    const { bookList, loadingList } = this.props;
+    const books = bookList;
+    const loading = loadingList;
     const columns = [
 
       {
@@ -52,30 +54,35 @@ class BookStatistic extends React.Component {
           multiple: 4,
         },
         render: (text) => (moment(text).format('ll')),
-      }
+      },
 
     ];
 
     return (
       <Table columns={columns} dataSource={books} loading={loading} />
     );
-
   }
-
 }
 
 const mapStateToProps = (state) => ({
   bookList: state.booksReducer.books,
-  loadingList: state.booksReducer.loading
+  loadingList: state.booksReducer.loading,
 });
 
 const mapDispatchToProps = {
   fetchBooks: getBooksThunk,
-}
+};
 
 BookStatistic.propTypes = {
-  bookList: PropTypes.object,
-  loadingList: PropTypes.bool,
-}
+  bookList: PropTypes.arrayOf(PropTypes.shape({
+    uuid: PropTypes.string,
+    name: PropTypes.string,
+    author: PropTypes.string,
+    description: PropTypes.string,
+    createDate: PropTypes.string,
+  })).isRequired,
+  loadingList: PropTypes.bool.isRequired,
+  fetchBooks: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookStatistic);

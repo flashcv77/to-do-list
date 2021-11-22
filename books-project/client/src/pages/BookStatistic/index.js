@@ -1,1 +1,1 @@
-export {default} from './BookStatistic'
+export { default } from './BookStatistic';

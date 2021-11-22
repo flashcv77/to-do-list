@@ -1,7 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-export const StyledLogoBlock = styled.div
-    `
+export const StyledLogoBlock = styled.div`
     display: block;
     color:white;
     font-size: 1.5em;
@@ -10,11 +9,9 @@ export const StyledLogoBlock = styled.div
     height: 62px;
     line-height: 62px;
     margin-right: 5px;
-    `
+    `;
 
-export const StyledFooterWrapper = styled.div
-    `
+export const StyledFooterWrapper = styled.div`
     height: 200px;
     background-color:#001529;
-
-    `
+    `;

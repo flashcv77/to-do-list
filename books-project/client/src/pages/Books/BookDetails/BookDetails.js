@@ -1,50 +1,70 @@
-import React from "react";
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from "react-redux";
-import { getBookDetailsThunk } from "../thunks/bookThunk";
-import { Button, Spin } from "antd";
-import moment from "moment";
+import { connect } from 'react-redux';
+import { Button, Spin } from 'antd';
+import moment from 'moment';
 import PropTypes from 'prop-types';
+import { getBookDetailsThunk } from '../thunks/bookThunk';
 
 class BookDetails extends React.Component {
+  componentDidMount() {
+    const { match } = this.props;
+    const { params } = match;
+    const { id } = params;
+    const getBookDetails = this.props;
+    getBookDetails(id);
+  }
 
-    componentDidMount() {
-        const { id } = this.props.match.params;
-        this.props.getBookDetails(id);
-    }
-
-    render() {
-        const { book, loading } = this.props.bookData;
-        return (
-            <>
-                {<Spin spinning={loading} tip="Loading...">
-                    <Link to={"/books"}>
-                        <Button className="margin30px" type="primary">Go back</Button>
-                    </Link>
-                    <h1>{book.name}</h1>
-                    <p>{book.description}</p>
-                    <hr />
-                    <p>{book.author}</p>
-                    <hr />
-                    <p>{moment(book.createDate).format('ll')}</p>
-                </Spin>}
-            </>
-        );
-    }
+  render() {
+    const { book, loading } = this.props;
+    return (
+      <Spin
+        spinning={loading}
+        tip="Loading..."
+      >
+        <Link to="/books">
+          <Button className="margin30px" type="primary">Go back</Button>
+        </Link>
+        <h1>{book.name}</h1>
+        <p>{book.description}</p>
+        <hr />
+        <p>{book.author}</p>
+        <hr />
+        <p>{moment(book.createDate).format('ll')}</p>
+      </Spin>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
-    bookData: state.bookReducer,
-    loading: state.bookReducer.loading
-})
+  book: state.bookReducer.book,
+  loading: state.bookReducer.loading,
+});
 
 const mapDispatchToProps = {
-    getBookDetails: getBookDetailsThunk
-}
+  getBookDetails: getBookDetailsThunk,
+};
 
 BookDetails.propTypes = {
-    book: PropTypes.object,
-    loading: PropTypes.bool,
-}
+  book: PropTypes.shape({
+    uuid: PropTypes.string,
+    name: PropTypes.string,
+    author: PropTypes.string,
+    description: PropTypes.string,
+    createDate: PropTypes.string,
+  }),
+
+  loading: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
+
+BookDetails.defaultProps = {
+  book: {},
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookDetails);
