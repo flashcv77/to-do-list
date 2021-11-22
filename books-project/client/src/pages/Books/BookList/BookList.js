@@ -8,6 +8,7 @@ import BookDeleteModal from "../BookDeleteModal/BookDeleteModal";
 import { getBooksThunk, updateBookThunk, addBookThunk, deleteBookByIdThunk, getBookModalDataThunk } from "../thunks/booksThunk"
 import { modalBookCloseAction, modalBookShowAction } from '../actions/books.actions';
 import PropTypes from 'prop-types';
+import { createStructuredSelector } from "reselect";
 
 export class BookList extends Component {
     componentDidMount() {
@@ -89,6 +90,10 @@ const mapStateToProps = (state) => ({
     bookEditData: state.modalReducer.data,
     loadingDetails: state.bookReducer.loading
 });
+// const mapState = createStructuredSelector(selectors: {
+//     selectModalLoading,
+
+// })
 
 const mapDispatchToProps = {
     fetchBooks: getBooksThunk,
