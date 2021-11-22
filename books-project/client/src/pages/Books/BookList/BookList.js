@@ -8,13 +8,13 @@ import BookDeleteModal from "../BookDeleteModal/BookDeleteModal";
 import { getBooksThunk, updateBookThunk, addBookThunk, deleteBookByIdThunk, getBookModalDataThunk } from "../thunks/booksThunk"
 import { modalBookCloseAction, modalBookShowAction } from '../actions/books.actions';
 import PropTypes from 'prop-types';
-import { createStructuredSelector } from "reselect";
-
+import * as selectors from '../selectors/books.selectors'
+ 
 export class BookList extends Component {
     componentDidMount() {
         this.props.fetchBooks();
     }
-
+ 
     render() {
         const { bookList, loadingList, type, loadingModal, id, bookEditData, addBook, deleteBook, updateBook, getBookData, showModal, closeModal,
         } = this.props;
@@ -22,7 +22,7 @@ export class BookList extends Component {
             <div className="site-card-wrapper">
                 <h1>Books</h1>
                 {/*TODO move create => MODAL_TYPES.CREATE
-                const MODAL_TYPES = { 
+                const MODAL_TYPES = {
                     CREATE: 'CREATE'
                  }
                 */}
@@ -33,9 +33,8 @@ export class BookList extends Component {
                     <Row className="flexWrapWrap flexJustifyCenter">
                         {!bookList.length && <Empty />}
                         {bookList.map((book) => (
-
+ 
                             <BookItem
-                                loading={this.props.loadingDetails}
                                 key={book.uuid}
                                 id={book.uuid}
                                 title={book.name}
@@ -45,7 +44,7 @@ export class BookList extends Component {
                                 showModal={showModal}
                             />
                         ))}
-
+ 
                     </Row>
                     {type === "create" && (
                         <BookAddModal
@@ -80,21 +79,22 @@ export class BookList extends Component {
         );
     }
 }
-
+ 
 const mapStateToProps = (state) => ({
-    bookList: state.booksReducer.books,
-    loadingList: state.booksReducer.loading,
-    type: state.modalReducer.type,
-    loadingModal: state.modalReducer.loading,
-    id: state.modalReducer.data.id,
-    bookEditData: state.modalReducer.data,
-    loadingDetails: state.bookReducer.loading
+    // bookList: state.booksReducer.books,
+    // loadingList: state.booksReducer.loading,
+    // type: state.modalReducer.type,
+    // loadingModal: state.modalReducer.loading,
+    // id: state.modalReducer.data.id,
+    // bookEditData: state.modalReducer.data,
+    bookList: selectors.selectBookList(state),
+    loadingList: selectors.selectBooksLoading(state),
+    type: selectors.selectModalType(state),
+    loadingModal: selectors.selectModalLoading(state),
+    id: selectors.selectModalId(state),
+    bookEditData: selectors.selectModalData(state),
 });
-// const mapState = createStructuredSelector(selectors: {
-//     selectModalLoading,
-
-// })
-
+ 
 const mapDispatchToProps = {
     fetchBooks: getBooksThunk,
     addBook: addBookThunk,
@@ -104,7 +104,7 @@ const mapDispatchToProps = {
     showModal: modalBookShowAction,
     closeModal: modalBookCloseAction,
 }
-
+ 
 BookList.propTypes = {
     bookList: PropTypes.array,
     loadingList: PropTypes.bool,
@@ -119,6 +119,6 @@ BookList.propTypes = {
     showModal: PropTypes.func,
     closeModal: PropTypes.func
 }
-
+ 
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);
-
+ 
