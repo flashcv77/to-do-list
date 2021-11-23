@@ -1,7 +1,7 @@
 export const MODAL_TYPES = {
-  CREATE: 'CREATE',
-  EDIT: 'EDIT',
-  DELETE: 'DELETE',
+  CREATE: 'create',
+  EDIT: 'edit',
+  DELETE: 'delete',
 };
 
 export default MODAL_TYPES;

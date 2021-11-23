@@ -12,13 +12,12 @@ export const BookEditModal = (props) => {
   }, []);
 
   const onSubmit = (event) => {
-    const { uuid } = event.uuid;
     const book = {
       name: event.name,
       author: event.author,
       description: event.description,
     };
-    updateBook(uuid, book);
+    updateBook(event.uuid, book);
   };
   return (
     <Modal
