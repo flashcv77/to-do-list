@@ -22,10 +22,14 @@ export const MyTextArea = (props) => {
 
 MyTextArea.propTypes = {
   allowClear: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   input: PropTypes.shape({
     name: PropTypes.string,
   }).isRequired,
+};
+
+MyTextArea.defaultProps = {
+  name: '',
 };
 
 export default MyTextArea;

@@ -21,10 +21,13 @@ export const MyField = (props) => {
 
 MyField.propTypes = {
   allowClear: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   input: PropTypes.shape({
     name: PropTypes.string,
   }).isRequired,
+};
+MyField.defaultProps = {
+  name: '',
 };
 
 export default MyField;

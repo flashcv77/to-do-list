@@ -38,7 +38,7 @@ export const BookItem = (props) => {
           overlay={(
             <Menu>
               <Menu.Item
-                key="1"
+                key="open"
                 icon={<FolderOpenOutlined />}
               >
                 <NavLink to={`/books/${id}`}>
@@ -46,14 +46,14 @@ export const BookItem = (props) => {
                 </NavLink>
               </Menu.Item>
               <Menu.Item
-                key="2"
+                key="edit"
                 onClick={() => { showModal('edit', id); }}
                 icon={<EditOutlined />}
               >
                 Edit
               </Menu.Item>
               <Menu.Item
-                key="3"
+                key="delete"
                 onClick={() => showModal('delete', id)}
                 icon={<DeleteOutlined />}
               >

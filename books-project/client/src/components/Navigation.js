@@ -10,6 +10,7 @@ class Navigation extends React.Component {
     return (
       <div className="flexDisplayFlex">
         <NavLink
+          key="homelogo"
           exact
           to="/"
         >
@@ -26,24 +27,40 @@ class Navigation extends React.Component {
           onClick={this.handleClick}
           className="flexJustifyEnd flexFlex1"
         >
-          <NavLink exact to="/" activeClassName="activeNavLink">
+          <NavLink
+            key="home"
+            exact
+            to="/"
+            activeClassName="activeNavLink"
+          >
             <Menu.Item
+              key="menuhome"
               icon={<HomeOutlined />}
             >
               Home
             </Menu.Item>
           </NavLink>
 
-          <NavLink to="/books" activeClassName="activeNavLink">
+          <NavLink
+            key="books"
+            to="/books"
+            activeClassName="activeNavLink"
+          >
             <Menu.Item
+              key="menubooks"
               icon={<ReadOutlined />}
             >
               Books
             </Menu.Item>
           </NavLink>
 
-          <NavLink to="/statistic" activeClassName="activeNavLink">
+          <NavLink
+            key="statistic"
+            to="/statistic"
+            activeClassName="activeNavLink"
+          >
             <Menu.Item
+              key="menustatistic"
               icon={<BarChartOutlined />}
             >
               Statistic

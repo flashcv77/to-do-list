@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 
 import { Table } from 'antd';
@@ -21,7 +22,7 @@ class BookStatistic extends React.Component {
       {
         title: 'Name',
         dataIndex: 'name',
-        key: 'name',
+        key: 'nameTable',
         sorter: {
           compare: (a, b) => a.name - b.name,
           multiple: 1,
@@ -29,7 +30,7 @@ class BookStatistic extends React.Component {
       },
       {
         title: 'Author',
-        key: 'author',
+        key: 'authorTable',
         dataIndex: 'author',
         sorter: {
           compare: (a, b) => a.author - b.author,
@@ -39,7 +40,7 @@ class BookStatistic extends React.Component {
       {
         title: 'Description',
         dataIndex: 'description',
-        key: 'description',
+        key: 'descriptionTable',
         sorter: {
           compare: (a, b) => a.descruption - b.description,
           multiple: 3,
@@ -47,7 +48,7 @@ class BookStatistic extends React.Component {
       },
       {
         title: 'Date of create',
-        key: 'createDate',
+        key: 'createDateTable',
         dataIndex: 'createDate',
         sorter: {
           compare: (a, b) => a.createDate - b.createDate,
@@ -59,7 +60,12 @@ class BookStatistic extends React.Component {
     ];
 
     return (
-      <Table columns={columns} dataSource={books} loading={loading} />
+      <Table
+        rowkey={(books) => books.uuid}
+        columns={columns}
+        dataSource={books}
+        loading={loading}
+      />
     );
   }
 }

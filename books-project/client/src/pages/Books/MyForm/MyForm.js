@@ -27,8 +27,12 @@ MyForm.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
     author: PropTypes.string,
-  }).isRequired,
+  }),
   handleOnSubmit: PropTypes.func.isRequired,
+};
+
+MyForm.defaultProps = {
+  initialValues: {},
 };
 
 export default MyForm;

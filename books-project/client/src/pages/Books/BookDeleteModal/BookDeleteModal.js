@@ -26,6 +26,7 @@ export const BookDeleteModal = ({
         Cancel
       </Button>,
       <Button
+        key="deletebook"
         loading={loading}
         className="ant-btn ant-btn-danger"
         onClick={() => deleteBook(id)}

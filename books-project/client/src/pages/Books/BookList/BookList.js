@@ -13,6 +13,7 @@ import {
 } from '../thunks/booksThunk';
 import { modalBookCloseAction, modalBookShowAction } from '../actions/books.actions';
 import * as selectors from '../selectors/books.selectors';
+import { MODAL_TYPES } from '../modal-types/books.modal-types';
 
 export class BookList extends Component {
   componentDidMount() {
@@ -38,12 +39,6 @@ export class BookList extends Component {
     return (
       <div className="site-card-wrapper">
         <h1>Books</h1>
-        {/*
-        TODO move create => MODAL_TYPES.CREATE
-                const MODAL_TYPES = {
-                    CREATE: 'CREATE'
-                 }
-                */}
         <Button type="primary" onClick={() => showModal('create')}>
           Create book
         </Button>
@@ -64,7 +59,7 @@ export class BookList extends Component {
             ))}
 
           </Row>
-          {type === 'create' && (
+          {type === MODAL_TYPES.CREATE && (
             <BookAddModal
               visible
               loading={loadingModal}
@@ -72,7 +67,7 @@ export class BookList extends Component {
               closeModal={closeModal}
             />
           )}
-          {type === 'edit' && (
+          {type === MODAL_TYPES.EDIT && (
             <BookEditModal
               visible
               loading={loadingModal}
@@ -83,7 +78,7 @@ export class BookList extends Component {
               closeModal={closeModal}
             />
           )}
-          {type === 'delete' && (
+          {type === MODAL_TYPES.DELETE && (
             <BookDeleteModal
               id={id}
               visible
@@ -123,7 +118,7 @@ BookList.propTypes = {
   loadingList: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
   loadingModal: PropTypes.bool.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   bookEditData: PropTypes.shape({
     name: PropTypes.string,
     author: PropTypes.string,
@@ -140,5 +135,6 @@ BookList.propTypes = {
 
 BookList.defaultProps = {
   bookList: [],
+  id: '',
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);
