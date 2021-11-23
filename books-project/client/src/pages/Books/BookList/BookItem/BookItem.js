@@ -41,7 +41,7 @@ export const BookItem = (props) => {
                 key="open"
                 icon={<FolderOpenOutlined />}
               >
-                <NavLink to={`/books/${id}`}>
+                <NavLink key="openLink" to={`/books/${id}`}>
                   Open
                 </NavLink>
               </Menu.Item>

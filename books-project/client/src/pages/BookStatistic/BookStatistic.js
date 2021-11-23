@@ -61,7 +61,7 @@ class BookStatistic extends React.Component {
 
     return (
       <Table
-        rowkey={(books) => books.uuid}
+        rowKey={(books) => books.uuid}
         columns={columns}
         dataSource={books}
         loading={loading}

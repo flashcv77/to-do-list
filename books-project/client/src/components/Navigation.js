@@ -9,63 +9,66 @@ class Navigation extends React.Component {
   render() {
     return (
       <div className="flexDisplayFlex">
-        <NavLink
+        {/* <NavLink
           key="homelogo"
           exact
           to="/"
-        >
-          <StyledLogoBlock>
-            <img src={booksLogo} alt="Books" height={52} />
-            <span className="paddingLeft10px">Books Library</span>
-          </StyledLogoBlock>
-        </NavLink>
+        > */}
+        <StyledLogoBlock>
+          <img src={booksLogo} alt="Books" height={52} />
+          <span className="paddingLeft10px">Books Library</span>
+        </StyledLogoBlock>
+        {/* </NavLink> */}
 
         <Menu
           mode="horizontal"
-          selectable={false}
+          // selectable={false}
+          selectable
           theme="dark"
           onClick={this.handleClick}
           className="flexJustifyEnd flexFlex1"
+          defaultSelectedKeys={['1']}
         >
-          <NavLink
-            key="home"
-            exact
-            to="/"
-            activeClassName="activeNavLink"
+
+          <Menu.Item
+            key="1"
+            icon={<HomeOutlined />}
           >
-            <Menu.Item
-              key="menuhome"
-              icon={<HomeOutlined />}
+            <NavLink
+              key="home"
+              exact
+              to="/"
+            // activeClassName="activeNavLink"
             >
               Home
-            </Menu.Item>
-          </NavLink>
+            </NavLink>
+          </Menu.Item>
 
-          <NavLink
-            key="books"
-            to="/books"
-            activeClassName="activeNavLink"
+          <Menu.Item
+            key="2"
+            icon={<ReadOutlined />}
           >
-            <Menu.Item
-              key="menubooks"
-              icon={<ReadOutlined />}
+            <NavLink
+              key="books"
+              to="/books"
+            // activeClassName="activeNavLink"
             >
               Books
-            </Menu.Item>
-          </NavLink>
+            </NavLink>
+          </Menu.Item>
 
-          <NavLink
-            key="statistic"
-            to="/statistic"
-            activeClassName="activeNavLink"
+          <Menu.Item
+            key="3"
+            icon={<BarChartOutlined />}
           >
-            <Menu.Item
-              key="menustatistic"
-              icon={<BarChartOutlined />}
+            <NavLink
+              key="statistic"
+              to="/statistic"
+            // activeClassName="activeNavLink"
             >
               Statistic
-            </Menu.Item>
-          </NavLink>
+            </NavLink>
+          </Menu.Item>
         </Menu>
       </div>
     );
