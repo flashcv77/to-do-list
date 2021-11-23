@@ -99,12 +99,6 @@ export class BookList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  // bookList: state.booksReducer.books,
-  // loadingList: state.booksReducer.loading,
-  // type: state.modalReducer.type,
-  // loadingModal: state.modalReducer.loading,
-  // id: state.modalReducer.data.id,
-  // bookEditData: state.modalReducer.data,
   bookList: selectors.selectBookList(state),
   loadingList: selectors.selectBooksLoading(state),
   type: selectors.selectModalType(state),
@@ -124,12 +118,17 @@ const mapDispatchToProps = {
 };
 
 BookList.propTypes = {
-  bookList: PropTypes.array,
+  bookList: PropTypes.arrayOf(PropTypes.object),
+  // bookList: PropTypes.shape({}),
   loadingList: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
   loadingModal: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
-  bookEditData: PropTypes.object,
+  bookEditData: PropTypes.shape({
+    name: PropTypes.string,
+    author: PropTypes.string,
+    description: PropTypes.string,
+  }).isRequired,
   addBook: PropTypes.func.isRequired,
   deleteBook: PropTypes.func.isRequired,
   updateBook: PropTypes.func.isRequired,
@@ -139,4 +138,7 @@ BookList.propTypes = {
   fetchBooks: PropTypes.func.isRequired,
 };
 
+BookList.defaultProps = {
+  bookList: [],
+};
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledDropDownWrapper = styled.div`
     // display:flex;
@@ -13,9 +13,8 @@ export const StyledDropDownWrapper = styled.div`
     :hover{
         cursor:pointer;
     }
-    `
+    `;
 
 export const StyledAvatarWrapper = styled.div`
     position: absolute;
-    `
-
+    `;

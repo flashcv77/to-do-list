@@ -11,7 +11,7 @@ class BookDetails extends React.Component {
     const { match } = this.props;
     const { params } = match;
     const { id } = params;
-    const getBookDetails = this.props;
+    const { getBookDetails } = this.props;
     getBookDetails(id);
   }
 
@@ -53,7 +53,7 @@ BookDetails.propTypes = {
     description: PropTypes.string,
     createDate: PropTypes.string,
   }),
-
+  getBookDetails: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
   match: PropTypes.shape({

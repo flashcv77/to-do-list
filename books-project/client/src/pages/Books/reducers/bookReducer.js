@@ -6,7 +6,7 @@ const detailsState = {
   error: '',
 };
 
-const bookReducer = (action, state = detailsState) => {
+const bookReducer = (state = detailsState, action = '') => {
   switch (action.type) {
     case BOOK_DETAILS_FETCH_SUCCESS: {
       return {

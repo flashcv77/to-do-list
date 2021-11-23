@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import {
   Card, Avatar, Button, Menu, Dropdown,
@@ -65,6 +66,8 @@ export const BookItem = (props) => {
           <div
             className="ant-dropdown-link"
             onClick={(e) => e.preventDefault()}
+            role="button"
+            tabIndex={0}
           >
             <img src={dropDownImg} width="15" alt="dropdown" />
             <DownOutlined />

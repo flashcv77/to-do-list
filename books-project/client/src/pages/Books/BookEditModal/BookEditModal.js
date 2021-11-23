@@ -69,7 +69,7 @@ BookEditModal.propTypes = {
     name: PropTypes.string,
     author: PropTypes.string,
     description: PropTypes.string,
-  }),
+  }).isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 

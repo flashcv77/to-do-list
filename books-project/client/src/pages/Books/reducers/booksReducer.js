@@ -10,7 +10,7 @@ const initialState = {
   book: {},
 };
 
-const booksReducer = (action, state = initialState) => {
+const booksReducer = (state = initialState, action = '') => {
   switch (action.type) {
     case BOOKS_FETCH_SUCCESS: {
       return {

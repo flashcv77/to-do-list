@@ -12,7 +12,7 @@ const initialState = {
   type: '',
 };
 
-const modalReducer = (action, state = initialState) => {
+const modalReducer = (state = initialState, action = '') => {
   switch (action.type) {
     case MODAL_BOOK_SHOW:
       return {
