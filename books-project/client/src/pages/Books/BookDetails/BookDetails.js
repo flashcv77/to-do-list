@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Button, Spin } from 'antd';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { getBookDetailsThunk } from '../thunks/bookThunk';
+import { bookDetailsFetchStartAction } from '../actions/books.actions';
+// import { getBookDetailsThunk } from '../thunks/bookThunk';
 
 class BookDetails extends React.Component {
   componentDidMount() {
@@ -42,7 +43,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getBookDetails: getBookDetailsThunk,
+  // getBookDetails: getBookDetailsThunk,
+  getBookDetails: bookDetailsFetchStartAction,
 };
 
 BookDetails.propTypes = {

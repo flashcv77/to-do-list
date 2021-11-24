@@ -1,11 +1,11 @@
-/* eslint-disable no-shadow */
 import React from 'react';
 
 import { Table } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { getBooksThunk } from '../Books/thunks/booksThunk';
+// import { getBooksThunk } from '../Books/thunks/booksThunk';
+import { booksFetchStartAction } from '../Books/actions/books.actions';
 
 class BookStatistic extends React.Component {
   componentDidMount() {
@@ -76,19 +76,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  fetchBooks: getBooksThunk,
+  // fetchBooks: getBooksThunk,
+  fetchBooks: booksFetchStartAction,
 };
 
 BookStatistic.propTypes = {
-  bookList: PropTypes.arrayOf(PropTypes.shape({
-    uuid: PropTypes.string,
-    name: PropTypes.string,
-    author: PropTypes.string,
-    description: PropTypes.string,
-    createDate: PropTypes.string,
-  })).isRequired,
+  bookList: PropTypes.arrayOf(PropTypes.object),
   loadingList: PropTypes.bool.isRequired,
   fetchBooks: PropTypes.func.isRequired,
 };
-
+BookStatistic.defaultProps = {
+  bookList: [],
+};
 export default connect(mapStateToProps, mapDispatchToProps)(BookStatistic);

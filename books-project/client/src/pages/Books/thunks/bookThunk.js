@@ -1,8 +1,9 @@
 import { message } from 'antd';
 import { getBookDetails } from '../../../api/books';
-import { bookDetailsFetchInProgressAction, bookDetailsFetchSuccesAction } from '../actions/books.actions';
+import { bookDetailsFetchInProgressAction, bookDetailsFetchReset, bookDetailsFetchSuccesAction } from '../actions/books.actions';
 
 export const getBookDetailsThunk = (id) => (dispatch) => {
+  dispatch(bookDetailsFetchReset());
   dispatch(bookDetailsFetchInProgressAction());
   getBookDetails(id)
     .then((response) => {

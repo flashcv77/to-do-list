@@ -8,10 +8,22 @@ import BookItem from './BookItem';
 import BookAddModal from '../BookAddModal';
 import { BookEditModal } from '../BookEditModal/BookEditModal';
 import { BookDeleteModal } from '../BookDeleteModal/BookDeleteModal';
+// import {
+//   // getBooksThunk,
+//   // updateBookThunk,
+//   // addBookThunk,
+//   // deleteBookByIdThunk,
+//   // getBookModalDataThunk,
+// } from '../thunks/booksThunk';
 import {
-  getBooksThunk, updateBookThunk, addBookThunk, deleteBookByIdThunk, getBookModalDataThunk,
-} from '../thunks/booksThunk';
-import { modalBookCloseAction, modalBookShowAction } from '../actions/books.actions';
+  addBookStartAction,
+  booksFetchStartAction,
+  deleteBookStartAction,
+  editBookStartAction,
+  getBookForEditStartAction,
+  modalBookCloseAction,
+  modalBookShowAction,
+} from '../actions/books.actions';
 import * as selectors from '../selectors/books.selectors';
 import { MODAL_TYPES } from '../modal-types/books.modal-types';
 
@@ -103,11 +115,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  fetchBooks: getBooksThunk,
-  addBook: addBookThunk,
-  deleteBook: deleteBookByIdThunk,
-  updateBook: updateBookThunk,
-  getBookData: getBookModalDataThunk,
+  // fetchBooks: getBooksThunk,
+  fetchBooks: booksFetchStartAction,
+  // addBook: addBookThunk,
+  addBook: addBookStartAction,
+  // deleteBook: deleteBookByIdThunk,
+  deleteBook: deleteBookStartAction,
+  // updateBook: updateBookThunk,
+  updateBook: editBookStartAction,
+  // getBookData: getBookModalDataThunk,
+  getBookData: getBookForEditStartAction,
   showModal: modalBookShowAction,
   closeModal: modalBookCloseAction,
 };
