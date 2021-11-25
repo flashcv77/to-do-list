@@ -48,8 +48,8 @@ export function* addBookSaga(action) {
     yield put(modalBookProgressAction());
     yield call(addBook, action.payload);
     yield put(modalBookSuccessAction());
-    yield call(message.success, 'The book has been added');
     yield put({ type: BOOKS_FETCH_START });
+    yield call(message.success, 'The book has been added');
   } catch (error) {
     yield put(modalBookErrorAction(error));
     yield call(message.error, 'Oops! Something went wrong');
@@ -65,8 +65,8 @@ export function* deleteBookSaga(action) {
     yield put(modalBookProgressAction());
     yield call(deleteBook, action.payload);
     yield put(modalBookSuccessAction());
-    yield call(message.success, 'The book has been removed');
     yield put({ type: BOOKS_FETCH_START });
+    yield call(message.success, 'The book has been removed');
   } catch (error) {
     yield put(modalBookErrorAction(error));
     yield call(message.error, 'Oops! Something went wrong');
@@ -82,8 +82,8 @@ export function* editBookSaga(action) {
     yield put(modalBookProgressAction());
     yield call(updateBook, action.payload.id, action.payload.data);
     yield put(modalBookSuccessAction());
-    yield call(message.success, 'The book has been updated');
     yield put({ type: BOOKS_FETCH_START });
+    yield call(message.success, 'The book has been updated');
   } catch (error) {
     yield put(modalBookErrorAction(error));
     yield call(message.error, 'Oops! Something went wrong');
