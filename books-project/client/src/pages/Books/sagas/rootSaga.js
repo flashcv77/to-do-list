@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
+import watcherGetBookSaga from './bookSaga';
 import {
   watcherGetBooksSaga,
-  watcherGetBookSaga,
   watcherAddBookSaga,
   watcherDeleteBookSaga,
   watcherEditBookSaga,
@@ -9,6 +9,12 @@ import {
 } from './booksSagas';
 
 export default function* rootSaga() {
-  // eslint-disable-next-line max-len
-  yield all([watcherGetBooksSaga(), watcherGetBookSaga(), watcherAddBookSaga(), watcherDeleteBookSaga(), watcherEditBookSaga(), watcherGetBookModalDataSaga()]);
+  yield all([
+    watcherGetBooksSaga(),
+    watcherGetBookSaga(),
+    watcherAddBookSaga(),
+    watcherDeleteBookSaga(),
+    watcherEditBookSaga(),
+    watcherGetBookModalDataSaga(),
+  ]);
 }

@@ -14,16 +14,11 @@ import {
 import {
   ADD_BOOK_START,
   BOOKS_FETCH_START,
-  BOOK_DETAILS_FETCH_START,
   DELETE_BOOK_START,
   EDIT_BOOK_START,
   GET_BOOK_FOR_EDIT_START,
 } from '../action-types/books.action-types';
 import {
-  bookDetailsFetchError,
-  bookDetailsFetchInProgressAction,
-  bookDetailsFetchReset,
-  bookDetailsFetchSuccesAction,
   booksFetchErrorAction,
   booksFetchInProgressAction,
   booksFetchSuccessAction,
@@ -40,7 +35,7 @@ function* getBooksSaga() {
     yield put(booksFetchSuccessAction(data));
   } catch (error) {
     yield put(booksFetchErrorAction(error));
-    yield call(message.error, 'Something went wrong');
+    yield call(message.error, 'Oops! Something went wrong');
   }
 }
 
@@ -48,31 +43,16 @@ export function* watcherGetBooksSaga() {
   yield takeLatest(BOOKS_FETCH_START, getBooksSaga);
 }
 
-function* getBookSaga(action) {
-  try {
-    yield put(bookDetailsFetchReset());
-    yield put(bookDetailsFetchInProgressAction());
-    const data = yield call(getBookDetails, action.payload);
-    yield put(bookDetailsFetchSuccesAction(data));
-  } catch (error) {
-    yield put(bookDetailsFetchError(error));
-    yield call(message.error, 'Something went wrong');
-  }
-}
-
-export function* watcherGetBookSaga() {
-  yield takeLatest(BOOK_DETAILS_FETCH_START, getBookSaga);
-}
-
 export function* addBookSaga(action) {
   try {
     yield put(modalBookProgressAction());
     yield call(addBook, action.payload);
     yield put(modalBookSuccessAction());
+    yield call(message.success, 'The book has been added');
     yield put({ type: BOOKS_FETCH_START });
   } catch (error) {
     yield put(modalBookErrorAction(error));
-    yield call(message.error, 'Something went wrong');
+    yield call(message.error, 'Oops! Something went wrong');
   }
 }
 
@@ -85,10 +65,11 @@ export function* deleteBookSaga(action) {
     yield put(modalBookProgressAction());
     yield call(deleteBook, action.payload);
     yield put(modalBookSuccessAction());
+    yield call(message.success, 'The book has been removed');
     yield put({ type: BOOKS_FETCH_START });
   } catch (error) {
     yield put(modalBookErrorAction(error));
-    yield call(message.error, 'Something went wrong');
+    yield call(message.error, 'Oops! Something went wrong');
   }
 }
 
@@ -101,10 +82,11 @@ export function* editBookSaga(action) {
     yield put(modalBookProgressAction());
     yield call(updateBook, action.payload.id, action.payload.data);
     yield put(modalBookSuccessAction());
+    yield call(message.success, 'The book has been updated');
     yield put({ type: BOOKS_FETCH_START });
   } catch (error) {
     yield put(modalBookErrorAction(error));
-    yield call(message.error, 'Something went wrong');
+    yield call(message.error, 'Oops! Something went wrong');
   }
 }
 
@@ -119,7 +101,7 @@ export function* getBookModalDataSaga(action) {
     yield put(getBookForEditAction(data));
   } catch (error) {
     yield put(modalBookErrorAction(error));
-    yield call(message.error, 'Something went wrong');
+    yield call(message.error, 'Oops! Something went wrong');
   }
 }
 
