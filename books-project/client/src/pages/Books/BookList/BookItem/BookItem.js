@@ -19,6 +19,9 @@ export const BookItem = (props) => {
   const {
     id, title, description, author, date, showModal,
   } = props;
+  console.log(date);
+  // console.log(typeof author, 'author');
+  // console.log(typeof description, 'description');
   return (
     <Card
       className="margin30px boxShadow"
@@ -98,10 +101,15 @@ export const BookItem = (props) => {
 BookItem.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  author: PropTypes.string,
   date: PropTypes.string.isRequired,
   showModal: PropTypes.func.isRequired,
+};
+
+BookItem.defaultProps = {
+  description: '',
+  author: '',
 };
 
 export default BookItem;

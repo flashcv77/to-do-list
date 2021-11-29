@@ -12,7 +12,7 @@ import {
 
 export const getBooksThunk = () => (dispatch) => {
   dispatch(booksFetchInProgressAction());
-  getBooks()
+  return getBooks()
     .then((response) => {
       const books = response.data;
       dispatch(booksFetchSuccessAction(books));

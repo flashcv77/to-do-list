@@ -28,7 +28,7 @@ import {
   modalBookSuccessAction,
 } from '../actions/books.actions';
 
-function* getBooksSaga() {
+export function* getBooksSaga() {
   try {
     yield put(booksFetchInProgressAction());
     const data = yield call(getBooks);

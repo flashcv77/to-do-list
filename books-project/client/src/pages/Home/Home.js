@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyledImgContainer } from './styled';
 
-const Home = () => (
+export const Home = () => (
   <StyledImgContainer>
-    <h1>Welcome to the Book club!</h1>
+    <h1 data-testid="welcome">Welcome to the Book club!</h1>
   </StyledImgContainer>
 );
 
