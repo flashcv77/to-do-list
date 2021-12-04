@@ -1,6 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Form } from 'react-final-form'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Form } from 'react-final-form';
+import { Button } from 'antd';
+import { StyledWizardFooter, StyledWizardForm, StyledWizardMain } from './styled';
 
 class Wizard extends React.Component {
   static propTypes = {
@@ -50,33 +52,61 @@ class Wizard extends React.Component {
     const activePage = React.Children.toArray(children)[page];
     const isLastPage = page === React.Children.count(children) - 2;
     const isSuccessPage = page === 2;
-    console.log(React.Children.count(children));
+    // console.log(React.Children.count(children));
+    console.log(this.state);
     return (
       <Form
         initialValues={values}
         validate={this.validate}
         onSubmit={this.handleSubmit}
       >
-        {({ handleSubmit, submitting, values }) => (
-          <form onSubmit={handleSubmit}>
-            {activePage}
-            <div className="buttons">
-              {!isSuccessPage && page > 0 && (
-                <button type="button" onClick={this.previous}>
-                  « Back
-                </button>
-              )}
-              {!isSuccessPage && !isLastPage && <button type="submit">Next »</button>}
-              {!isSuccessPage && isLastPage && (
-                <button type="submit" disabled={submitting}>
-                  Submit
-                </button>
-              )}
-            </div>
+        {({ handleSubmit, submitting, errors, values }) => {
+          console.log(errors);
+          return (
+            <>
+              <form id="form" onSubmit={handleSubmit}>
+                <StyledWizardForm>
+                  <StyledWizardMain>
+                    {activePage}
+                  </StyledWizardMain>
 
-            {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
-          </form>
-        )}
+                  <StyledWizardFooter>
+                    {!isSuccessPage && page > 0 && (
+                      <Button type="text" onClick={this.previous}>
+                        Back
+                      </Button>
+                    )}
+                    {!isSuccessPage && !isLastPage &&
+                      <Button
+                        // type="submit"
+                        type="text"
+                        // disabled={errors.email && errors.password && errors.confirm.password}
+                        // form="form"
+                        htmlType="form"
+                      >
+                        Next
+                      </Button>}
+
+                    {!isSuccessPage && isLastPage && (
+                      <Button
+                        // type="submit"
+                        type="text"
+                        disabled={submitting}
+                        // form="form"
+                        htmlType="form"
+                      // disabled={errors.email && errors.password && errors.confirm.password}
+                      >
+                        Submit
+                      </Button>
+                    )}
+
+                  </StyledWizardFooter>
+                </StyledWizardForm>
+                {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
+              </form>
+            </>
+          )
+        }}
       </Form>
     )
   }

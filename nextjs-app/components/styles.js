@@ -131,7 +131,7 @@ export default styled.div`
         margin-left: 10px;
         color: red;
         // font-weight: bold;
-        font-size: 10px;
+        // font-size: 10px;
       }
       & > button.remove {
         ${btnDanger};

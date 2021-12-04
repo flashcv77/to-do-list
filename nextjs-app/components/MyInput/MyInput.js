@@ -1,16 +1,18 @@
-import { TextField } from '@material-ui/core';
+// import { TextField } from '@material-ui/core';
+import { Input } from 'antd';
 import React from 'react';
 
 export default function MyInput(props) {
-  const { input, label, validate } = props;
+  const { input, label, validate, meta } = props;
   const { name } = input;
+  console.log(meta);
   return (
     <div>
-      <TextField
+      <Input
         id={name}
         {...input}
-        label={label}
         validate={validate}
+        bordered={false}
       />
     </div>
   );
