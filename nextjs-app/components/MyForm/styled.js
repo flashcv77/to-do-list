@@ -85,3 +85,23 @@ export const StyledSelectWrapper = styled.div`
        
     }
 `
+
+export const StyledGoHomeWrapper = styled.div`
+width: 100%;
+height: 100px;
+display: flex;
+justify-content: center;
+align-items: center;
+color: #1890ff;
+button{
+    border: 1px solid #1890ff;
+    color: #1890ff;
+}
+
+`
+
+export const StyledLabelWrapper = styled.div`
+color: #7E7F79;
+font-size: 16px;
+font-family: Arial,sans-serif;
+`

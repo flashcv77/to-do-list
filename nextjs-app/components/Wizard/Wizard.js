@@ -53,7 +53,7 @@ class Wizard extends React.Component {
     const isLastPage = page === React.Children.count(children) - 2;
     const isSuccessPage = page === 2;
     // console.log(React.Children.count(children));
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <Form
         initialValues={values}
@@ -77,7 +77,7 @@ class Wizard extends React.Component {
                         type="text"
                         htmlType="form"
                         className="nextButton"
-                      // disabled={!Object.keys(errors).length == 0}
+                      disabled={!Object.keys(errors).length === 0}
                       >
                         Next
                       </Button>}
@@ -88,7 +88,7 @@ class Wizard extends React.Component {
                         type="text"
                         // disabled={submitting}
                         htmlType="form"
-                      // disabled={!Object.keys(errors).length == 0}
+                      disabled={!Object.keys(errors).length === 0}
                       >
                         Submit
                       </Button>

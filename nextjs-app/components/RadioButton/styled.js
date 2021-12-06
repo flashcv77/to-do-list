@@ -34,4 +34,14 @@ export const StyledRadio = styled.div`
 export const StyleRadioButtonWrapper = styled.div`
 width: 118.8px;
 // height: 40px;
+
+  .ant-radio-button-wrapper{
+    span{
+      color: #d3d3d3;
+      font-size: 15px;
+      font-family: Arial,sans-serif;
+    }
+  } 
+
+
 `

@@ -4,12 +4,12 @@ import React from 'react'
 import { Field } from 'react-final-form'
 import Wizard from '../Wizard'
 import Link from 'next/link'
-import { Image, Progress } from 'antd'
+import { Button, Image, Progress } from 'antd'
 import moment from 'moment';
 import MyInput from '../MyInput'
 import { StyledDate, StyledInput, StyledDateContainer } from '../MyInput/styled'
 import RadioButton from '../RadioButton'
-import { StyledDateWrapper, StyledForm, StyledFormHeader, StyledFormMain, StyledRadioWrapper, StyledSelect, StyledSelectWrapper } from './styled'
+import { StyledDateWrapper, StyledForm, StyledFormHeader, StyledFormMain, StyledGoHomeWrapper, StyledLabelWrapper, StyledRadioWrapper, StyledSelect, StyledSelectWrapper } from './styled'
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -48,7 +48,7 @@ const MyForm = () => (
         >
           <Wizard.Page
             validate={values => {
-              console.log(values);
+              // console.log(values);
               const errors = {}
               if (values.hasOwnProperty('email')
                 && !values.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)
@@ -102,9 +102,7 @@ const MyForm = () => (
           </Wizard.Page>
           <Wizard.Page
             validate={values => {
-              const errors = {
-                date: "",
-              }
+              const errors = {}
               const dateMoment = moment(values.year + '-' + values.month + '-' + values.day);
               console.log(dateMoment.isValid() === false, dateMoment.isBetween('1000-01-01', '2022-01-01'));
               // if (dateMoment.isValid() === false && !dateMoment.isBetween('1000-01-01', '2022-01-01')) {
@@ -124,7 +122,9 @@ const MyForm = () => (
             <Progress percent={66} showInfo={false} />
             {/* <label>Email</label> */}
             <StyledDateWrapper>
-              <h3>DATE OF BIRTH</h3>
+              <StyledLabelWrapper>
+                <label>DATE OF BIRTH</label>
+              </StyledLabelWrapper>
               <StyledDateContainer>
                 <StyledDate>
                   <Field
@@ -165,7 +165,10 @@ const MyForm = () => (
               </StyledDateContainer>
             </StyledDateWrapper>
             <StyledRadioWrapper>
-              <h3>GENDER</h3>
+            <StyledLabelWrapper>
+                <label>GENDER</label>
+              </StyledLabelWrapper>
+              {/* <h3>GENDER</h3> */}
               <Field
                 name="gender"
                 component={RadioButton}
@@ -177,7 +180,10 @@ const MyForm = () => (
               <Error name="gender" />
             </StyledRadioWrapper>
             <StyledSelectWrapper>
-              <h3>WHERE DID YOU HEAR ABOUT IT?</h3>
+            <StyledLabelWrapper>
+                <label>WHERE DID YOU HEAR ABOUT IT?</label>
+              </StyledLabelWrapper>
+              {/* <h3>WHERE DID YOU HEAR ABOUT IT?</h3> */}
               <StyledSelect>
 
                 <Field
@@ -213,13 +219,27 @@ const MyForm = () => (
                 preview={false}
               />
             </div>
+            <StyledGoHomeWrapper>
+              <Link href="/">
+                <a>
+                  <Button
+                    // type="text"
+                    size='large'
+                  >
+                    Go to Dashboard
+                  </Button>
+                </a>
+              </Link>
+            </StyledGoHomeWrapper>
+
+
           </Wizard.Page>
         </Wizard>
       </StyledFormMain>
     </StyledForm>
-    <Link href="/">
+    {/* <Link href="/">
       <a>Back to home</a>
-    </Link>
+    </Link> */}
   </>
 )
 
