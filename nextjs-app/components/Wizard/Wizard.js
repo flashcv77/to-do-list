@@ -64,25 +64,20 @@ class Wizard extends React.Component {
           console.log(errors);
           return (
             <>
-              <form id="form" onSubmit={handleSubmit}>
+              <form id="form" onSubmit={handleSubmit} noValidate>
                 <StyledWizardForm>
                   <StyledWizardMain>
                     {activePage}
                   </StyledWizardMain>
 
-                  <StyledWizardFooter>
-                    {!isSuccessPage && page > 0 && (
-                      <Button type="text" onClick={this.previous}>
-                        Back
-                      </Button>
-                    )}
+                  {!isSuccessPage && <StyledWizardFooter>
+
                     {!isSuccessPage && !isLastPage &&
                       <Button
-                        // type="submit"
                         type="text"
-                        // disabled={errors.email && errors.password && errors.confirm.password}
-                        // form="form"
                         htmlType="form"
+                        className="nextButton"
+                      // disabled={!Object.keys(errors).length == 0}
                       >
                         Next
                       </Button>}
@@ -91,16 +86,20 @@ class Wizard extends React.Component {
                       <Button
                         // type="submit"
                         type="text"
-                        disabled={submitting}
-                        // form="form"
+                        // disabled={submitting}
                         htmlType="form"
-                      // disabled={errors.email && errors.password && errors.confirm.password}
+                      // disabled={!Object.keys(errors).length == 0}
                       >
                         Submit
                       </Button>
                     )}
+                    {!isSuccessPage && page > 0 && (
+                      <Button type="text" onClick={this.previous}>
+                        Back
+                      </Button>
+                    )}
 
-                  </StyledWizardFooter>
+                  </StyledWizardFooter>}
                 </StyledWizardForm>
                 {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
               </form>

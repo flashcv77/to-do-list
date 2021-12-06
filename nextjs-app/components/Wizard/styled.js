@@ -11,14 +11,15 @@ justify-content: center;
 `
 
 export const StyledWizardMain = styled.div`
-height: 410px;
+height: 396px;
 width: 396px;
-background-color: purple;
+// background-color: #f7e3e3;
 display: flex; 
 flex-direction: column;
 align-items: center;
+// border-bottom: 1px solid #d3d3d3;
 .ant-progress{
-  margin-bottom: 50px;
+  margin-bottom: 35px;
   .ant-progress-inner{
       border-radius:0;
       border-top: 1px solid #d3d3d3;
@@ -32,12 +33,14 @@ align-items: center;
 
 export const StyledWizardFooter = styled.div`
     // margin-left: auto;
-    height: 40px;
+    height: 50px;
     // background-color: green;
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: space-between;
     width: 100%;
+    border-top: 1px solid #d3d3d3;
+    align-items: center;
     button{
         font-size: 16px;
         font-family: Arial, sans-serif;

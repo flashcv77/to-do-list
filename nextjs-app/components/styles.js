@@ -150,6 +150,7 @@ export default styled.div`
       color: #800;
       flex-flow: row nowrap;
       justify-content: center;
+      background-color: red;
     }
     pre {
       position: relative;

@@ -3,9 +3,9 @@ import { Input } from 'antd';
 import React from 'react';
 
 export default function MyInput(props) {
-  const { input, label, validate, meta } = props;
+  const { input, label, validate, meta, placeholder } = props;
   const { name } = input;
-  console.log(meta);
+  console.log(input);
   return (
     <div>
       <Input
@@ -13,6 +13,7 @@ export default function MyInput(props) {
         {...input}
         validate={validate}
         bordered={false}
+        placeholder={placeholder}
       />
     </div>
   );
