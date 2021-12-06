@@ -54,6 +54,7 @@ export const StyledDateWrapper = styled.div`
 `
 
 export const StyledRadioWrapper = styled.div`
+    margin-top: 15px;
     height: 100px;
     display: flex;
     flex-wrap: wrap;

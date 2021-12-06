@@ -102,7 +102,9 @@ const MyForm = () => (
           </Wizard.Page>
           <Wizard.Page
             validate={values => {
-              const errors = {}
+              const errors = {
+                date: "",
+              }
               const dateMoment = moment(values.year + '-' + values.month + '-' + values.day);
               console.log(dateMoment.isValid() === false, dateMoment.isBetween('1000-01-01', '2022-01-01'));
               // if (dateMoment.isValid() === false && !dateMoment.isBetween('1000-01-01', '2022-01-01')) {
@@ -111,8 +113,8 @@ const MyForm = () => (
               if (!dateMoment.isValid()) {
                 errors.date = 'Input valid date'
               }
-              if (!dateMoment.isBetween('1000-01-01', '2022-01-01') === true) {
-                return errors.date = 'Input valid date';
+              if (!dateMoment.isBetween('1900-01-01', '2022-01-01') === true) {
+                errors.date = 'Input valid date';
               }
               console.log(errors);
               return errors;

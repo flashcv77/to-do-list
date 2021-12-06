@@ -5,7 +5,7 @@ import React from 'react';
 export default function MyInput(props) {
   const { input, label, validate, meta, placeholder } = props;
   const { name } = input;
-  console.log(input);
+  // console.log(input);
   return (
     <div>
       <Input
