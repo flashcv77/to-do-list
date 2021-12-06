@@ -105,10 +105,18 @@ const MyForm = () => (
               const errors = {}
               const dateMoment = moment(values.year + '-' + values.month + '-' + values.day);
               console.log(dateMoment.isValid() === false, dateMoment.isBetween('1000-01-01', '2022-01-01'));
-              if (!dateMoment.isValid() === false && !dateMoment.isBetween('1000-01-01', '2022-01-01')) {
-                errors.date = 'Input valid date from 1900 to 2022';
+              // if (dateMoment.isValid() === false && !dateMoment.isBetween('1000-01-01', '2022-01-01')) {
+              //   errors.date = 'Input valid date from 1900 to 2022';
+              // }
+              if (!dateMoment.isValid()) {
+                errors.date = 'Input valid date'
               }
+              if (!dateMoment.isBetween('1000-01-01', '2022-01-01') === true) {
+                return errors.date = 'Input valid date';
+              }
+              console.log(errors);
               return errors;
+
             }}
           >
             <Progress percent={66} showInfo={false} />
@@ -151,7 +159,7 @@ const MyForm = () => (
 
                   <Error name="year" />
                 </StyledDate>
-
+                <Error name="date" />
               </StyledDateContainer>
             </StyledDateWrapper>
             <StyledRadioWrapper>
