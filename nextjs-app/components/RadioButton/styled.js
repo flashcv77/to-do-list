@@ -42,6 +42,10 @@ width: 118.8px;
       font-family: Arial,sans-serif;
     }
   } 
-
+  .ant-radio-button-wrapper-checked{
+    span{
+      color: #fff;  
+    }
+  }
 
 `

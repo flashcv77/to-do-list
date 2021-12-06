@@ -40,8 +40,6 @@ const MyForm = () => (
         <h1>Signup</h1>
       </StyledFormHeader>
       <StyledFormMain>
-
-
         <Wizard
           initialValues={{}}
           onSubmit={onSubmit}
