@@ -25,83 +25,11 @@ height: 410px;
 
 `
 
-export const StyledSelect = styled.div`
-width: 90%;
-height: 40px;
-border: 1px solid #d3d3d3;
-text-align: center;
-// font-size: 16px;
-// font-family: Arial, sans-serif;
-select{
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-`
 
-export const StyledDateWrapper = styled.div`
-    height: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    .error{
-        height: 20px;
-        color: red;
-    }
-    h3{
-        margin-bottom:0;
-    }
-`
 
-export const StyledRadioWrapper = styled.div`
-    margin-top: 15px;
-    height: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
-    .error{
-        height: 20px;
-        min-height: 20px;
-        color: red;
-    }
-    h3{
-        margin-bottom:0;
-        height: 40px;
-    }
-`
 
-export const StyledSelectWrapper = styled.div`
-    height: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    .error{
-        height: 20px;
-        color: red;
-    }
-    h3{
-        margin-bottom:0;
-       
-    }
-`
 
-export const StyledGoHomeWrapper = styled.div`
-width: 100%;
-height: 100px;
-display: flex;
-justify-content: center;
-align-items: center;
-color: #1890ff;
-button{
-    border: 1px solid #1890ff;
-    color: #1890ff;
-}
 
-`
 
-export const StyledLabelWrapper = styled.div`
-color: #7E7F79;
-font-size: 16px;
-font-family: Arial,sans-serif;
-`
+
+

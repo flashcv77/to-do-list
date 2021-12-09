@@ -14,7 +14,6 @@ export default function Layout({ children, home }) {
           name="description"
           content="Learn how to build a personal website using Next.js"
         />
-
       </Head>
       <header className={styles.header}>
 
